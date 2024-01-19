@@ -1,0 +1,2 @@
+public interface IDangerousRadarObject : IRadarObject {
+}

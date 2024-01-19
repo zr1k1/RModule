@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f76d85c6cfdbf4182a5b7b126b944c84, type: 3}
+  m_Name: exampleAppEconomicsData
+  m_EditorClassIdentifier: 
+  _gameItemPriceDictionary:
+    m_keys: 00000000
+    m_values:
+    - {fileID: 11400000, guid: 0637a7e1f99da44f9a838b133383e286, type: 2}

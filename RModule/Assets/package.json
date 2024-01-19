@@ -1,0 +1,20 @@
+{
+    "name": "com.r.rmodule",
+    "version": "1.0.0",
+    "displayName": "R Module",
+    "description": "Developer Helper",
+    "unity": "2019.1",
+   
+    "dependencies": {
+        "com.unity.addressables": "1.18.19",
+        "com.unity.textmeshpro": "3.0.4",
+        "com.unity.mobile.notifications": "2.3.0",
+        "com.unity.nuget.newtonsoft-json": "3.2.1"
+    },
+    "keywords": [
+        "r rmodule"
+    ],
+    "author": {
+        "name": "Aleksandr"
+    }
+}

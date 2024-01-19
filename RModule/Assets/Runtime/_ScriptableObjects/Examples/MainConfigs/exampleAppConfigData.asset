@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ece83b52f8ef40548d8fe0067f31db9, type: 3}
+  m_Name: exampleAppConfigData
+  m_EditorClassIdentifier: 
+  _targetFPS: 60
+  _enableFirebaseInitialization: 0
+  _enableRemoteConfig: 0
+  _dragBeginTreeshold: 0
+  _copyrightBeginYear: 0
+  _firstLevelToShowLikeGamePopup: 0
+  _likeGamePopupLevelsThreshold: 0
+  _platformDatas:
+    m_keys: 0000000001000000
+    m_values:
+    - _storeLink: https://itunes.apple.com/app/id6473294292?action=write-review
+      _appodealAPIKey: 
+    - _storeLink: https://play.google.com/store/apps/details?id=com.lunappstudio.stretchyarms
+      _appodealAPIKey: 
+  _soundsConfig: {fileID: 0}
+  _appEconomicsData: {fileID: 11400000, guid: 183f50c04df5e43f8ad6337305972866, type: 2}
+  _appPolicyLink: https://lunappstudio.com/privacypolicy.html
+  _appTermsLink: https://lunappstudio.com/termofservices.html
+  _contactEmail: support@lunappstudio.com
+  _vkLink: https://vk.com/public221146076
+  _fbLink: https://www.facebook.com/people/Stretchy-Arms/100093975182621/
+  _appSiteLink: https://lunappstudio.com
+  _appodealApiKeyIos: 
+  _appodealApiKeyAndroid: 
+  _flurryApiKeyIos: 
+  _flurryApiKeyAndroid: 
+  _iosGADApplicationIdentifier: 
+  _trackingUsageDescription: Your data will be used to deliver personalized ads for
+    you.
+  _enableTestAdsMode: 0
+  _adPlacementsConfig: {fileID: 11400000, guid: fe1f489e0fb914f6b89c1214ac96b817, type: 2}
+  _optionalValuesDict:
+    m_keys: 01000000
+    m_values:
+    - {fileID: 11400000, guid: eeabafa5600824fe3827286c97bedf5c, type: 2}

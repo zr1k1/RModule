@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d1d776b8adc348e095c53b08cc105e6, type: 3}
+  m_Name: examplePersistentSavedDataConfig
+  m_EditorClassIdentifier: 
+  _folderPath: PlayerData
+  _fileName: player
+  _fileFormat: .json
+  _valuesDict:
+    m_keys: 0200000001000000030000000400000005000000
+    m_values:
+    - {fileID: 11400000, guid: 0c03e88a6a4654e2b98c94dd8a7cbba4, type: 2}
+    - {fileID: 11400000, guid: 0b36b78d920d548059400135aeb38083, type: 2}
+    - {fileID: 11400000, guid: f0cc2e8798aaf4bb586f69d5f2d8f9c7, type: 2}
+    - {fileID: 11400000, guid: a58f29d6e938f4361925bebf4bcfd259, type: 2}
+    - {fileID: 11400000, guid: 08db0925087af488292e75f691d0daf9, type: 2}

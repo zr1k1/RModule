@@ -1,0 +1,19 @@
+{
+    "name": "com.r.module.editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:2efa21886f5a64398869cf295834c700",
+        "GUID:45d30cbd1315949ed83949755c874e45"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
