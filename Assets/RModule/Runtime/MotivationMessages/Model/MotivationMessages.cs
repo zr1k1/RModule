@@ -31,7 +31,7 @@ public class MotivationMessages {
 
     public string GetRandomStringKey(string changeableParameterKeyInMotivationMessage) {
         MotivationMessage motivationMessage;
-        string message = "";
+        string messageKey = "";
         if (_motivationMessages.Count > 1 || (_motivationMessages.Count > 0 && lastShowedCanBeRepeated)) {
             List<int> correctedIndexes = new List<int>();
             for (int i = 0; i < _motivationMessages.Count; i++) 
@@ -50,7 +50,7 @@ public class MotivationMessages {
                 var correctedIndexesRndIndex = UnityEngine.Random.Range(0, correctedIndexes.Count);
                 var messageRndIndex = correctedIndexes[correctedIndexesRndIndex];
                 motivationMessage = _motivationMessages[messageRndIndex];
-                message = LocalizedText.T(motivationMessage.Key);
+                messageKey = motivationMessage.Key;
 
                 MotivationMessage.ChangeableParameterType changeableParameterType = motivationMessage.ParameterType;
                 MotivationMessage.IntegerParameterName intParameterId = motivationMessage.IntParameterName;
@@ -59,7 +59,7 @@ public class MotivationMessages {
             }
         }
 
-        return message;
+        return messageKey;
     }
 
     public bool ConditionForShowIsTrue(ShowType showType) {

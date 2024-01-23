@@ -1,13 +1,10 @@
 {
-    "name": "com.r.module.editor",
+    "name": "Vibration",
     "rootNamespace": "",
     "references": [
-        "GUID:2efa21886f5a64398869cf295834c700",
-        "GUID:6247cdbd3f25c47b9adb5b81a3f11d37"
+        "GUID:07cf946c588a04abcb56695f8ba846dd"
     ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

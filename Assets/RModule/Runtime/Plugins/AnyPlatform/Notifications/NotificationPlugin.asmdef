@@ -1,13 +1,11 @@
 {
-    "name": "com.r.module.editor",
+    "name": "NotificationPlugin",
     "rootNamespace": "",
     "references": [
-        "GUID:2efa21886f5a64398869cf295834c700",
-        "GUID:6247cdbd3f25c47b9adb5b81a3f11d37"
+        "GUID:ac145e6b8c6034cdbadc8c6e26aedbcf",
+        "GUID:1e8e55397bd004beaba78a667566665f"
     ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
