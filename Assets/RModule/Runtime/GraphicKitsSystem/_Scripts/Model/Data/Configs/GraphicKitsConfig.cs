@@ -20,7 +20,7 @@ namespace RModule.Runtime.GraphicKitsSystem {
 			var graphicKit = p_graphicKitConfigs.Find(graphicKitConfig => graphicKitConfig.Key == graphicKitConfigNameKey);
 			graphicKit = graphicKit != null ? graphicKit : p_graphicKitConfigs[0];
 			int index = p_graphicKitConfigs.IndexOf(graphicKit);
-			var nextIndex = Utils.GetLoopNextNumber(index, 0, p_graphicKitConfigs.Count);
+			var nextIndex = Utils.Utils.GetLoopNextNumber(index, 0, p_graphicKitConfigs.Count);
 
 			return p_graphicKitConfigs[nextIndex];
 		}
