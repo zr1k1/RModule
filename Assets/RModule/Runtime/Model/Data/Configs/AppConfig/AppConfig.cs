@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RModule.Runtime.Data.Configs;
 
 public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue> : ScriptableObject where OptionaAppConfigValue : Enum {
 	// Accessors
