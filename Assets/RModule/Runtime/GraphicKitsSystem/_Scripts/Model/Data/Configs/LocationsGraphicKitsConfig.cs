@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GraphicKitsSystem {
+namespace RModule.Runtime.GraphicKitsSystem {
 
 	[CreateAssetMenu(fileName = "GraphicKitsConfig", menuName = "AppConfigs/GraphicKitsConfigs/LocationsGraphicKitsConfig", order = 1)]
 	public class LocationsGraphicKitsConfig : GraphicKitsConfig {
