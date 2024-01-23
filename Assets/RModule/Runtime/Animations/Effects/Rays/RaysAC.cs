@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using RModule.Runtime.LeanTween;
 
 public class RaysAC : BaseAC {
 	// Outlets

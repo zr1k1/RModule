@@ -4,6 +4,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using RModule.Runtime.LeanTween;
 
 public class SwitchImagesAC : BaseAC {
 

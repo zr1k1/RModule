@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using RModule.Runtime.LeanTween;
 
 public class LightTailAC : BaseAC {
 
