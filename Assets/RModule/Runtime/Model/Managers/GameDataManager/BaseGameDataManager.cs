@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class BaseGameDataManager : SingletonMonoBehaviour<BaseGameDataManager>, IInitializable {
+public class BaseGameDataManager<PlayerDataValuesNames, DataConfigClass> : SingletonMonoBehaviour<BaseGameDataManager<PlayerDataValuesNames, DataConfigClass>>, IInitializable
+	where PlayerDataValuesNames : Enum {
 	// Accessors
 	//public StoreProductsProvider StoreProductsProvider => _storeProductsProvider;
 	//public NotificationsService NotificationsService => _notificationsService;
@@ -18,18 +19,20 @@ public class BaseGameDataManager : SingletonMonoBehaviour<BaseGameDataManager>, 
 	// Outlets 
 	//[SerializeField] StoreProductsProvider _storeProductsProvider = new StoreProductsProvider();
 	//[SerializeField] NotificationsService _notificationsService = new NotificationsService();
-	[SerializeField] PlayerConfig _playerConfig = default;
+	[SerializeField] PersistentSavedDataConfig<PlayerDataValuesNames> _playerConfig = default;
 	//[SerializeField] GameConfig _gameConfig = default;
 	//[SerializeField] AppEconomicsData _appEconomicsData = default;
 
 	// Private vars
 	//PlayerDataProvider _playerDataProvider = new PlayerDataProvider();
 	//GameProgressDataProvider _gameProgressDataProvider = new GameProgressDataProvider();
+	DataProvider<PlayerDataValuesNames, PersistentSavedDataConfig<PlayerDataValuesNames>> _playerDataProvider;
 	bool _dataPreparingFinished = false;
 
 	// Init
 	public IEnumerator Initialize() {
     	_dataPreparingFinished = false;
+		_playerDataProvider = new DataProvider<PlayerDataValuesNames, PersistentSavedDataConfig<PlayerDataValuesNames>>(_playerConfig);
 
 		LoadPlayerAndProgressData();
 		PrepareData();
@@ -57,7 +60,7 @@ public class BaseGameDataManager : SingletonMonoBehaviour<BaseGameDataManager>, 
 	// General Methods
 
 	void LoadPlayerAndProgressData() {
-		//_playerDataProvider.LoadData(_playerConfig);
+		_playerDataProvider.LoadData();
 		//_gameProgressDataProvider.LoadData();
 	}
 
@@ -65,10 +68,6 @@ public class BaseGameDataManager : SingletonMonoBehaviour<BaseGameDataManager>, 
 		Debug.Log($"GameDataManager : PrepareData");
 			_dataPreparingFinished = true;
 	}
-
-	// Actions
-
-	// Getters
 
 	// Resets
 	public static void ResetProgress() {
@@ -82,11 +81,11 @@ public class BaseGameDataManager : SingletonMonoBehaviour<BaseGameDataManager>, 
 		}
 	}
 
-	public static void ResetPlayerData() {
-		PlayerDataProvider.Reset();
-		if(Instance != null)
-			Instance.LoadPlayerAndProgressData();
-	}
+	//public static void ResetPlayerData() {
+	//	PlayerDataProvider.Reset();
+	//	if (Instance != null)
+	//		Instance.LoadPlayerAndProgressData();
+	//}
 
 	//public static int GetLevelsCount() {
 	//	return Instance._gameConfig.LevelsCount;

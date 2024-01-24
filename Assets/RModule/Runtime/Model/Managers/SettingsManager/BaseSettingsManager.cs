@@ -2,9 +2,6 @@
 using System.Collections;
 using UnityEngine;
 
-[Serializable] public class LangStringDictionary : SerializableDictionary<SystemLanguage, string> { }
-[Serializable] public class SettingsDictionary<T0, T1> : SerializableDictionary<T0, T1> { }
-
 public class BaseSettingsManager<PurchasableGameItem, Placement, OptionaAppConfigValue, OptionalSettingType, OptionaDebugValue>
 	: SingletonMonoBehaviour<BaseSettingsManager<PurchasableGameItem, Placement, OptionaAppConfigValue, OptionalSettingType, OptionaDebugValue>>
 
