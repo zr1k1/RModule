@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using RModule.Runtime.Sounds;
-//using RModule.Runtime.ge
+using RModule.Runtime.Vibration;
 
 public class TestSettingsManager : MonoBehaviour {
 	private IEnumerator Start() {

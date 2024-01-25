@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RModule.Runtime.GraphicKitsSystem {
 
-	[CreateAssetMenu(fileName = "GraphicKitsConfig", menuName = "AppConfigs/GraphicKitsConfigs/LocationsGraphicKitsConfig", order = 1)]
+	[CreateAssetMenu(fileName = "ExampleLocationsGraphicKitsConfig", menuName = "RModule/Examples/AppConfigs/GraphicKitsConfigs/ExampleLocationsGraphicKitsConfig", order = 1)]
 	public class LocationsGraphicKitsConfig : GraphicKitsConfig {
 
 		// Outlets
@@ -12,7 +12,7 @@ namespace RModule.Runtime.GraphicKitsSystem {
 		[SerializeField] protected List<int> _maxLevelNumberForApplyGraphicKitWithSameIndex = default;
 
 		public T GetSpriteAddress<T>(string graphicKitConfigNameKey, string parameterKey) {
-			GetGraphicKitConfigByNameKeyOrDefault(graphicKitConfigNameKey).TryGetParameter(parameterKey, out T parameter);
+			GetGraphicKitConfigByNameKeyOrDefault(graphicKitConfigNameKey).TryGetValue(parameterKey, out T parameter);
 			return parameter;
 		}
 

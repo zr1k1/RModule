@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using System.Linq;
 
-[Serializable] public class ParametersDictionary<T> : SerializableDictionary<string, T> { }
+[Serializable] public class ValuesDictionary<T> : SerializableDictionary<string, T> { }
 
 [CreateAssetMenu(fileName = "BaseUniversalDataConfig", menuName = "Helpers/UniversalDataConfigs/BaseUniversalDataConfig", order = 1)]
 public class BaseUniversalDataConfig : ScriptableObject {
@@ -13,36 +13,36 @@ public class BaseUniversalDataConfig : ScriptableObject {
 
 	// Outlets
 	[SerializeField] protected string _nameKey = default;
-	[SerializeField] protected ParametersDictionary<string> _stringParams = new ParametersDictionary<string>();
-	[SerializeField] protected ParametersDictionary<bool> _boolParams = new ParametersDictionary<bool>();
-	[SerializeField] protected ParametersDictionary<int> _intParams = new ParametersDictionary<int>();
-	[SerializeField] protected ParametersDictionary<float> _floatParams = new ParametersDictionary<float>();
-	[SerializeField] protected ParametersDictionary<Vector3> _vector3Params = new ParametersDictionary<Vector3>();
-	[SerializeField] protected ParametersDictionary<Color> _colorParams = new ParametersDictionary<Color>();
+	[SerializeField] protected ValuesDictionary<string> _stringValues = new ValuesDictionary<string>();
+	[SerializeField] protected ValuesDictionary<bool> _boolValues = new ValuesDictionary<bool>();
+	[SerializeField] protected ValuesDictionary<int> _intValues = new ValuesDictionary<int>();
+	[SerializeField] protected ValuesDictionary<float> _floatValues = new ValuesDictionary<float>();
+	[SerializeField] protected ValuesDictionary<Vector3> _vector3Values = new ValuesDictionary<Vector3>();
+	[SerializeField] protected ValuesDictionary<Color> _colorValues = new ValuesDictionary<Color>();
 
-	public virtual bool TryGetParameter<T>(string parameterKey, out T value) {
+	public virtual bool TryGetValue<T>(string valueKey, out T value) {
 		value = default(T);
 
-		if (_stringParams.Contains(parameterKey) && _stringParams[parameterKey] is T stringParameter) {
-			value = stringParameter;
+		if (_stringValues.Contains(valueKey) && _stringValues[valueKey] is T stringValue) {
+			value = stringValue;
 			return true;
-		} else if (_boolParams.Contains(parameterKey) && _boolParams[parameterKey] is T boolParameter) {
-			value = boolParameter;
+		} else if (_boolValues.Contains(valueKey) && _boolValues[valueKey] is T boolValue) {
+			value = boolValue;
 			return true;
-		} else if (_intParams.Contains(parameterKey) && _intParams[parameterKey] is T intParameter) {
-			value = intParameter;
+		} else if (_intValues.Contains(valueKey) && _intValues[valueKey] is T intValue) {
+			value = intValue;
 			return true;
-		} else if (_floatParams.Contains(parameterKey) && _floatParams[parameterKey] is T floatParameter) {
-			value = floatParameter;
+		} else if (_floatValues.Contains(valueKey) && _floatValues[valueKey] is T floatValue) {
+			value = floatValue;
 			return true;
-		} else if (_vector3Params.Contains(parameterKey) && _vector3Params[parameterKey] is T vector3Parameter) {
-			value = vector3Parameter;
+		} else if (_vector3Values.Contains(valueKey) && _vector3Values[valueKey] is T vector3Value) {
+			value = vector3Value;
 			return true;
-		} else if (_colorParams.Contains(parameterKey) && _colorParams[parameterKey] is T colorParameter) {
-			value = colorParameter;
+		} else if (_colorValues.Contains(valueKey) && _colorValues[valueKey] is T colorValue) {
+			value = colorValue;
 			return true;
 		} else {
-			Debug.Log($"ParameterKey {parameterKey} is not present on dictionaries");
+			Debug.Log($"ValueKey {valueKey} is not present on dictionaries");
 			return false;
 		}
 	}

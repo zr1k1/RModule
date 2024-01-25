@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
+using RModule.Runtime.Utils;
 
 namespace RModule.Runtime.GraphicKitsSystem {
-
-	[CreateAssetMenu(fileName = "GraphicKitsConfig", menuName = "AppConfigs/GraphicKitsConfigs/GraphicKitsConfig", order = 1)]
+	[CreateAssetMenu(fileName = "GraphicKitsConfig", menuName = "RModule/Examples/AppConfigs/GraphicKitsConfigs/GraphicKitsConfig", order = 1)]
 	public class GraphicKitsConfig : ScriptableObject {
 		// Accessors
 		public List<GraphicKitConfig> GraphicKitConfigs => p_graphicKitConfigs;

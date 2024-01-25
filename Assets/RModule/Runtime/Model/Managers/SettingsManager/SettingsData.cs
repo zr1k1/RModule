@@ -30,7 +30,8 @@ public class SettingsData<OptionalSettingEnum> : IValueSetter<OptionalSettingEnu
 			return;
 		}
 
-		((ISaveServiceValue<T1>)_playerPrefsSaveService).SetValue($"{c_save_key_prefix}{setting}", value);
+		//((ISaveServiceValue<T1>)_playerPrefsSaveService).SetValue($"{c_save_key_prefix}{setting}", value);
+		((IKeyValueSetter<string, T1>)_playerPrefsSaveService).SetValue($"{c_save_key_prefix}{setting}", value);
 
 		_settingsDict[setting].ValueDidChange?.Invoke(value);
 	}

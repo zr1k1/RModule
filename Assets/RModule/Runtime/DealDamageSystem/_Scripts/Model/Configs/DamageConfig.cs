@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "DamageConfig", menuName = "AppConfigs/DamageConfig", order = 1)]
+[CreateAssetMenu(fileName = "DamageConfig", menuName = "RModule/Examples/AppConfigs/DamageConfig", order = 1)]
 public class DamageConfig : ScriptableObject {
 	// Accessors
 	public float Damage => _damage;

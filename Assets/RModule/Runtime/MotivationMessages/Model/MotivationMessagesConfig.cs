@@ -6,7 +6,7 @@ using System.Collections.Generic;
 [Serializable]
 public class MotivationMessagesDictionary : SerializableDictionary<MotivationMessages.ShowType, MotivationMessages> { }
 
-[CreateAssetMenu(fileName = "MotivationMessagesConfig", menuName = "AppConfigs/MotivationMessagesConfig", order = 1)]
+[CreateAssetMenu(fileName = "MotivationMessagesConfig", menuName = "RModule/Examples/AppConfigs/MotivationMessagesConfig", order = 1)]
 public class MotivationMessagesConfig : ScriptableObject {
     // Accessors
     public MotivationMessagesDictionary MotivationMessagesDictionary => _motivationMessagesDictionary;

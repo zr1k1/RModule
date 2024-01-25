@@ -1,55 +1,59 @@
-﻿using RModule.Runtime.Utils;
-using UnityEngine;
+﻿namespace RModule.Runtime.Vibration {
 
-public class VibrationController : MonoBehaviour {
+	using RModule.Runtime.Utils;
+	using UnityEngine;
 
-    // Accessors
-    public static bool IsInitialized => s_isInitialized;
-    public static bool VibrationIsEnabled => PlayerPrefsHelper.GetBool(k_vibrationIsEnabled, true);
+	public class VibrationController : MonoBehaviour {
 
-    // Private vars
-    static VibrationAndroid s_vibrationAndroid;
-    static VibrationIOS s_vibrationIOS;
-    static IVibrator s_vibrator;
-    static bool s_isInitialized;
+		// Accessors
+		public static bool IsInitialized => s_isInitialized;
+		public static bool VibrationIsEnabled => PlayerPrefsHelper.GetBool(k_vibrationIsEnabled, true);
 
-    // Consts
-    const string k_vibrationIsEnabled = "vibrationIsEnabled";
+		// Private vars
+		static VibrationAndroid s_vibrationAndroid;
+		static VibrationIOS s_vibrationIOS;
+		static IVibrator s_vibrator;
+		static bool s_isInitialized;
 
-    public static void Initialize() {
-        GameObject vibrationControllerGO = new GameObject("vibrationController",
-            typeof(VibrationController), typeof(VibrationAndroid), typeof(VibrationIOS));
+		// Consts
+		const string k_vibrationIsEnabled = "vibrationIsEnabled";
 
-        s_vibrationAndroid = vibrationControllerGO.GetComponent<VibrationAndroid>();
-        s_vibrationAndroid.enabled = false;
-        s_vibrationIOS = vibrationControllerGO.GetComponent<VibrationIOS>();
-        s_vibrationIOS.enabled = false;
+		public static void Initialize() {
+			GameObject vibrationControllerGO = new GameObject("vibrationController",
+				typeof(VibrationController), typeof(VibrationAndroid), typeof(VibrationIOS));
 
-        if (Application.platform == RuntimePlatform.Android) {
-            s_vibrationAndroid.enabled = true;
-            s_vibrator = s_vibrationAndroid;
-        } else if (Application.platform == RuntimePlatform.IPhonePlayer) {
-            s_vibrationIOS.enabled = true;
-            s_vibrator = s_vibrationIOS;
-        }
+			s_vibrationAndroid = vibrationControllerGO.GetComponent<VibrationAndroid>();
+			s_vibrationAndroid.enabled = false;
+			s_vibrationIOS = vibrationControllerGO.GetComponent<VibrationIOS>();
+			s_vibrationIOS.enabled = false;
 
-        s_isInitialized = true;
-    }
+			if (Application.platform == RuntimePlatform.Android) {
+				s_vibrationAndroid.enabled = true;
+				s_vibrator = s_vibrationAndroid;
+			} else if (Application.platform == RuntimePlatform.IPhonePlayer) {
+				s_vibrationIOS.enabled = true;
+				s_vibrator = s_vibrationIOS;
+			}
 
-    public static void SetEnable(bool enable, bool safeStateToPrefs) {
-        if (safeStateToPrefs && enable != VibrationIsEnabled) {
-            PlayerPrefsHelper.SetBool(k_vibrationIsEnabled, enable);
-            PlayerPrefs.Save();
-        }
-    }
+			s_isInitialized = true;
+		}
 
-    public static void SetAndroidShortVibrationTime(long androidShortVibrationTime) {
-        s_vibrationAndroid.SetShortVibrationTime(androidShortVibrationTime);
-    }
+		public static void SetEnable(bool enable, bool safeStateToPrefs) {
+			if (safeStateToPrefs && enable != VibrationIsEnabled) {
+				PlayerPrefsHelper.SetBool(k_vibrationIsEnabled, enable);
+				PlayerPrefs.Save();
+			}
+		}
 
-    // Play vibrations
-    public static void PlayShortVibration() {
-        if (VibrationIsEnabled && s_isInitialized && s_vibrator != null)
-            s_vibrator.VibrateShort();
-    }
+		public static void SetAndroidShortVibrationTime(long androidShortVibrationTime) {
+			s_vibrationAndroid.SetShortVibrationTime(androidShortVibrationTime);
+		}
+
+		// Play vibrations
+		public static void PlayShortVibration() {
+			if (VibrationIsEnabled && s_isInitialized && s_vibrator != null)
+				s_vibrator.VibrateShort();
+		}
+	}
+
 }
