@@ -5,6 +5,33 @@ using UnityEngine;
 
 namespace RModule.Runtime.GraphicKitsSystem {
 
+	/// <summary>
+	/// <para>
+	/// GraphicKitKey - Used kits types, like Hero or Location.
+	/// </para>
+	/// <para>
+	/// GraphicKitValueType - Used graphic type to get, like SpriteAddress or Color (You will choise on your graphickitsetter conponent).
+	/// </para>
+	/// <para>
+	/// Setup instruction:
+	/// </para>
+	/// <para>
+	/// 1. Create and add to game object GraphicKitsManager script inherited from BaseGraphicKitsManager.
+	/// </para>
+	/// <para>
+	/// 2. Create graphic kits configs (Example on rigth click -> Create -> RModule/Examples/AppConfigs/GraphicKitsConfigs/...).
+	/// </para>
+	/// <para>
+	/// 3. Setup configs into your GraphicKitsManager game object.
+	/// <para>
+	/// Сreate YourGraphicSetter with using RModule.Runtime.GraphicKitsSystem, inherit from BaseGraphicSetter(YourGraphicKitKey, YourGraphicKitValueType) and setup to your game object.
+	/// </para>
+	/// </para>
+	/// <para>
+	/// You can check ExampleGraphicKitsManager, ExampleGraphicSetter for understand
+	/// </para>
+	/// </summary>
+
 	public class BaseGraphicKitsManager<GraphicKitKey, GraphicKitValueType> : SingletonMonoBehaviour<BaseGraphicKitsManager<GraphicKitKey, GraphicKitValueType>>
 		, IGraphicKitsManager<GraphicKitKey, GraphicKitValueType>
 
@@ -49,7 +76,6 @@ namespace RModule.Runtime.GraphicKitsSystem {
 		public interface IGraphicKitDataProvider : IKeyValueSetter<GraphicKitKey, string> , IKeyValueGetter<GraphicKitKey, string> {
 		}
 
-		// Init
 		public IEnumerator Initialize(IGraphicKitDataProvider graphicKitDataProvider) {
 			_graphicKitDataProvider = graphicKitDataProvider;
 			SetupGraphicKits();
@@ -110,10 +136,14 @@ namespace RModule.Runtime.GraphicKitsSystem {
 			}
 		}
 
-		public virtual T GetGraphicKitValue<T>(GraphicKitKey graphicKitKey, string graphiKitValueKey) {
-			_graphicKitsDict[graphicKitKey].CurrentGraphicKitConfig.TryGetValue(graphiKitValueKey, out T value);
+		public virtual T GetGraphicKitValue<T>(GraphicKitKey graphicKitKey, string graphicKitValueKey) {
+			_graphicKitsDict[graphicKitKey].CurrentGraphicKitConfig.TryGetValue(graphicKitValueKey, out T value);
 
 			return value;
+		}
+
+		public GraphicKitConfig GetCurrentGraphicKitConfig(GraphicKitKey graphicKitKey) {
+			return _graphicKitsDict[graphicKitKey].CurrentGraphicKitConfig;
 		}
 	}
 }
