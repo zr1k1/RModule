@@ -33,7 +33,7 @@ public class SpriteRendererHelper : MonoBehaviour {
 			UpdateParameters();
 	}
 
-	void UpdateParameters() {
+	public void UpdateParameters() {
 		if (_spriteRenderer == null)
 			_spriteRenderer = GetComponent<SpriteRenderer>();
 

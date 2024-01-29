@@ -348,7 +348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f0134d55802241b49db6df5c7fd38f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _appConfigData: {fileID: 0}
+  _appConfigData: {fileID: 11400000, guid: af6bd8f8fddb3454b954d765374a7916, type: 2}
   _debugConfig: {fileID: 11400000, guid: 8386d5bcde49046a1bc2f535fd81636a, type: 2}
   _databaseNames:
     m_keys: 00000000
@@ -356,7 +356,7 @@ MonoBehaviour:
     - 
   _commonSettings:
     _settingsDict:
-      m_keys: 0000000001000000020000000300000004000000050000000600000007000000
+      m_keys: 000000000100000002000000030000000400000005000000060000000700000008000000
       m_values:
       - ValueDidChange:
           m_PersistentCalls:
@@ -429,6 +429,10 @@ MonoBehaviour:
           m_PersistentCalls:
             m_Calls: []
         _settingConfig: {fileID: 11400000, guid: ab8db81039c1e4b6c823d49cf73a5392, type: 2}
+      - ValueDidChange:
+          m_PersistentCalls:
+            m_Calls: []
+        _settingConfig: {fileID: 11400000, guid: 9e2258e7dd47740b6be4ab45475e0142, type: 2}
   _optionalSettings:
     _settingsDict:
       m_keys: 
