@@ -2,20 +2,23 @@
 using System.Collections;
 using UnityEngine;
 
-public abstract class BaseSettingsManager<PurchasableGameItem, Placement, OptionaAppConfigValue, OptionalSettingType, OptionaDebugValue>
-	: SingletonMonoBehaviour<BaseSettingsManager<PurchasableGameItem, Placement, OptionaAppConfigValue, OptionalSettingType, OptionaDebugValue>>
+public abstract class BaseSettingsManager<PurchasableGameItem, Placement, OptionaAppConfigValue, OptionalSettingType, OptionaDebugValue, OptionalCrossPlatformAppConfigValue>
+	: SingletonMonoBehaviour<BaseSettingsManager<PurchasableGameItem, Placement, OptionaAppConfigValue, OptionalSettingType, OptionaDebugValue, OptionalCrossPlatformAppConfigValue>>
 
+	where PurchasableGameItem : Enum
+	where Placement : Enum
 	where OptionalSettingType : Enum
 	where OptionaDebugValue : Enum
-	where OptionaAppConfigValue : Enum {
+	where OptionaAppConfigValue : Enum 
+	where OptionalCrossPlatformAppConfigValue : Enum {
 
 	// Accessors
-	public AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue> AppConfigData => _appConfigData;
-	public DebugConfig<OptionaDebugValue> DebugConfig => _debugConfig;
+	public AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue, OptionalCrossPlatformAppConfigValue> AppConfigData => _appConfigData;
+	public BaseDebugConfig<OptionaDebugValue> DebugConfig => _debugConfig;
 
 	// Outlets
-	[SerializeField] protected AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue> _appConfigData = default;
-	[SerializeField] protected DebugConfig<OptionaDebugValue> _debugConfig = default;
+	[SerializeField] protected AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue, OptionalCrossPlatformAppConfigValue> _appConfigData = default;
+	[SerializeField] protected BaseDebugConfig<OptionaDebugValue> _debugConfig = default;
 	[SerializeField] protected LangStringDictionary _databaseNames = new LangStringDictionary();
 
 	// Settings
@@ -86,10 +89,6 @@ public abstract class BaseSettingsManager<PurchasableGameItem, Placement, Option
 	}
 
 	// Others
-	public string GetStoreLink() {
-		return _appConfigData.GetStorelink();
-	}
-
 	public string GetSupportEmailString() {
 		string aboutString = GetAboutDeviceString();
 		aboutString = Uri.EscapeDataString(aboutString);
@@ -121,5 +120,9 @@ public abstract class BaseSettingsManager<PurchasableGameItem, Placement, Option
 
 	public virtual T1 GetValue<T1>(OptionalSettingType setting) {
 		return ((IValueGetter<OptionalSettingType>)_optionalSettings).GetValue<T1>(setting);
+	}
+
+	public virtual T1 GetValue<T1>(OptionalCrossPlatformAppConfigValue setting) {
+		return ((IValueGetter<OptionalCrossPlatformAppConfigValue>)_optionalSettings).GetValue<T1>(setting);
 	}
 }

@@ -4,7 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using RModule.Runtime.Data.Configs;
 
-public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue> : ScriptableObject where OptionaAppConfigValue : Enum {
+public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue, CrossPlatformValue> : ScriptableObject, IValueGetter<CrossPlatformValue>
+	where PurchasableGameItem : Enum
+	where Placement : Enum
+	where OptionaAppConfigValue : Enum
+	where CrossPlatformValue : Enum {
+
 	// Accessors
 	public AppEconomicsConfig<PurchasableGameItem> AppEconomicsData => _appEconomicsData;
 	public AdPlacementsConfig<Placement> AdPlacementsConfig => _adPlacementsConfig;
@@ -14,20 +19,13 @@ public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue> : 
 	public bool EnableFirebaseInitialization => _enableFirebaseInitialization;
 	public bool EnableRemoteConfig => _enableRemoteConfig;
 	public int DragBeginTreeshold => _dragBeginTreeshold;
-	public int FirstLevelToShowLikeGamePopup => _firstLevelToShowLikeGamePopup;
-	public int LikeGamePopupLevelsThreeshold => _likeGamePopupLevelsThreshold;
 
-
-	public string AppLinkIos => _platformDatas[Store.AppStore].StoreLink;
-	public string AppLinkAndroid => _platformDatas[Store.GooglePlayStore].StoreLink;
 	public string AppPolicyLink => _appPolicyLink;
 	public string AppTermsLink => _appTermsLink;
 	public string ContactEmail => _contactEmail;
 	public string VkLink => _vkLink;
 	public string FbLink => _fbLink;
 	public string AppSiteLink => _appSiteLink;
-	public string AppodealApiKey => Application.platform == RuntimePlatform.IPhonePlayer ? _appodealApiKeyIos : _appodealApiKeyAndroid;
-	public string FlurryApiKey => Application.platform == RuntimePlatform.IPhonePlayer ? _flurryApiKeyIos : _flurryApiKeyAndroid;
 	public string IOSGADApplicationIdentifier => _iosGADApplicationIdentifier;
 	public string TrackingUsageDescription => _trackingUsageDescription;
 	public bool EnableTestAdsMode => _enableTestAdsMode;
@@ -39,9 +37,6 @@ public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue> : 
 	[SerializeField] protected bool _enableRemoteConfig = default;
 	[SerializeField] protected int _dragBeginTreeshold = default;
 	[SerializeField] protected int _copyrightBeginYear = default;
-	[SerializeField] protected int _firstLevelToShowLikeGamePopup = default;
-	[SerializeField] protected int _likeGamePopupLevelsThreshold = default;
-	[SerializeField] protected SerializableDictionary<Store, PlatformData> _platformDatas = default;
 
 	[Header("Sounds"), Space]
 	[SerializeField] protected SoundsConfig _soundsConfig = default;
@@ -50,8 +45,6 @@ public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue> : 
 	[SerializeField] protected AppEconomicsConfig<PurchasableGameItem> _appEconomicsData = default;
 
 	[Header("Links"), Space]
-	//[SerializeField] protected string _appLinkIOS = default;
-	//[SerializeField] protected string _appLinkAndroid = default;
 	[SerializeField] protected string _appPolicyLink = default;
 	[SerializeField] protected string _appTermsLink = default;
 	[SerializeField] protected string _contactEmail = default;
@@ -59,11 +52,7 @@ public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue> : 
 	[SerializeField] protected string _fbLink = default;
 	[SerializeField] protected string _appSiteLink = default;
 
-	[Header("API keys"), Space]
-	[SerializeField] protected string _appodealApiKeyIos = default;
-	[SerializeField] protected string _appodealApiKeyAndroid = default;
-	[SerializeField] protected string _flurryApiKeyIos = default;
-	[SerializeField] protected string _flurryApiKeyAndroid = default;
+	//[Header("API keys"), Space]
 	[SerializeField] protected string _iosGADApplicationIdentifier = default;
 
 	[Header("Plist descriptions"), Space]
@@ -73,26 +62,16 @@ public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue> : 
 	[SerializeField] protected bool _enableTestAdsMode = default;
 	[SerializeField] protected AdPlacementsConfig<Placement> _adPlacementsConfig = default;
 
+	[Header("OptionaApiDatas"), Space]
+	[SerializeField] protected SerializableDictionary<CrossPlatformValue, ApiData> _apiDatas = default;
+
 	[Header("OptionaAppConfigValue"), Space]
 	[SerializeField] protected SerializableDictionary<OptionaAppConfigValue, BaseValueConfig> _optionalValuesDict = default;
 
 	//Classes
 	[Serializable]
-	public class PlatformData : IStoreLinkProvider, IAppodealAPIKeyLinkProvider {
-		public string StoreLink => _storeLink;
-		public string AppodealAPIKey => _appodealAPIKey;
-
-		[SerializeField] protected string _storeLink = default;
-		[SerializeField] protected string _appodealAPIKey = default;
-
-	}
-
-	// Interfaces
-	public interface IStoreLinkProvider {
-		public string StoreLink { get; }
-	}
-	public interface IAppodealAPIKeyLinkProvider {
-		public string AppodealAPIKey { get; }
+	public class ApiData {
+		[SerializeField] internal protected SerializableDictionary<Store, string> values = default;
 	}
 
 	public string GetCopyRightString() {
@@ -104,12 +83,6 @@ public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue> : 
 		return copyrighString;
 	}
 
-	public string GetStorelink() {
-		return Application.platform == RuntimePlatform.Android ?
-			_platformDatas[Store.GooglePlayStore].StoreLink :
-			_platformDatas[Store.AppStore].StoreLink;
-	}
-
 	// Outlets
 	public virtual T1 GetValue<T1>(OptionaAppConfigValue valueType) {
 		if (!_optionalValuesDict.ContainsKey(valueType)) {
@@ -118,5 +91,21 @@ public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue> : 
 		}
 		var value = _optionalValuesDict[valueType].GetValue<object>();
 		return (T1)value;
+	}
+
+	public T1 GetValue<T1>(CrossPlatformValue key) {
+		if (!_apiDatas.ContainsKey(key)) {
+			Debug.LogError($"Value {key} is not present on dictionary _optionalValuesDict");
+
+			return default(T1);
+		}
+
+		if (Application.platform == RuntimePlatform.Android) {
+			return (T1)(object)_apiDatas[key].values[Store.GooglePlayStore];
+		} else if (Application.platform == RuntimePlatform.IPhonePlayer) {
+			return (T1)(object)_apiDatas[key].values[Store.AppStore];
+		} else {
+			return (T1)(object)_apiDatas[key].values[Store.GooglePlayStore];
+		}
 	}
 }

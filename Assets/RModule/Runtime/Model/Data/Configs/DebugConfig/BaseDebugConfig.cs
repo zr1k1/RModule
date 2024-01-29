@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class DebugConfig<OptionalDebugValue> : ScriptableObject where OptionalDebugValue : Enum {
+public class BaseDebugConfig<OptionalDebugValue> : ScriptableObject where OptionalDebugValue : Enum {
 	//Accessors
 	public bool DebugModeEnabled => _debugModeEnabled;
 
