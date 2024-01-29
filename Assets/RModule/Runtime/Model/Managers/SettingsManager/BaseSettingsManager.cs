@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class BaseSettingsManager<PurchasableGameItem, Placement, OptionaAppConfigValue, OptionalSettingType, OptionaDebugValue>
+public abstract class BaseSettingsManager<PurchasableGameItem, Placement, OptionaAppConfigValue, OptionalSettingType, OptionaDebugValue>
 	: SingletonMonoBehaviour<BaseSettingsManager<PurchasableGameItem, Placement, OptionaAppConfigValue, OptionalSettingType, OptionaDebugValue>>
 
 	where OptionalSettingType : Enum
@@ -36,14 +36,40 @@ public class BaseSettingsManager<PurchasableGameItem, Placement, OptionaAppConfi
 		_musicEnabler = soundsPlayerService;
 		_setEnableVibration = setEnableVibration;
 
+		UpdateNubmerOfStars();
+		UpdateLastPlayedDay();
+		UpdatePlayedDaysInARowCount();
+		LateInitialize();
+
 		Application.targetFrameRate = _appConfigData.TargetFps;
 
-		_isReady = true;
+		SetReady();
+
 		yield return null;
 	}
 
 	public override bool IsInitialized() {
 		return _isReady;
+	}
+
+	void UpdateNubmerOfStars() {
+		SetValue(CommonSetting.NumberOfStarts, GetValue<int>(CommonSetting.NumberOfStarts) + 1);
+	}
+
+	void UpdateLastPlayedDay() {
+		SetValue(CommonSetting.LastPlayedDay, DateTime.Now);
+	}
+
+	void UpdatePlayedDaysInARowCount() {
+		if ((GetValue<DateTime>(CommonSetting.LastPlayedDay) - DateTime.Now).Days <= 1) {
+			SetValue(CommonSetting.PlayedDaysInARowCount, GetValue<int>(CommonSetting.PlayedDaysInARowCount) + 1);
+		}
+	}
+
+	protected abstract void LateInitialize();
+
+	void SetReady() {
+		_isReady = true;
 	}
 
 	// To sets Action to Unity Events on inspector in SettingDatas
