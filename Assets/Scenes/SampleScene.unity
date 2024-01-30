@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 697326368}
   - component: {fileID: 697326367}
   m_Layer: 0
-  m_Name: testsavedata
+  m_Name: TestPersistentSavedDataConfig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -304,139 +304,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &882452711
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 882452712}
-  - component: {fileID: 882452713}
-  m_Layer: 0
-  m_Name: ExampleSettingsManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &882452712
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 882452711}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &882452713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 882452711}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f0134d55802241b49db6df5c7fd38f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _appConfigData: {fileID: 11400000, guid: af6bd8f8fddb3454b954d765374a7916, type: 2}
-  _debugConfig: {fileID: 11400000, guid: 8386d5bcde49046a1bc2f535fd81636a, type: 2}
-  _databaseNames:
-    m_keys: 00000000
-    m_values:
-    - 
-  _commonSettings:
-    _settingsDict:
-      m_keys: 000000000100000002000000030000000400000005000000060000000700000008000000
-      m_values:
-      - ValueDidChange:
-          m_PersistentCalls:
-            m_Calls: []
-        _settingConfig: {fileID: 11400000, guid: a32afaa5e8f924e6dab17848833bb98a, type: 2}
-      - ValueDidChange:
-          m_PersistentCalls:
-            m_Calls: []
-        _settingConfig: {fileID: 11400000, guid: 074b497567160474bb35eb0f3bacd840, type: 2}
-      - ValueDidChange:
-          m_PersistentCalls:
-            m_Calls:
-            - m_Target: {fileID: 882452713}
-              m_TargetAssemblyTypeName: SettingsManager`5[[ExamplePlacementType,
-                com.r.module
-              m_MethodName: SetEnableSounds
-              m_Mode: 6
-              m_Arguments:
-                m_ObjectArgument: {fileID: 0}
-                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-                m_IntArgument: 0
-                m_FloatArgument: 0
-                m_StringArgument: 
-                m_BoolArgument: 0
-              m_CallState: 2
-        _settingConfig: {fileID: 11400000, guid: a095b3b05acef40c09a488e7faf28ddb, type: 2}
-      - ValueDidChange:
-          m_PersistentCalls:
-            m_Calls:
-            - m_Target: {fileID: 882452713}
-              m_TargetAssemblyTypeName: SettingsManager`5[[ExamplePlacementType,
-                com.r.module
-              m_MethodName: SetEnableMusic
-              m_Mode: 6
-              m_Arguments:
-                m_ObjectArgument: {fileID: 0}
-                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-                m_IntArgument: 0
-                m_FloatArgument: 0
-                m_StringArgument: 
-                m_BoolArgument: 0
-              m_CallState: 2
-        _settingConfig: {fileID: 11400000, guid: ede2653c9c6324690b5a51ed35323bce, type: 2}
-      - ValueDidChange:
-          m_PersistentCalls:
-            m_Calls:
-            - m_Target: {fileID: 882452713}
-              m_TargetAssemblyTypeName: SettingsManager`5[[ExamplePlacementType,
-                com.r.module
-              m_MethodName: SetEnableVibration
-              m_Mode: 6
-              m_Arguments:
-                m_ObjectArgument: {fileID: 0}
-                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-                m_IntArgument: 0
-                m_FloatArgument: 0
-                m_StringArgument: 
-                m_BoolArgument: 0
-              m_CallState: 2
-        _settingConfig: {fileID: 11400000, guid: d032a79ca8589430eb7d1e154913a40b, type: 2}
-      - ValueDidChange:
-          m_PersistentCalls:
-            m_Calls: []
-        _settingConfig: {fileID: 11400000, guid: eeabafa5600824fe3827286c97bedf5c, type: 2}
-      - ValueDidChange:
-          m_PersistentCalls:
-            m_Calls: []
-        _settingConfig: {fileID: 11400000, guid: 5b44b09c396124df6b4c06a90510ef15, type: 2}
-      - ValueDidChange:
-          m_PersistentCalls:
-            m_Calls: []
-        _settingConfig: {fileID: 11400000, guid: ab8db81039c1e4b6c823d49cf73a5392, type: 2}
-      - ValueDidChange:
-          m_PersistentCalls:
-            m_Calls: []
-        _settingConfig: {fileID: 11400000, guid: 9e2258e7dd47740b6be4ab45475e0142, type: 2}
-  _optionalSettings:
-    _settingsDict:
-      m_keys: 
-      m_values: []
 --- !u!1001 &1808248487
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -551,6 +418,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fc7a12892dcb4158afe91a9f8529a29, type: 3}
+--- !u!1001 &3946082298986950668
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3776938303362360689, guid: 8412758ee4b1546d192be1e279f5b110, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776938303362360689, guid: 8412758ee4b1546d192be1e279f5b110, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776938303362360689, guid: 8412758ee4b1546d192be1e279f5b110, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776938303362360689, guid: 8412758ee4b1546d192be1e279f5b110, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776938303362360689, guid: 8412758ee4b1546d192be1e279f5b110, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776938303362360689, guid: 8412758ee4b1546d192be1e279f5b110, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776938303362360689, guid: 8412758ee4b1546d192be1e279f5b110, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776938303362360689, guid: 8412758ee4b1546d192be1e279f5b110, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776938303362360689, guid: 8412758ee4b1546d192be1e279f5b110, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776938303362360689, guid: 8412758ee4b1546d192be1e279f5b110, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5723904438354186841, guid: 8412758ee4b1546d192be1e279f5b110, type: 3}
+      propertyPath: m_Name
+      value: ExampleSettingsManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8412758ee4b1546d192be1e279f5b110, type: 3}
 --- !u!1001 &5167154681287519356
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -613,9 +537,9 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
-  - {fileID: 882452712}
-  - {fileID: 697326368}
   - {fileID: 713100742}
+  - {fileID: 697326368}
+  - {fileID: 3946082298986950668}
   - {fileID: 3351022478401227802}
   - {fileID: 5167154681287519356}
   - {fileID: 1808248487}

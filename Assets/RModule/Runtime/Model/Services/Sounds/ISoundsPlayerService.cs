@@ -2,5 +2,5 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ISoundsPlayerService : ISoundsEnabler , IMusicEnabler {
+public interface ISoundsPlayerService : ISoundsStateHandler , IMusicStateHandler {
 }

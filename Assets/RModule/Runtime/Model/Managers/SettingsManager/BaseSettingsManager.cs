@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class BaseSettingsManager<PurchasableGameItem, Placement, OptionaAppConfigValue, OptionalSettingType, OptionaDebugValue, OptionalCrossPlatformAppConfigValue>
 	: SingletonMonoBehaviour<BaseSettingsManager<PurchasableGameItem, Placement, OptionaAppConfigValue, OptionalSettingType, OptionaDebugValue, OptionalCrossPlatformAppConfigValue>>
+	, ISoundsStateHandler, IMusicStateHandler
 
 	where PurchasableGameItem : Enum
 	where Placement : Enum
@@ -26,8 +27,8 @@ public abstract class BaseSettingsManager<PurchasableGameItem, Placement, Option
 	[SerializeField] protected SettingsData<OptionalSettingType> _optionalSettings = default;
 
 	// Private vars
-	protected ISoundsEnabler _soundsEnabler;
-	protected IMusicEnabler _musicEnabler;
+	protected ISoundsStateHandler _soundsStateHandler;
+	protected IMusicStateHandler _musicStateHandler;
 	protected Action<bool> _setEnableVibration;
 	protected bool _isReady;
 
@@ -35,8 +36,8 @@ public abstract class BaseSettingsManager<PurchasableGameItem, Placement, Option
 	// IInitializable
 
 	public virtual IEnumerator Initialize(ISoundsPlayerService soundsPlayerService, Action<bool> setEnableVibration) {
-		_soundsEnabler = soundsPlayerService;
-		_musicEnabler = soundsPlayerService;
+		_soundsStateHandler = soundsPlayerService;
+		_musicStateHandler = soundsPlayerService;
 		_setEnableVibration = setEnableVibration;
 
 		UpdateNubmerOfStars();
@@ -76,15 +77,15 @@ public abstract class BaseSettingsManager<PurchasableGameItem, Placement, Option
 	}
 
 	// To sets Action to Unity Events on inspector in SettingDatas
-	public virtual void SetEnableSounds(bool enable) {
-		_soundsEnabler.SetEnableSounds(enable);
+	public void OnSoundsStateChanged(bool enabled) {
+		_soundsStateHandler.OnSoundsStateChanged(enabled);
 	}
 
-	public virtual void SetEnableMusic(bool enable) {
-		_musicEnabler.SetEnableMusic(enable);
+	public void OnMusicStateChanged(bool enabled) {
+		_musicStateHandler.OnMusicStateChanged(enabled);
 	}
 
-	public virtual void SetEnableVibration(bool enable) {
+	public void OnVibrationStateChanged(bool enable) {
 		_setEnableVibration?.Invoke(enable);
 	}
 

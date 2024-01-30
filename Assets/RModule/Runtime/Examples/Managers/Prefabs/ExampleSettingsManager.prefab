@@ -1,0 +1,135 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5723904438354186841
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3776938303362360689}
+  - component: {fileID: 146329641177576651}
+  m_Layer: 0
+  m_Name: ExampleSettingsManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3776938303362360689
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5723904438354186841}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &146329641177576651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5723904438354186841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f0134d55802241b49db6df5c7fd38f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _appConfigData: {fileID: 11400000, guid: af6bd8f8fddb3454b954d765374a7916, type: 2}
+  _debugConfig: {fileID: 11400000, guid: 8386d5bcde49046a1bc2f535fd81636a, type: 2}
+  _databaseNames:
+    m_keys: 00000000
+    m_values:
+    - 
+  _commonSettings:
+    _settingsDict:
+      m_keys: 000000000100000002000000030000000400000005000000060000000700000008000000
+      m_values:
+      - ValueDidChange:
+          m_PersistentCalls:
+            m_Calls: []
+        _settingConfig: {fileID: 11400000, guid: a32afaa5e8f924e6dab17848833bb98a, type: 2}
+      - ValueDidChange:
+          m_PersistentCalls:
+            m_Calls: []
+        _settingConfig: {fileID: 11400000, guid: 074b497567160474bb35eb0f3bacd840, type: 2}
+      - ValueDidChange:
+          m_PersistentCalls:
+            m_Calls:
+            - m_Target: {fileID: 146329641177576651}
+              m_TargetAssemblyTypeName: BaseSettingsManager`6[[ExampleGameItemToPurchase,
+                Model
+              m_MethodName: OnSoundsStateChanged
+              m_Mode: 6
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
+        _settingConfig: {fileID: 11400000, guid: a095b3b05acef40c09a488e7faf28ddb, type: 2}
+      - ValueDidChange:
+          m_PersistentCalls:
+            m_Calls:
+            - m_Target: {fileID: 146329641177576651}
+              m_TargetAssemblyTypeName: BaseSettingsManager`6[[ExampleGameItemToPurchase,
+                Model
+              m_MethodName: OnMusicStateChanged
+              m_Mode: 6
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
+        _settingConfig: {fileID: 11400000, guid: ede2653c9c6324690b5a51ed35323bce, type: 2}
+      - ValueDidChange:
+          m_PersistentCalls:
+            m_Calls:
+            - m_Target: {fileID: 146329641177576651}
+              m_TargetAssemblyTypeName: BaseSettingsManager`6[[ExampleGameItemToPurchase,
+                Model
+              m_MethodName: OnVibrationStateChanged
+              m_Mode: 6
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
+        _settingConfig: {fileID: 11400000, guid: d032a79ca8589430eb7d1e154913a40b, type: 2}
+      - ValueDidChange:
+          m_PersistentCalls:
+            m_Calls: []
+        _settingConfig: {fileID: 11400000, guid: eeabafa5600824fe3827286c97bedf5c, type: 2}
+      - ValueDidChange:
+          m_PersistentCalls:
+            m_Calls: []
+        _settingConfig: {fileID: 11400000, guid: 5b44b09c396124df6b4c06a90510ef15, type: 2}
+      - ValueDidChange:
+          m_PersistentCalls:
+            m_Calls: []
+        _settingConfig: {fileID: 11400000, guid: ab8db81039c1e4b6c823d49cf73a5392, type: 2}
+      - ValueDidChange:
+          m_PersistentCalls:
+            m_Calls: []
+        _settingConfig: {fileID: 11400000, guid: 9e2258e7dd47740b6be4ab45475e0142, type: 2}
+  _optionalSettings:
+    _settingsDict:
+      m_keys: 
+      m_values: []
