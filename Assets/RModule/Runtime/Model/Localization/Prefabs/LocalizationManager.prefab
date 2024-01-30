@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _baseStringsFileName: _strings
-  _localizationFolderName: Res/locData
+  _localizationFolderName: locData
   _supportedLanguages: 1e0000000a000000
   _debugLanguage: 30
   _useDebugLanguage: 0
