@@ -13,7 +13,8 @@ public class LocalizationManager : SingletonMonoBehaviour<LocalizationManager> {
 
 	// Outlets
 	[SerializeField] string _baseStringsFileName = "_strings";
-	[SerializeField] string _localizationFolderName = "Res/locData";// from Resources Folder
+	[Tooltip("Assets/Resources/...")]
+	[SerializeField] string _localizationFolderName = "Res/locData";
 	[SerializeField] SystemLanguage[] _supportedLanguages = default;
 
 	[Header("Debug only"), Space]
