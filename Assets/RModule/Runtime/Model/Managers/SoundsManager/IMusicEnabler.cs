@@ -1,3 +1,3 @@
 public interface IMusicEnabler {
-	public void SetMusicEnabled(bool enabled);
+	public void SetEnableMusic(bool enabled);
 }

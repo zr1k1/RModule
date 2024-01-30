@@ -1,3 +1,3 @@
 public interface ISoundsEnabler {
-	public void SetSoundEnabled(bool enabled);
+	public void SetEnableSounds(bool enabled);
 }

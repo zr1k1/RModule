@@ -10,7 +10,7 @@ public class TestSettingsManager : MonoBehaviour {
 		yield return ExampleSettingsManager.Instance.Initialize(SoundsManager.Instance, (enable) => {
 			VibrationController.SetEnable(enable, true);
 		});
-		Debug.Log($"TestSettingsManager : CommonSetting.SoundEffectsVolume {ExampleSettingsManager.Instance.GetValue<bool>(CommonSetting.SoundEffectsVolume)}");
+		Debug.Log($"TestSettingsManager : CommonSetting.SoundEffectsVolume {ExampleSettingsManager.Instance.GetValue<bool>(CommonSetting.SoundEnabled)}");
 		Debug.Log($"TestSettingsManager : CommonSetting.Ages {ExampleSettingsManager.Instance.GetValue<int>(CommonSetting.Ages)}");
 
 		//todo test save stop play and get

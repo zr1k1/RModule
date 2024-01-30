@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: adb875fd34ec34a64b990c9168711691, type: 3}
-  m_Name: soundEffectsVolumeBoolValueConfig
+  m_Name: soundEffectsEnabledBoolValueConfig
   m_EditorClassIdentifier: 
   _value: 1

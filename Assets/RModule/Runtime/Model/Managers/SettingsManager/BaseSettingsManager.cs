@@ -77,11 +77,11 @@ public abstract class BaseSettingsManager<PurchasableGameItem, Placement, Option
 
 	// To sets Action to Unity Events on inspector in SettingDatas
 	public virtual void SetEnableSounds(bool enable) {
-		_soundsEnabler.SetSoundEnabled(enable);
+		_soundsEnabler.SetEnableSounds(enable);
 	}
 
 	public virtual void SetEnableMusic(bool enable) {
-		_musicEnabler.SetMusicEnabled(enable);
+		_musicEnabler.SetEnableMusic(enable);
 	}
 
 	public virtual void SetEnableVibration(bool enable) {
