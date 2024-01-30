@@ -2,29 +2,27 @@
 using System.Collections;
 using UnityEngine;
 
-public abstract class BaseSettingsManager<PurchasableGameItem, Placement, OptionaAppConfigValue, OptionalSettingType, OptionaDebugValue, OptionalCrossPlatformAppConfigValue>
-	: SingletonMonoBehaviour<BaseSettingsManager<PurchasableGameItem, Placement, OptionaAppConfigValue, OptionalSettingType, OptionaDebugValue, OptionalCrossPlatformAppConfigValue>>
-	, ISoundsStateHandler, IMusicStateHandler
+public abstract class BaseSettingsManager<PurchasableGameItem, Placement, OptionalAppConfigSetting, OptionalSetting, OptionaDebugSetting, OptionalCrossPlatformAppConfigSetting>
+	: SingletonMonoBehaviour<BaseSettingsManager<PurchasableGameItem, Placement, OptionalAppConfigSetting, OptionalSetting, OptionaDebugSetting, OptionalCrossPlatformAppConfigSetting>>
 
 	where PurchasableGameItem : Enum
 	where Placement : Enum
-	where OptionalSettingType : Enum
-	where OptionaDebugValue : Enum
-	where OptionaAppConfigValue : Enum 
-	where OptionalCrossPlatformAppConfigValue : Enum {
+	where OptionalSetting : Enum
+	where OptionaDebugSetting : Enum
+	where OptionalAppConfigSetting : Enum
+	where OptionalCrossPlatformAppConfigSetting : Enum {
 
 	// Accessors
-	public AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue, OptionalCrossPlatformAppConfigValue> AppConfigData => _appConfigData;
-	public BaseDebugConfig<OptionaDebugValue> DebugConfig => _debugConfig;
+	public AppConfig<PurchasableGameItem, Placement, OptionalAppConfigSetting, OptionalCrossPlatformAppConfigSetting> AppConfigData => _appConfigData;
+	public BaseDebugConfig<OptionaDebugSetting> DebugConfig => _debugConfig;
 
 	// Outlets
-	[SerializeField] protected AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue, OptionalCrossPlatformAppConfigValue> _appConfigData = default;
-	[SerializeField] protected BaseDebugConfig<OptionaDebugValue> _debugConfig = default;
-	[SerializeField] protected LangStringDictionary _databaseNames = new LangStringDictionary();
+	[SerializeField] protected AppConfig<PurchasableGameItem, Placement, OptionalAppConfigSetting, OptionalCrossPlatformAppConfigSetting> _appConfigData = default;
+	[SerializeField] protected BaseDebugConfig<OptionaDebugSetting> _debugConfig = default;
 
 	// Settings
 	[SerializeField] protected SettingsData<CommonSetting> _commonSettings = default;
-	[SerializeField] protected SettingsData<OptionalSettingType> _optionalSettings = default;
+	[SerializeField] protected SettingsData<OptionalSetting> _optionalSettings = default;
 
 	// Private vars
 	protected ISoundsStateHandler _soundsStateHandler;
@@ -40,14 +38,17 @@ public abstract class BaseSettingsManager<PurchasableGameItem, Placement, Option
 		_musicStateHandler = soundsPlayerService;
 		_setEnableVibration = setEnableVibration;
 
+		_commonSettings.AddValueChangedListener(CommonSetting.SoundEnabled, (value) => { _soundsStateHandler.OnSoundsStateChanged((bool)value); });
+		_commonSettings.AddValueChangedListener(CommonSetting.MusicEnabled, (value) => { _musicStateHandler.OnMusicStateChanged((bool)value); });
+		_commonSettings.AddValueChangedListener(CommonSetting.VibrationEnabled, (value) => { _soundsStateHandler.OnSoundsStateChanged((bool)value); });
+
 		UpdateNubmerOfStars();
 		UpdateLastPlayedDay();
 		UpdatePlayedDaysInARowCount();
 		LateInitialize();
 
 		Application.targetFrameRate = _appConfigData.TargetFps;
-
-		SetReady();
+		_isReady = true;
 
 		yield return null;
 	}
@@ -57,37 +58,20 @@ public abstract class BaseSettingsManager<PurchasableGameItem, Placement, Option
 	}
 
 	void UpdateNubmerOfStars() {
-		SetValue(CommonSetting.NumberOfStarts, GetValue<int>(CommonSetting.NumberOfStarts) + 1);
+		SetSetting(CommonSetting.NumberOfStarts, GetSetting<int>(CommonSetting.NumberOfStarts) + 1);
 	}
 
 	void UpdateLastPlayedDay() {
-		SetValue(CommonSetting.LastPlayedDay, DateTime.Now);
+		SetSetting(CommonSetting.LastPlayedDay, DateTime.Now);
 	}
 
 	void UpdatePlayedDaysInARowCount() {
-		if ((GetValue<DateTime>(CommonSetting.LastPlayedDay) - DateTime.Now).Days <= 1) {
-			SetValue(CommonSetting.PlayedDaysInARowCount, GetValue<int>(CommonSetting.PlayedDaysInARowCount) + 1);
+		if ((GetSetting<DateTime>(CommonSetting.LastPlayedDay) - DateTime.Now).Days <= 1) {
+			SetSetting(CommonSetting.PlayedDaysInARowCount, GetSetting<int>(CommonSetting.PlayedDaysInARowCount) + 1);
 		}
 	}
 
 	protected abstract void LateInitialize();
-
-	void SetReady() {
-		_isReady = true;
-	}
-
-	// To sets Action to Unity Events on inspector in SettingDatas
-	public void OnSoundsStateChanged(bool enabled) {
-		_soundsStateHandler.OnSoundsStateChanged(enabled);
-	}
-
-	public void OnMusicStateChanged(bool enabled) {
-		_musicStateHandler.OnMusicStateChanged(enabled);
-	}
-
-	public void OnVibrationStateChanged(bool enable) {
-		_setEnableVibration?.Invoke(enable);
-	}
 
 	// Others
 	public string GetSupportEmailString() {
@@ -107,23 +91,24 @@ public abstract class BaseSettingsManager<PurchasableGameItem, Placement, Option
 		return aboutString;
 	}
 
-	public virtual void SetValue<T1>(CommonSetting setting, T1 value) {
+	// Set settings
+	public virtual void SetSetting<T1>(CommonSetting setting, T1 value) {
 		((IValueSetter<CommonSetting>)_commonSettings).SetValue(setting, value);
 	}
 
-	public virtual void SetValue<T1>(OptionalSettingType setting, T1 value) {
-		((IValueSetter<OptionalSettingType>)_optionalSettings).SetValue(setting, value);
+	public virtual void SetSetting<T1>(OptionalSetting setting, T1 value) {
+		((IValueSetter<OptionalSetting>)_optionalSettings).SetValue(setting, value);
 	}
 
-	public virtual T1 GetValue<T1>(CommonSetting setting) {
+	public virtual T1 GetSetting<T1>(CommonSetting setting) {
 		return ((IValueGetter<CommonSetting>)_commonSettings).GetValue<T1>(setting);
 	}
 
-	public virtual T1 GetValue<T1>(OptionalSettingType setting) {
-		return ((IValueGetter<OptionalSettingType>)_optionalSettings).GetValue<T1>(setting);
+	public virtual T1 GetSetting<T1>(OptionalSetting setting) {
+		return ((IValueGetter<OptionalSetting>)_optionalSettings).GetValue<T1>(setting);
 	}
 
-	public virtual T1 GetValue<T1>(OptionalCrossPlatformAppConfigValue setting) {
-		return ((IValueGetter<OptionalCrossPlatformAppConfigValue>)_optionalSettings).GetValue<T1>(setting);
+	public virtual T1 GetSetting<T1>(OptionalCrossPlatformAppConfigSetting enumType) {
+		return ((IValueGetter<OptionalCrossPlatformAppConfigSetting>)_appConfigData).GetValue<T1>(enumType);
 	}
 }

@@ -3,7 +3,7 @@ public enum CommonSetting {
 	PolicyAndTermsIsConfirmed = 1,
 	SoundEnabled = 2,
 	MusicEnabled = 3,
-	Vibration = 4,
+	VibrationEnabled = 4,
 	Ages = 5,
 	NumberOfStarts = 6,
 	PlayedDaysInARowCount = 7,
