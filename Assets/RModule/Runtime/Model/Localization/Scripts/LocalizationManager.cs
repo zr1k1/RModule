@@ -22,7 +22,7 @@ public class LocalizationManager : SingletonMonoBehaviour<LocalizationManager> {
 	[SerializeField] bool _useDebugLanguage = default;
 
 	// Private vars
-	Dictionary<string, object> _localizationDictionary = new ();
+	Dictionary<string, object> _localizationDictionary = new Dictionary<string, object>();
 	SystemLanguage _currentLanguage;
 	bool _stringsLoaded;
 	bool _isLoadingStrings;
