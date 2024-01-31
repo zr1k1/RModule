@@ -37,11 +37,14 @@ namespace RModule.Runtime.GraphicKitsSystem {
 
 		where GraphicKitKey : Enum {
 
+		// Accessors
+		public SerializableDictionary<GraphicKitKey, GraphicKitsData> GraphicKitsDict => _graphicKitsDict;
+
 		// Outlets
 		[SerializeField] protected SerializableDictionary<GraphicKitKey, GraphicKitsData> _graphicKitsDict = default;
 
 		// Private vars
-		protected IGraphicKitDataProvider _graphicKitDataProvider;
+		protected ISavedDataProvider _graphicKitDataProvider;
 		protected Dictionary<GraphicKitKey, List<IGraphicKitElement>> _graphicKitElements = new Dictionary<GraphicKitKey, List<IGraphicKitElement>>();
 		protected bool _initializeFinished = false;
 
@@ -73,10 +76,14 @@ namespace RModule.Runtime.GraphicKitsSystem {
 			}
 		}
 
-		public interface IGraphicKitDataProvider : IKeyValueSetter<GraphicKitKey, string> , IKeyValueGetter<GraphicKitKey, string> {
+		public interface ISavedDataProvider : ISavedAvailableSkinsCollectionProvider, IKeyValueSetter<GraphicKitKey, string> , IKeyValueGetter<GraphicKitKey, string> {
 		}
 
-		public IEnumerator Initialize(IGraphicKitDataProvider graphicKitDataProvider) {
+		public interface ISavedAvailableSkinsCollectionProvider {
+			List<string> GetAvailableSkinsCollection();
+		}
+
+		public IEnumerator Initialize(ISavedDataProvider graphicKitDataProvider) {
 			_graphicKitDataProvider = graphicKitDataProvider;
 			SetupGraphicKits();
 
