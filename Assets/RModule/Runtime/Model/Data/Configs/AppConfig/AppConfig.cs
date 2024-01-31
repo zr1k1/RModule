@@ -44,6 +44,10 @@ public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue, Cr
 	[Header("Economics"), Space]
 	[SerializeField] protected AppEconomicsConfig<PurchasableGameItem> _appEconomicsData = default;
 
+	[Header("Ads"), Space]
+	[SerializeField] protected bool _enableTestAdsMode = default;
+	[SerializeField] protected AdPlacementsConfig<Placement> _adPlacementsConfig = default;
+
 	[Header("Links"), Space]
 	[SerializeField] protected string _appPolicyLink = default;
 	[SerializeField] protected string _appTermsLink = default;
@@ -51,26 +55,20 @@ public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue, Cr
 	[SerializeField] protected string _vkLink = default;
 	[SerializeField] protected string _fbLink = default;
 	[SerializeField] protected string _appSiteLink = default;
-
-	//[Header("API keys"), Space]
 	[SerializeField] protected string _iosGADApplicationIdentifier = default;
 
 	[Header("Plist descriptions"), Space]
 	[SerializeField] protected string _trackingUsageDescription = default;
 
-	[Header("Ads"), Space]
-	[SerializeField] protected bool _enableTestAdsMode = default;
-	[SerializeField] protected AdPlacementsConfig<Placement> _adPlacementsConfig = default;
-
-	[Header("OptionaApiDatas"), Space]
-	[SerializeField] protected SerializableDictionary<CrossPlatformValue, ApiData> _apiDatas = default;
+	[Header("OptionaCrossPlatformValuesDict"), Space]
+	[SerializeField] protected SerializableDictionary<CrossPlatformValue, CrossPlatformValuesData> _crossPlatformValuesDict = default;
 
 	[Header("OptionaAppConfigValue"), Space]
 	[SerializeField] protected SerializableDictionary<OptionaAppConfigValue, BaseValueConfig> _optionalValuesDict = default;
 
 	//Classes
 	[Serializable]
-	public class ApiData {
+	public class CrossPlatformValuesData {
 		[SerializeField] internal protected SerializableDictionary<Store, string> values = default;
 	}
 
@@ -94,18 +92,18 @@ public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue, Cr
 	}
 
 	public T1 GetValue<T1>(CrossPlatformValue key) {
-		if (!_apiDatas.ContainsKey(key)) {
-			Debug.LogError($"Value {key} is not present on dictionary _optionalValuesDict");
+		if (!_crossPlatformValuesDict.ContainsKey(key)) {
+			Debug.LogError($"AppConfig : Value {key} is not present on dictionary _crossPlatformValuesDict");
 
 			return default(T1);
 		}
 
 		if (Application.platform == RuntimePlatform.Android) {
-			return (T1)(object)_apiDatas[key].values[Store.GooglePlayStore];
+			return (T1)(object)_crossPlatformValuesDict[key].values[Store.GooglePlayStore];
 		} else if (Application.platform == RuntimePlatform.IPhonePlayer) {
-			return (T1)(object)_apiDatas[key].values[Store.AppStore];
+			return (T1)(object)_crossPlatformValuesDict[key].values[Store.AppStore];
 		} else {
-			return (T1)(object)_apiDatas[key].values[Store.GooglePlayStore];
+			return (T1)(object)_crossPlatformValuesDict[key].values[Store.GooglePlayStore];
 		}
 	}
 }
