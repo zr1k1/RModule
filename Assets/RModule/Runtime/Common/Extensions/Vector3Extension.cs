@@ -8,10 +8,17 @@ namespace RModule.Runtime.Extensions {
 		/// <summary>Calculates angle between 2 vectors. Angle increases clockwise.</summary>
 		/// <param name="from"> Starting Vector with 0°, like Vector3.up</param>
 		/// <param name="clockwise">Clockwise.</param>
-		/// <param name="o">Starting position of vectors.</param>
-		/// <returns>Angle between 0° and 360° from.</returns>
+		/// <returns>Angle between 0° and 360°.</returns>
 		public static float CalculateAngle(this Vector3 to, Vector3 from, bool clockwise = true) {
 			return Quaternion.FromToRotation(clockwise ? to - from : from - to, from).eulerAngles.z;
+		}
+
+		/// <summary>Calculates angle between 2 vectors. Angle increases clockwise.</summary>
+		/// <param name="from"> Starting Vector with 0°, like Vector3.up</param>
+		/// <param name="clockwise">Clockwise.</param>
+		/// <returns>Angle between 0° and 360°.</returns>
+		public static float CalculateAngle(this Vector2 to, Vector2 from, bool clockwise = true) {
+			return CalculateAngle((Vector3)to, (Vector3)from);
 		}
 	}
 }
