@@ -10,7 +10,7 @@ namespace RModule.Runtime.Extensions {
 		/// <param name="clockwise">Clockwise.</param>
 		/// <param name="o">Starting position of vectors.</param>
 		/// <returns>Angle between 0° and 360° from.</returns>
-		public static float CalculateAngle1(Vector3 to, Vector3 from, bool clockwise = true) {
+		public static float CalculateAngle(this Vector3 to, Vector3 from, bool clockwise = true) {
 			return Quaternion.FromToRotation(clockwise ? to - from : from - to, from).eulerAngles.z;
 		}
 	}
