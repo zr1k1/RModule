@@ -11,10 +11,10 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Consumes
+  - Blocks
+  - Hero
+  - GatheringElements
   - 
   - 
   - 
@@ -40,4 +40,22 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Blocks
+    uniqueID: 900384853
+    locked: 0
+  - name: Hero
+    uniqueID: 41196197
+    locked: 0
+  - name: GatheringElements
+    uniqueID: 3848425291
+    locked: 0
+  - name: FinishGameElements
+    uniqueID: 3445211761
+    locked: 0
+  - name: UI
+    uniqueID: 1344923231
+    locked: 0
+  - name: FrontUI
+    uniqueID: 326198959
     locked: 0
