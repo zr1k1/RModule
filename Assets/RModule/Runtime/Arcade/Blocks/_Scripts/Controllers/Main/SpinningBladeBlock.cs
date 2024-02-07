@@ -6,7 +6,7 @@ namespace RModule.Runtime.Arcade {
 	using RModule.Runtime.LeanTween;
 	using RModule.Runtime.Utils;
 
-	public class SpinningBladeBlock : BaseBlock, IDamagable {
+	public class SpinningBladeBlock : BaseBlock, IDamagable, IHeroDamager {
 
 		// Outlets
 		[SerializeField] protected Transform _container = default;
