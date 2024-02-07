@@ -306,7 +306,7 @@ MonoBehaviour:
       m_Calls: []
   p_damageConfig: {fileID: 11400000, guid: c13695e37b2574c9488c08a57a49eed6, type: 2}
   p_contactSfx: {fileID: 3356882633291134674}
-  p_animation: {fileID: 0}
+  p_animation: {fileID: 5960814291412593189}
 --- !u!114 &3356882633291134674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,6 +324,11 @@ MonoBehaviour:
   _playOnStart: 0
   _isImportantSound: 1
   _discardSameSoundsInOneFrame: 0
+--- !u!198 &5960814291412593189 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1092231957203307756, guid: 8d4d6c63fa7fe4234b751d0a7807c27a, type: 3}
+  m_PrefabInstance: {fileID: 6742295640637105865}
+  m_PrefabAsset: {fileID: 0}
 --- !u!212 &6039574320695280641 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 1027263757246259912, guid: 8d4d6c63fa7fe4234b751d0a7807c27a, type: 3}
