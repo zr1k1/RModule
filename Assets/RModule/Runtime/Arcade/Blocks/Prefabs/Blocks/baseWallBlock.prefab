@@ -50,10 +50,51 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5765925644607111465, guid: 8d4d6c63fa7fe4234b751d0a7807c27a, type: 3}
       propertyPath: m_Name
-      value: wallBlock Variant
+      value: baseWallBlock
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5765925644954920704, guid: 8d4d6c63fa7fe4234b751d0a7807c27a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8407873099805507618}
   m_SourcePrefab: {fileID: 100100000, guid: 8d4d6c63fa7fe4234b751d0a7807c27a, type: 3}
+--- !u!1 &3039588498597732980 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5765925644954920704, guid: 8d4d6c63fa7fe4234b751d0a7807c27a, type: 3}
+  m_PrefabInstance: {fileID: 8802962159876015476}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8407873099805507618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3039588498597732980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b446979e472a4ad8bb6cc43e98c3792, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  p_levelPauseComponent: {fileID: 6224733029126768592}
+  WillDestroyed:
+    m_PersistentCalls:
+      m_Calls: []
+  spriteRenderer: {fileID: 8389068662955730876}
+--- !u!114 &6224733029126768592 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3191036473296257700, guid: 8d4d6c63fa7fe4234b751d0a7807c27a, type: 3}
+  m_PrefabInstance: {fileID: 8802962159876015476}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3039588498597732980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c34ecc61baa8b4e2da90ee1517e677d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!212 &8389068662955730876 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 1027263757246259912, guid: 8d4d6c63fa7fe4234b751d0a7807c27a, type: 3}
+  m_PrefabInstance: {fileID: 8802962159876015476}
+  m_PrefabAsset: {fileID: 0}
