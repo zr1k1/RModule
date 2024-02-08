@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4012641329387841256}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 790220968589278255}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5276324503745027708
 SpriteRenderer:
@@ -70,15 +70,15 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 589433205
+  m_SortingLayerID: 900384853
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3246fbde77ba44505add6404f42642a6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4d95ae99be2df4d4c82fb371b1766134, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.3, y: 0.7}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -107,6 +107,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7308083861045069277}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.44, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -114,7 +115,6 @@ Transform:
   m_Children:
   - {fileID: 2429008882914106331}
   m_Father: {fileID: 8074589129986138199}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8074589129986138198
 GameObject:
@@ -128,12 +128,11 @@ GameObject:
   - component: {fileID: 8074589129986138281}
   - component: {fileID: 6979653176287744138}
   - component: {fileID: 3335909665142498718}
-  - component: {fileID: 5141223248688453243}
-  - component: {fileID: 212895847783725472}
-  - component: {fileID: 1865868593846918840}
-  - component: {fileID: 3110535645263291638}
+  - component: {fileID: 7191832049379872945}
+  - component: {fileID: 2849480539519330396}
+  - component: {fileID: 1117000298144232323}
   m_Layer: 9
-  m_Name: actionButton
+  m_Name: baseActionButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -146,6 +145,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8074589129986138198}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.53, y: -0.79, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -153,7 +153,6 @@ Transform:
   m_Children:
   - {fileID: 790220968589278255}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &8074589129986138281
 Rigidbody2D:
@@ -275,10 +274,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 589433205
+  m_SortingLayerID: 900384853
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 945eb6bdac83644bfa55605f76135d0f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5daf1a436931f4fe2b58461ccf244e3b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -289,7 +288,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5141223248688453243
+--- !u!114 &7191832049379872945
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -298,39 +297,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 8074589129986138198}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82d0d26d699b348b6b06ea219f90b9a4, type: 3}
+  m_Script: {fileID: 11500000, guid: b7d565dea3bbd4c1d8ba6ea7b16dd830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soundEffectConfig: {fileID: 11400000, guid: f2190332b976f4025bcd72572b3c0a5c, type: 2}
-  _randomizePitch: 0
-  _playOnStart: 0
-  _pitchRange:
-    min: 0.95
-    max: 1.05
-  _isImportantSound: 1
-  _discardSameSoundsInOneFrame: 0
---- !u!114 &212895847783725472
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8074589129986138198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5856057684d0a4ca8a2a10d33eeef0eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  p_levelPauseComponent: {fileID: 1865868593846918840}
+  p_levelPauseComponent: {fileID: 1117000298144232323}
+  DidDestroyed:
+    m_PersistentCalls:
+      m_Calls: []
   p_spriteRenderer: {fileID: 3335909665142498718}
-  p_sfx: {fileID: 5141223248688453243}
+  p_sfx: {fileID: 2849480539519330396}
+  p_itemAnimationComponent: {fileID: 0}
   DidUse:
     m_PersistentCalls:
       m_Calls: []
   _pressedBtn: {fileID: 2429008882914106331}
   _pressedStateLocalPosition: {x: 0.2, y: 0}
   _startAtStatePressed: 0
---- !u!114 &1865868593846918840
+--- !u!114 &2849480539519330396
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -339,37 +322,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 8074589129986138198}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32f06387f266a4cd6bdc7ef41afda846, type: 3}
+  m_Script: {fileID: 11500000, guid: 996453ffb165745ecb91ff6c74ee8f45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundEffectConfig: {fileID: 0}
+  _randomizePitch: 0
+  _playOnStart: 0
+  _isImportantSound: 1
+  _discardSameSoundsInOneFrame: 0
+--- !u!114 &1117000298144232323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8074589129986138198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c34ecc61baa8b4e2da90ee1517e677d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   DidResumePauseNotFromLevel:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 212895847783725472}
-        m_TargetAssemblyTypeName: ActionButton, Assembly-CSharp
-        m_MethodName: UnPress
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   _tweansForPause:
   - {fileID: 8074589129986138198}
---- !u!114 &3110535645263291638
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8074589129986138198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d703f0bbf09b436fa6967473c085be6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _key: actionBtnColor
-  _graphicType: 1
