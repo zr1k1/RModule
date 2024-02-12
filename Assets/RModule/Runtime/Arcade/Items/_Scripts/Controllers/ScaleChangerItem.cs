@@ -8,20 +8,13 @@ namespace RModule.Runtime.Arcade {
 		[SerializeField] Sprite _moreThanOne = default;
 		[SerializeField] float _scaleModifier = default;
 
-		protected override void Awake() {
-			base.Awake();
-			p_spriteRenderer.sprite = _scaleModifier < 1 ? _lessThanOne : _moreThanOne;
-		}
-
 		public interface IScaleChangeable {
 			void Scale(float scaleModifier);
 		}
 
-		public void Drop(GameObject droperGo) {
-		}
-
-		public void PickUp(GameObject pickerGo) {
-			TryPlaySound();
+		protected override void Awake() {
+			base.Awake();
+			p_spriteRenderer.sprite = _scaleModifier < 1 ? _lessThanOne : _moreThanOne;
 		}
 
 		public override void Consume(GameObject consumer) {

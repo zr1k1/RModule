@@ -21,6 +21,7 @@ namespace RModule.Runtime.Arcade {
 		[SerializeField] protected bool _notMove = default;
 
 		// Privats
+		protected DamageDealerComponent _damageDealerComponent;
 		protected List<Vector3> _pointsToMove = new List<Vector3>();
 		protected LTDescr _moveTween;
 		protected LTDescr _rotationTween;
@@ -28,7 +29,8 @@ namespace RModule.Runtime.Arcade {
 		// Interfaces
 		public interface ISpinningBladeBlockDestroyer { }
 
-		protected void Start() {
+		protected virtual void Start() {
+			_damageDealerComponent = GetComponent<DamageDealerComponent>();
 			foreach (Transform pointTr in _pointsToMoveParent)
 				_pointsToMove.Add(pointTr.position);
 

@@ -4,6 +4,10 @@ using UnityEngine.Events;
 using RModule.Runtime.Sounds;
 
 public class DamageDealerComponent : MonoBehaviour {
+	// Delegates
+	public delegate bool DealDamageCondition();
+	public DealDamageCondition D_DealDamageCondition = () => { return true; };
+
 	// Events
 	public UnityEvent<DamageData> DamageDidDeal = default;
 
@@ -14,7 +18,7 @@ public class DamageDealerComponent : MonoBehaviour {
 
 	public virtual void OnCollisionEnter2D(Collision2D collision) {
 		var damageRecipientComponent = collision.collider.GetComponent<DamageRecipientComponent>();
-		if (damageRecipientComponent != null) {
+		if (damageRecipientComponent != null && D_DealDamageCondition()) {
 			DealDamage(damageRecipientComponent, new DamageData {
 				damageConfig = p_damageConfig,
 				damageSourceGameObject = gameObject,
@@ -25,7 +29,7 @@ public class DamageDealerComponent : MonoBehaviour {
 
 	public virtual void OnTriggerEnter2D(Collider2D collider) {
 		var damageRecipientComponent = collider.GetComponent<DamageRecipientComponent>();
-		if (damageRecipientComponent != null) {
+		if (damageRecipientComponent != null && D_DealDamageCondition()) {
 			DealDamage(damageRecipientComponent, new DamageData {
 				damageConfig = p_damageConfig,
 				damageSourceGameObject = gameObject,
