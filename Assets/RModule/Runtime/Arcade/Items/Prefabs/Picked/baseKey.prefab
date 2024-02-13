@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 1811681019376698766}
   - component: {fileID: 947294072349300817}
   - component: {fileID: 871707979611263191}
-  - component: {fileID: 462814159910450263}
   - component: {fileID: 5560706934559707160}
+  - component: {fileID: 2555384866138281039}
   m_Layer: 9
-  m_Name: key
+  m_Name: baseKey
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,13 +29,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5143496064025067590}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &5143496064025067705
 Rigidbody2D:
@@ -102,7 +102,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 750721845
+  m_SortingLayerID: 69398757
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5edcfc3e6167249d3808132f3e034eb1, type: 3}
@@ -207,37 +207,6 @@ PolygonCollider2D:
       - {x: 0.32071698, y: 0.01750921}
       - {x: 0.30543557, y: 0.07705578}
   m_UseDelaunayMesh: 0
---- !u!114 &462814159910450263
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5143496064025067590}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c1782077f7a44587874adc4c17065c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  p_levelPauseComponent: {fileID: 0}
-  DidDestroyed:
-    m_PersistentCalls:
-      m_Calls: []
-  p_spriteRenderer: {fileID: 1811681019376698766}
-  p_sfx: {fileID: 0}
-  p_itemAnimationComponent: {fileID: 0}
-  DidTap:
-    m_PersistentCalls:
-      m_Calls: []
-  DidPicked:
-    m_PersistentCalls:
-      m_Calls: []
-  _coloredKeySprites:
-  - {fileID: 21300000, guid: 5edcfc3e6167249d3808132f3e034eb1, type: 3}
-  - {fileID: 21300000, guid: 9165d22b6d91b4c9790b803bccecaba0, type: 3}
-  - {fileID: 21300000, guid: f056b106d31ae45158885c637c0dd776, type: 3}
-  - {fileID: 21300000, guid: a1e5977a2dba04dd2b42b5eccd5334e8, type: 3}
-  _colorType: 0
 --- !u!58 &5560706934559707160
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -273,3 +242,34 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.8
+--- !u!114 &2555384866138281039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5143496064025067590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b15345d335f77401ab26ea18caa642a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  p_levelPauseComponent: {fileID: 0}
+  DidDestroyed:
+    m_PersistentCalls:
+      m_Calls: []
+  p_spriteRenderer: {fileID: 1811681019376698766}
+  p_sfx: {fileID: 0}
+  p_itemAnimationComponent: {fileID: 0}
+  DidTap:
+    m_PersistentCalls:
+      m_Calls: []
+  DidPicked:
+    m_PersistentCalls:
+      m_Calls: []
+  _coloredKeySprites:
+  - {fileID: 21300000, guid: 5edcfc3e6167249d3808132f3e034eb1, type: 3}
+  - {fileID: 21300000, guid: 9165d22b6d91b4c9790b803bccecaba0, type: 3}
+  - {fileID: 21300000, guid: f056b106d31ae45158885c637c0dd776, type: 3}
+  - {fileID: 21300000, guid: a1e5977a2dba04dd2b42b5eccd5334e8, type: 3}
+  _colorType: 0
