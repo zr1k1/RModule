@@ -29,23 +29,24 @@ public class TeleportBlock : BaseBlock, ITeleport {
 	}
 
 	protected virtual void OnTriggerEnter2D(Collider2D collision) {
-		TryTeleport(collision.gameObject);
+		StartCoroutine(TryTeleport(collision.gameObject));
 	}
 
 	protected virtual void OnCollisionEnter2D(Collision2D collision) {
-		TryTeleport(collision.gameObject);
+		StartCoroutine(TryTeleport(collision.gameObject));
 	}
 
-	void TryTeleport(GameObject go) {
+	IEnumerator TryTeleport(GameObject go) {
 		Debug.Log($"TryTeleport {go.name}");
-		if (_destinationTeleport == null)
-			return;
-
-		var iTeleportable = go.GetComponent<ITeleportable>();
-		if (iTeleportable != null && iTeleportable.CanTeleport()) {
-			iTeleportable.OnStartTeleport(this);
-			StartCoroutine(Teleport(go, iTeleportable.OnEndTeleport));
+		if (_destinationTeleport != null) {
+			var iTeleportable = go.GetComponent<ITeleportable>();
+			if (iTeleportable != null && iTeleportable.CanTeleport()) {
+				yield return StartCoroutine(iTeleportable.OnStartTeleport(this));
+				StartCoroutine(Teleport(go, iTeleportable.OnEndTeleport));
+			}
 		}
+		yield return null;
+
 	}
 
 	protected virtual IEnumerator Teleport(GameObject go, Action finishCallback) {

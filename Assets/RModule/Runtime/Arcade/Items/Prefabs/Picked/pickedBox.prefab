@@ -13,12 +13,9 @@ GameObject:
   - component: {fileID: 1776691802391114234}
   - component: {fileID: 912268639995718693}
   - component: {fileID: 7455740669159464760}
-  - component: {fileID: 6826493430777663458}
-  - component: {fileID: 3101656475022574455}
-  - component: {fileID: 6111899377573274243}
   - component: {fileID: 3314645202551551581}
   m_Layer: 9
-  m_Name: box
+  m_Name: pickedBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,13 +28,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5110793812952708146}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.50003, y: 1.250005, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &5110793812952708301
 Rigidbody2D:
@@ -105,7 +102,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 750721845
-  m_SortingLayer: 3
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 9b96fe649a2f6475fb87df4de3a69aef, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -182,75 +179,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &6826493430777663458
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5110793812952708146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52f0ed63e0e834992a22acf28dd5f440, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  p_levelPauseComponent: {fileID: 0}
-  DidDestroyed:
-    m_PersistentCalls:
-      m_Calls: []
-  p_spriteRenderer: {fileID: 1776691802391114234}
-  p_sfx: {fileID: 0}
-  p_itemAnimationComponent: {fileID: 0}
-  DidTap:
-    m_PersistentCalls:
-      m_Calls: []
-  DidPicked:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &3101656475022574455
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5110793812952708146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20b5ef7e1bc204d84b03b94f1a57a504, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DamageDidDeal:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6826493430777663458}
-        m_TargetAssemblyTypeName: Stopper, Assembly-CSharp
-        m_MethodName: Destroy
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  p_damageConfig: {fileID: 11400000, guid: f4440b89fa1654b1a8b0f9c878a6345b, type: 2}
-  p_contactSfx: {fileID: 0}
-  p_animation: {fileID: 0}
---- !u!114 &6111899377573274243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5110793812952708146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d703f0bbf09b436fa6967473c085be6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _key: boxAddress
-  _graphicType: 0
 --- !u!58 &3314645202551551581
 CircleCollider2D:
   m_ObjectHideFlags: 0

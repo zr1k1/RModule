@@ -5,7 +5,7 @@ using UnityEngine;
 namespace RModule.Runtime.Arcade {
 	public interface ITeleportable {
 		bool CanTeleport();
-		void OnStartTeleport(TeleportBlock teleportBlock);
+		IEnumerator OnStartTeleport(TeleportBlock teleportBlock);
 		void OnEndTeleport();
 	}
 }

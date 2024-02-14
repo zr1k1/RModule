@@ -15,7 +15,7 @@ namespace RModule.Runtime.Arcade {
 		}
 
 		public virtual void PickUp(GameObject pickerGo) {
-			p_rigidbody2D.constraints = RigidbodyConstraints2D.None;
+			//p_rigidbody2D.constraints = RigidbodyConstraints2D.None;
 			DidPicked?.Invoke();
 		}
 
