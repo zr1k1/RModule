@@ -28,6 +28,7 @@ public class DamageDealerComponent : MonoBehaviour {
 	}
 
 	public virtual void OnTriggerEnter2D(Collider2D collider) {
+		Debug.Log($"DamageDealerComponent : OnTriggerEnter2D {collider.gameObject.name}");
 		var damageRecipientComponent = collider.GetComponent<DamageRecipientComponent>();
 		if (damageRecipientComponent != null && D_DealDamageCondition()) {
 			DealDamage(damageRecipientComponent, new DamageData {

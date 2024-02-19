@@ -35,6 +35,7 @@ namespace RModule.Runtime.Arcade {
 		}
 
 		protected virtual void OnTriggerEnter2D(Collider2D collision) {
+			Debug.Log($"ItemPicker : OnTriggerEnter2D {collision.gameObject.name} {collision.transform.position}");
 			var itemContactHandlers = collision.GetComponents<IItemContactHandler>();
 			if (itemContactHandlers.Length > 0) {
 				foreach (var itemContactHandler in itemContactHandlers)
@@ -51,6 +52,7 @@ namespace RModule.Runtime.Arcade {
 		}
 
 		protected virtual void OnCollisionEnter2D(Collision2D collision) {
+			Debug.Log($"ItemPicker : OnCollisionEnter2D");
 			var itemContactHandlers = collision.gameObject.GetComponents<IItemContactHandler>();
 			if (itemContactHandlers.Length > 0) {
 				foreach (var itemContactHandler in itemContactHandlers)

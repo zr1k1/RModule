@@ -29,6 +29,7 @@ public class TeleportBlock : BaseBlock, ITeleport {
 	}
 
 	protected virtual void OnTriggerEnter2D(Collider2D collision) {
+		Debug.Log($"TeleportBlock : OnTriggerEnter2D");
 		StartCoroutine(TryTeleport(collision.gameObject));
 	}
 
@@ -41,7 +42,7 @@ public class TeleportBlock : BaseBlock, ITeleport {
 		if (_destinationTeleport != null) {
 			var iTeleportable = go.GetComponent<ITeleportable>();
 			if (iTeleportable != null && iTeleportable.CanTeleport()) {
-				yield return StartCoroutine(iTeleportable.OnStartTeleport(this));
+				iTeleportable.OnStartTeleport(this);
 				StartCoroutine(Teleport(go, iTeleportable.OnEndTeleport));
 			}
 		}
@@ -57,9 +58,11 @@ public class TeleportBlock : BaseBlock, ITeleport {
 	}
 
 	public virtual IEnumerator DefaultAnimationTeleportIn(GameObject go) {
+		Debug.Log($"TeleportBlock : DefaultAnimationTeleportIn");
 		LeanTween.scale(go, Vector3.zero, 0.5f);
 		LeanTween.move(go, transform, 0.5f);
 		yield return new WaitForSeconds(0.5f);
+		Debug.Log($"TeleportBlock : DefaultAnimationTeleportIn end");
 	}
 
 	public virtual IEnumerator DefaultAnimationTeleportOut(GameObject go) {
