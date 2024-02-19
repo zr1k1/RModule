@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using RModule.Runtime.Arcade;
+using RModule.Runtime.Arcade.Inventory;
 
-public class Lock : Item {
+public class Lock : UnPickableItem ,IItemContactHandler {
 	// Enums
 	public enum MaterialType { Steel = 0 }
 
@@ -49,5 +50,18 @@ public class Lock : Item {
 		p_collider2D.enabled = false;
 		GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
 		Destroy(gameObject, 5);
+	}
+
+	public void OnStartContactWithItem(Item item) {
+		if (item is Key keyItem && _colorType == ((Key)item).Color) {
+			if (!IsUnlocked) {
+				TryUnlock();
+				if (IsUnlocked)
+					keyItem.Destroy();
+			}
+		}
+	}
+
+	public void OnEndContactWithItem(Item item) {
 	}
 }
