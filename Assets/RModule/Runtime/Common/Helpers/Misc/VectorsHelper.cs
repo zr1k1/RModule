@@ -15,4 +15,18 @@ public static class VectorsHelper {
 		else
 			return 360 - Quaternion.FromToRotation(endPoint - startPoint, beginAngleFrom).eulerAngles.z;
 	}
+
+	public static (int, Vector3) GetNearestPoint(this Vector3 targetPoint, List<Vector3> points) {
+		(int, Vector3) result = (0, points[0]);
+		float nearestDistance = Vector3.Distance(targetPoint, points[0]);
+		for (int i = 0; i < points.Count; i++) {
+			var distance = Vector3.Distance(targetPoint, points[i]);
+			if (distance < nearestDistance) {
+				nearestDistance = distance;
+				result = (i, points[i]);
+			}
+		}
+
+		return result;
+	}
 }

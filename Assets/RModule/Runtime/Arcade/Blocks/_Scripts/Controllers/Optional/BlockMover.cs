@@ -7,7 +7,7 @@ namespace RModule.Runtime.Arcade {
 	using UnityEngine.Events;
 	using RModule.Runtime.LeanTween;
 
-	public class BlockMover : MonoBehaviour, IItemContactHandler {
+	public class BlockMover : MonoBehaviour, IItemContactHandler, IInfluenceMovingObjects, IMoveable {
 		// Enums
 		public enum PointsType { Vectors, Transforms }
 
@@ -42,8 +42,40 @@ namespace RModule.Runtime.Arcade {
 
 		// Interfaces
 		public interface IMoveBlockContactHandler {
-			void OnStartMoveBlockContact();
-			void OnEndMoveBlockContact();
+			void OnStartMoveBlockContact(BlockMover blockMover);
+			void OnEndMoveBlockContact(BlockMover blockMover);
+		}
+
+		private void OnTriggerEnter2D(Collider2D collision) {
+			var iMoveBlockContactHandler = collision.gameObject.GetComponent<IMoveBlockContactHandler>();
+			if(iMoveBlockContactHandler != null) {
+				iMoveBlockContactHandler.OnStartMoveBlockContact(this);
+				AddStopperPauseMove(iMoveBlockContactHandler);
+			}
+		}
+
+		private void OnTriggerExit2D(Collider2D collision) {
+			var iMoveBlockContactHandler = collision.gameObject.GetComponent<IMoveBlockContactHandler>();
+			if (iMoveBlockContactHandler != null) {
+				iMoveBlockContactHandler.OnEndMoveBlockContact(this);
+				RemoveStopperAndTryResumeMove(iMoveBlockContactHandler);
+			}
+		}
+
+		private void OnCollisionEnter2D(Collision2D collision) {
+			var iMoveBlockContactHandler = collision.gameObject.GetComponent<IMoveBlockContactHandler>();
+			if (iMoveBlockContactHandler != null) {
+				iMoveBlockContactHandler.OnStartMoveBlockContact(this);
+				AddStopperPauseMove(iMoveBlockContactHandler);
+			}
+		}
+
+		private void OnCollisionExit2D(Collision2D collision) {
+			var iMoveBlockContactHandler = collision.gameObject.GetComponent<IMoveBlockContactHandler>();
+			if (iMoveBlockContactHandler != null) {
+				iMoveBlockContactHandler.OnEndMoveBlockContact(this);
+				RemoveStopperAndTryResumeMove(iMoveBlockContactHandler);
+			}
 		}
 
 		void Start() {
@@ -92,18 +124,26 @@ namespace RModule.Runtime.Arcade {
 		void IItemContactHandler.OnStartContactWithItem(Item item) {
 			var iMoveBlockContactHandler = item.GetComponent<IMoveBlockContactHandler>();
 			if (iMoveBlockContactHandler != null) {
-				_stoppers.Add(iMoveBlockContactHandler);
-				_moveLTDescr.pause();
+				AddStopperPauseMove(iMoveBlockContactHandler);
 			}
 		}
 
 		void IItemContactHandler.OnEndContactWithItem(Item item) {
 			var iMoveBlockContactHandler = item.GetComponent<IMoveBlockContactHandler>();
 			if (iMoveBlockContactHandler != null) {
-				_stoppers.Remove(iMoveBlockContactHandler);
-				if (_stoppers.Count == 0)
-					_moveLTDescr.resume();
+				RemoveStopperAndTryResumeMove(iMoveBlockContactHandler);
 			}
+		}
+
+		void AddStopperPauseMove(IMoveBlockContactHandler moveBlockContactHandler) {
+			_stoppers.Add(moveBlockContactHandler);
+			_moveLTDescr.pause();
+		}
+
+		void RemoveStopperAndTryResumeMove(IMoveBlockContactHandler moveBlockContactHandler) {
+			_stoppers.Remove(moveBlockContactHandler);
+			if (_stoppers.Count == 0)
+				_moveLTDescr.resume();
 		}
 
 		public void TryMoveNextPoint() {
@@ -134,6 +174,26 @@ namespace RModule.Runtime.Arcade {
 			PrevPointExist = _currentPointToMoveIndex - 1 >= 0;
 
 			MovementDidEnd?.Invoke(this);
+		}
+
+		public Vector2 GetMoveEndPoint() {
+			return Vector2.zero;
+		}
+
+		public bool TryGetMoveEndPoint(out Vector3 moveEndPoint) {
+			throw new System.NotImplementedException();
+		}
+
+		public void StopMove() {
+			throw new System.NotImplementedException();
+		}
+
+		public void PauseMove() {
+			_moveLTDescr.pause();
+		}
+
+		public void ResumeMove() {
+			throw new System.NotImplementedException();
 		}
 	}
 }
