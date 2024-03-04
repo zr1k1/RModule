@@ -4,16 +4,17 @@ namespace RModule.Runtime.Arcade {
 
 	public class FinishBlock : BaseBlock {
 
-		public virtual void OnTriggerEnter2D(Collider2D collider) {
-			IFinishBlockCollisionHandler iIFinishBlockCollisionHandler = collider.GetComponent<IFinishBlockCollisionHandler>();
-			if (iIFinishBlockCollisionHandler != null) {
-				PlayAnimation();
-				iIFinishBlockCollisionHandler.OnContactFinishBlock(this);
-			}
+		protected override void Start() {
+			p_contactDetector.Setup(this);
 		}
 
 		public virtual void PlayAnimation() {
 
+		}
+
+		public override void OnStartContact(GameObject userGo) {
+			base.OnStartContact(userGo);
+			PlayAnimation();
 		}
 	}
 }

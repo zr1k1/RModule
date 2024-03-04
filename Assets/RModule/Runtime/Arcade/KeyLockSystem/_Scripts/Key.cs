@@ -23,19 +23,9 @@ public class Key : PickedAtHandItem {
 			p_spriteRenderer.sprite = _coloredKeySprites[(int)_colorType];
 	}
 
-	//void IItemContactHandler.OnStartContactWithItem(Item item) {
-	//	if (item is Lock && _colorType == ((Lock)item).Color) {
-	//		var lockItem = (Lock)item;
-	//		if (!lockItem.IsUnlocked) {
-	//			lockItem.TryUnlock();
-	//			if (lockItem.IsUnlocked)
-	//				Destroy();
-	//		}
-	//	}
-	//}
-
-	//void IItemContactHandler.OnEndContactWithItem(Item item) {
-	//}
+	protected override void Start() {
+		p_contactDetector.Setup(this);
+	}
 
 	public override void Destroy() {
 		base.Destroy();
@@ -43,9 +33,5 @@ public class Key : PickedAtHandItem {
 		enabled = false;
 		p_collider2D.enabled = false;
 		Destroy(gameObject, 0);
-	}
-
-	public bool TryGetItem(out Lock item) {
-		throw new System.NotImplementedException();
 	}
 }

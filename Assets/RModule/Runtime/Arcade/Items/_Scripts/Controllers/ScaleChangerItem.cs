@@ -17,6 +17,10 @@ namespace RModule.Runtime.Arcade {
 			p_spriteRenderer.sprite = _scaleModifier < 1 ? _lessThanOne : _moreThanOne;
 		}
 
+		protected override void Start() {
+			p_contactDetector.Setup(this);
+		}
+
 		public override void Consume(GameObject consumer) {
 			base.Consume(consumer);
 			var iScaleChangeable = consumer.GetComponent<IScaleChangeable>();

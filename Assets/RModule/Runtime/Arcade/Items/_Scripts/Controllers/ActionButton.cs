@@ -21,6 +21,10 @@ namespace RModule.Runtime.Arcade {
 				_pressedBtn.localPosition = _pressedStateLocalPosition;
 		}
 
+		protected override void Start() {
+			p_contactDetector.Setup(this);
+		}
+
 		public void Use(GameObject userGo) {
 			Debug.Log($"ActionButton : Use");
 			if (_isPressed)

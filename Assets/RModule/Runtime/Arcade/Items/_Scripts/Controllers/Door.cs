@@ -12,6 +12,10 @@ namespace RModule.Runtime.Arcade {
 		// Privats
 		protected bool _isOpen = default;
 
+		protected override void Start() {
+			p_contactDetector.Setup(this);
+		}
+
 		public virtual void Open() {
 			if (_isOpen)
 				return;

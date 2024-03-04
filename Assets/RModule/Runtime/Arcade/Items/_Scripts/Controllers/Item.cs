@@ -20,6 +20,7 @@ namespace RModule.Runtime.Arcade {
 		[SerializeField] protected ItemAnimationComponent p_itemAnimationComponent = default;
 
 		// Privats
+		protected ContactDetector p_contactDetector;
 		protected Collider2D p_collider2D;
 		protected Rigidbody2D p_rigidbody2D;
 		protected Vector2 p_startPosition;
@@ -32,41 +33,46 @@ namespace RModule.Runtime.Arcade {
 			p_rigidbody2D = GetComponent<Rigidbody2D>();
 			p_sfx = GetComponent<SoundEffectPlayer>();
 			p_startPosition = transform.position;
+			p_contactDetector = gameObject.AddComponent<ContactDetector>();
 		}
 
-		protected virtual void OnTriggerEnter2D(Collider2D collision) {
-			Debug.Log($"ItemPicker : OnTriggerEnter2D {collision.gameObject.name} {collision.transform.position}");
-			var itemContactHandlers = collision.GetComponents<IItemContactHandler>();
-			if (itemContactHandlers.Length > 0) {
-				foreach (var itemContactHandler in itemContactHandlers)
-					itemContactHandler.OnStartContactWithItem(this);
-			}
+		protected virtual void Start() {
+			Debug.LogError($"{transform.name} : Override Start method and use p_contactDetector.Setup(this)");
 		}
 
-		protected virtual void OnTriggerExit2D(Collider2D collision) {
-			var itemContactHandlers = collision.GetComponents<IItemContactHandler>();
-			if (itemContactHandlers.Length > 0) {
-				foreach (var itemContactHandler in itemContactHandlers)
-					itemContactHandler.OnEndContactWithItem(this);
-			}
-		}
+		//protected virtual void OnTriggerEnter2D(Collider2D collision) {
+		//	Debug.Log($"ItemPicker : OnTriggerEnter2D {collision.gameObject.name} {collision.transform.position}");
+		//	var itemContactHandlers = collision.GetComponents<IItemContactHandler>();
+		//	if (itemContactHandlers.Length > 0) {
+		//		foreach (var itemContactHandler in itemContactHandlers)
+		//			itemContactHandler.OnStartContactWithItem(this);
+		//	}
+		//}
 
-		protected virtual void OnCollisionEnter2D(Collision2D collision) {
-			Debug.Log($"ItemPicker : OnCollisionEnter2D");
-			var itemContactHandlers = collision.gameObject.GetComponents<IItemContactHandler>();
-			if (itemContactHandlers.Length > 0) {
-				foreach (var itemContactHandler in itemContactHandlers)
-					itemContactHandler.OnStartContactWithItem(this);
-			}
-		}
+		//protected virtual void OnTriggerExit2D(Collider2D collision) {
+		//	var itemContactHandlers = collision.GetComponents<IItemContactHandler>();
+		//	if (itemContactHandlers.Length > 0) {
+		//		foreach (var itemContactHandler in itemContactHandlers)
+		//			itemContactHandler.OnEndContactWithItem(this);
+		//	}
+		//}
 
-		protected virtual void OnCollisionExit2D(Collision2D collision) {
-			var itemContactHandlers = collision.gameObject.GetComponents<IItemContactHandler>();
-			if (itemContactHandlers.Length > 0) {
-				foreach (var itemContactHandler in itemContactHandlers)
-					itemContactHandler.OnEndContactWithItem(this);
-			}
-		}
+		//protected virtual void OnCollisionEnter2D(Collision2D collision) {
+		//	Debug.Log($"ItemPicker : OnCollisionEnter2D");
+		//	var itemContactHandlers = collision.gameObject.GetComponents<IItemContactHandler>();
+		//	if (itemContactHandlers.Length > 0) {
+		//		foreach (var itemContactHandler in itemContactHandlers)
+		//			itemContactHandler.OnStartContactWithItem(this);
+		//	}
+		//}
+
+		//protected virtual void OnCollisionExit2D(Collision2D collision) {
+		//	var itemContactHandlers = collision.gameObject.GetComponents<IItemContactHandler>();
+		//	if (itemContactHandlers.Length > 0) {
+		//		foreach (var itemContactHandler in itemContactHandlers)
+		//			itemContactHandler.OnEndContactWithItem(this);
+		//	}
+		//}
 
 		protected virtual void TryPlaySound() {
 			if (p_sfx != null) {

@@ -4,10 +4,7 @@ using RModule.Runtime.Arcade;
 using RModule.Runtime.LeanTween;
 using UnityEngine;
 
-public interface ITeleport {
-}
-
-public class TeleportBlock : BaseBlock, ITeleport {
+public class TeleportBlock : BaseBlock {
 
 	// Delegates
 	public delegate IEnumerator Animation(GameObject teleportedGo);
@@ -23,22 +20,17 @@ public class TeleportBlock : BaseBlock, ITeleport {
 
 	// Privats
 
-	private void Start() {
+	protected override void Start() {
+		p_contactDetector.Setup(this);
 		AnimationIn = DefaultAnimationTeleportIn;
 		AnimationOut = DefaultAnimationTeleportOut;
 	}
 
-	protected virtual void OnTriggerEnter2D(Collider2D collision) {
-		Debug.Log($"TeleportBlock : OnTriggerEnter2D");
-		StartCoroutine(TryTeleport(collision.gameObject));
-	}
-
-	protected virtual void OnCollisionEnter2D(Collision2D collision) {
-		StartCoroutine(TryTeleport(collision.gameObject));
+	public void Teleport(GameObject go) {
+		StartCoroutine(TryTeleport(go));
 	}
 
 	IEnumerator TryTeleport(GameObject go) {
-		Debug.Log($"TryTeleport {go.name}");
 		if (_destinationTeleport != null) {
 			var iTeleportable = go.GetComponent<ITeleportable>();
 			if (iTeleportable != null && iTeleportable.CanTeleport()) {
@@ -58,11 +50,9 @@ public class TeleportBlock : BaseBlock, ITeleport {
 	}
 
 	public virtual IEnumerator DefaultAnimationTeleportIn(GameObject go) {
-		Debug.Log($"TeleportBlock : DefaultAnimationTeleportIn");
 		LeanTween.scale(go, Vector3.zero, 0.5f);
 		LeanTween.move(go, transform, 0.5f);
 		yield return new WaitForSeconds(0.5f);
-		Debug.Log($"TeleportBlock : DefaultAnimationTeleportIn end");
 	}
 
 	public virtual IEnumerator DefaultAnimationTeleportOut(GameObject go) {

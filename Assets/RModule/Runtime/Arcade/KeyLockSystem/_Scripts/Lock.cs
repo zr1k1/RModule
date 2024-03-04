@@ -5,7 +5,7 @@ using UnityEngine.Events;
 using RModule.Runtime.Arcade;
 using RModule.Runtime.Arcade.Inventory;
 
-public class Lock : UnPickableItem ,IItemContactHandler {
+public class Lock : UnPickableItem, IStartContactDetector<Key> {
 	// Enums
 	public enum MaterialType { Steel = 0 }
 
@@ -32,6 +32,10 @@ public class Lock : UnPickableItem ,IItemContactHandler {
 			p_spriteRenderer.sprite = _coloredLockSprites[(int)_colorType];
 	}
 
+	protected override void Start() {
+		p_contactDetector.Setup(this);
+	}
+
 	public void TryUnlock() {
 		if (_isUnlocked)
 			return;
@@ -52,16 +56,11 @@ public class Lock : UnPickableItem ,IItemContactHandler {
 		Destroy(gameObject, 5);
 	}
 
-	public void OnStartContactWithItem(Item item) {
-		if (item is Key keyItem && _colorType == ((Key)item).Color) {
-			if (!IsUnlocked) {
-				TryUnlock();
-				if (IsUnlocked)
-					keyItem.Destroy();
-			}
+	public void OnStartContact(Key contactedObject) {
+		if (_colorType == contactedObject.Color && !IsUnlocked) {
+			TryUnlock();
+			if (IsUnlocked)
+				contactedObject.Destroy();
 		}
-	}
-
-	public void OnEndContactWithItem(Item item) {
 	}
 }

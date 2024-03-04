@@ -2,6 +2,7 @@ namespace RModule.Runtime.Arcade.Inventory {
 	using System.Collections;
 	using System.Collections.Generic;
 	using UnityEngine;
+	using System.Linq;
 
 	public class InventoryVC : MonoBehaviour {
 
@@ -43,6 +44,13 @@ namespace RModule.Runtime.Arcade.Inventory {
 			UpdateListView();
 
 			return _items.FindAll(item => item is T);
+		}
+
+		public List<T> GetAllItemByType<T>() where T : Item {
+			//Debug.Log($"InventoryVC : item type {item.GetType()}");
+			UpdateListView();
+
+			return _items.OfType<T>().ToList();
 		}
 
 		public void UpdateListView() {

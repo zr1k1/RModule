@@ -11,6 +11,10 @@ namespace RModule.Runtime.Arcade {
 		// Privats
 		Buff _buff;
 
+		protected override void Start() {
+			p_contactDetector.Setup(this);
+		}
+
 		public override void Drop(GameObject dropperGo) {
 			base.Drop(dropperGo);
 		}

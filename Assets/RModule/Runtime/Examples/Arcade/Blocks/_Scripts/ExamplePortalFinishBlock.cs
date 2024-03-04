@@ -19,19 +19,19 @@ namespace RModule.Runtime.Arcade {
 			}
 		}
 
-		public override void OnTriggerEnter2D(Collider2D collider) {
-			IFinishBlockCollisionHandler iIFinishBlockCollisionHandler = collider.GetComponent<IFinishBlockCollisionHandler>();
-			if (iIFinishBlockCollisionHandler != null) {
-				iIFinishBlockCollisionHandler.OnContactFinishBlock(this);
-			}
-		}
+		//public override void OnTriggerEnter2D(Collider2D collider) {
+		//	IFinishBlockCollisionHandler iIFinishBlockCollisionHandler = collider.GetComponent<IFinishBlockCollisionHandler>();
+		//	if (iIFinishBlockCollisionHandler != null) {
+		//		iIFinishBlockCollisionHandler.OnContactFinishBlock(this);
+		//	}
+		//}
 
-		public void OnOpenDoorsTriggerEnter2D(Collider2D collider) {
-			IFinishBlockCollisionHandler iIFinishBlockCollisionHandler = collider.GetComponent<IFinishBlockCollisionHandler>();
-			if (iIFinishBlockCollisionHandler != null) {
-				PlayAnimation();
-			}
-		}
+		//public void OnOpenDoorsTriggerEnter2D(Collider2D collider) {
+		//	IFinishBlockCollisionHandler iIFinishBlockCollisionHandler = collider.GetComponent<IFinishBlockCollisionHandler>();
+		//	if (iIFinishBlockCollisionHandler != null) {
+		//		PlayAnimation();
+		//	}
+		//}
 
 		public override void PlayAnimation() {
 			_animator.SetTrigger("open");
