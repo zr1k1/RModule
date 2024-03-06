@@ -1,0 +1,107 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3893929463720490335
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3379553172122086234, guid: 1846b25c5a1f643dab08f65e52c7d9dc, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 872e783364a17449d8ba700d43dd874a, type: 3}
+    - target: {fileID: 7267078365519399395, guid: 1846b25c5a1f643dab08f65e52c7d9dc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7267078365519399395, guid: 1846b25c5a1f643dab08f65e52c7d9dc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7267078365519399395, guid: 1846b25c5a1f643dab08f65e52c7d9dc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7267078365519399395, guid: 1846b25c5a1f643dab08f65e52c7d9dc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7267078365519399395, guid: 1846b25c5a1f643dab08f65e52c7d9dc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7267078365519399395, guid: 1846b25c5a1f643dab08f65e52c7d9dc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7267078365519399395, guid: 1846b25c5a1f643dab08f65e52c7d9dc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7267078365519399395, guid: 1846b25c5a1f643dab08f65e52c7d9dc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7267078365519399395, guid: 1846b25c5a1f643dab08f65e52c7d9dc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7267078365519399395, guid: 1846b25c5a1f643dab08f65e52c7d9dc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8277450691684905941, guid: 1846b25c5a1f643dab08f65e52c7d9dc, type: 3}
+      propertyPath: m_Name
+      value: baseStopMoveItem Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8277450691684905941, guid: 1846b25c5a1f643dab08f65e52c7d9dc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1400938579593403009}
+  m_SourcePrefab: {fileID: 100100000, guid: 1846b25c5a1f643dab08f65e52c7d9dc, type: 3}
+--- !u!212 &1795970344089886213 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 3379553172122086234, guid: 1846b25c5a1f643dab08f65e52c7d9dc, type: 3}
+  m_PrefabInstance: {fileID: 3893929463720490335}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2333346805807502602 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1615581402345922645, guid: 1846b25c5a1f643dab08f65e52c7d9dc, type: 3}
+  m_PrefabInstance: {fileID: 3893929463720490335}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4959991215531230858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c34ecc61baa8b4e2da90ee1517e677d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &4959991215531230858 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8277450691684905941, guid: 1846b25c5a1f643dab08f65e52c7d9dc, type: 3}
+  m_PrefabInstance: {fileID: 3893929463720490335}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1400938579593403009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4959991215531230858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 274ac6200427b41f3a9e671869f7def5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  p_levelPauseComponent: {fileID: 2333346805807502602}
+  DidDestroyed:
+    m_PersistentCalls:
+      m_Calls: []
+  p_spriteRenderer: {fileID: 1795970344089886213}
+  p_sfx: {fileID: 0}
+  p_itemAnimationComponent: {fileID: 0}
+  _actionIconSprite: {fileID: 21300000, guid: 872e783364a17449d8ba700d43dd874a, type: 3}
