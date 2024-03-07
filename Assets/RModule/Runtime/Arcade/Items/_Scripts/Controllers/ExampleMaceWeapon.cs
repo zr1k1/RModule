@@ -1,5 +1,5 @@
 using RModule.Runtime.Arcade;
 
-public class ExampleMaceWeapon : Weapon, DestroyableWallBlock.IWallDestroyer {
+public class ExampleMaceWeapon : Weapon {
 
 }

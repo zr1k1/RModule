@@ -37,7 +37,7 @@ namespace RModule.Runtime.Arcade {
 		}
 
 		protected virtual void Start() {
-			Debug.LogError($"{transform.name} : Override Start method and use p_contactDetector.Setup(this)");
+			Debug.LogError($"{transform.name} : Override Start method and use p_contactDetector.Setup(this);");
 		}
 
 		//protected virtual void OnTriggerEnter2D(Collider2D collision) {

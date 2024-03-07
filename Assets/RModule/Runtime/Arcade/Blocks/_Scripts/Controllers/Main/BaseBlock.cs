@@ -28,7 +28,7 @@ namespace RModule.Runtime.Arcade {
 		}
 
 		protected virtual void Start() {
-			Debug.LogError($"{transform.parent.parent.name} : Override Start method and use _contactDetector.Setup(this)");
+			Debug.LogError($"{transform.parent.parent.name} : Override Start method and use p_contactDetector.Setup(this);");
 		}
 
 		public virtual void Die() {

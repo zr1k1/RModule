@@ -5,22 +5,10 @@ namespace RModule.Runtime.Arcade {
 	using UnityEngine;
 	using RModule.Runtime.LeanTween;
 
-	public class DestroyableWallBlock : WallBlock, IDamagable {
+	public class DestroyableWallBlock : WallBlock, IStartContactDetector<CannonBlockFireUnit> {
 
 		// Outlets
 		[SerializeField] protected float _destroyAnimationDuration = default;
-
-		// Interfaces
-		public interface IWallDestroyer { }
-
-		public virtual bool TryTakeDmg(DamageData damageData) {
-			var iWallDestroyer = damageData.damageSourceGameObject.GetComponent<IWallDestroyer>();
-			if (iWallDestroyer != null) {
-				Die();
-				return true;
-			}
-			return false;
-		}
 
 		public override void Die() {
 			base.Die();
@@ -31,6 +19,11 @@ namespace RModule.Runtime.Arcade {
 		IEnumerator PlayAnimationAndDisableCollider() {
 			yield return LeanTween.alpha(gameObject, 0f, _destroyAnimationDuration);
 			p_collider2D.enabled = false;
+		}
+
+		public void OnStartContact(CannonBlockFireUnit contactedObject) {
+			Die();
+			Destroy(contactedObject.gameObject);
 		}
 	}
 }
