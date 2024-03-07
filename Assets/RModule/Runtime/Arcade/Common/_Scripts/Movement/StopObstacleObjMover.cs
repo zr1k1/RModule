@@ -74,11 +74,12 @@ namespace RModule.Runtime.Arcade {
 			CalculateEndPointAndMove();
 		}
 
-		public void ChangeEndPointAndMove(Vector2 endPoint, float correctVectorLenght = 0f) {
+		public bool TryChangeEndPointAndMove(Vector2 endPoint, float correctVectorLenght = 0f) {
 			_correctVectorLenght = correctVectorLenght;
 			_endPoint = endPoint;
 			_endPoint -= _direction * _correctVectorLenght;
-			Move();
+
+			return TryMove();
 		}
 
 		public void MoveToPoint(Vector2 endPoint) {
@@ -157,7 +158,7 @@ namespace RModule.Runtime.Arcade {
 				if (i >= _currentWayPointIndex)
 					_wayPoints.Add(tempWayPoints[i]);
 			}
-			Move();
+			TryMove();
 		}
 
 		float GetSpeed() {
@@ -166,7 +167,7 @@ namespace RModule.Runtime.Arcade {
 
 		void CalculateEndPointAndMove() {
 			CalculateEndPoint(_objTransform.position, _direction);
-			Move();
+			TryMove();
 		}
 
 		Vector2 ConvertEnumDirectionToVector(Degrees90DirectionsCalculator.Direction direction) {
@@ -190,11 +191,11 @@ namespace RModule.Runtime.Arcade {
 			}
 		}
 
-		void Move() {
+		bool TryMove() {
 			int lenght = Mathf.RoundToInt(Vector3.Distance(_objTransform.position, _endPoint));
 			//Debug.Log($"PushBox : lenght {gameObject.name}{lenght}");
 			if (lenght == 0) {
-				return;
+				return false;
 			}
 
 			_moveInProgress = true;
@@ -223,6 +224,7 @@ namespace RModule.Runtime.Arcade {
 			};
 
 			MoveDidBegan?.Invoke(_direction);
+			return true;
 		}
 
 		void OnUpdateRation(float val, float ratioPassed) {

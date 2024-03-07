@@ -5,6 +5,7 @@ namespace RModule.Runtime.Arcade {
 	using UnityEngine;
 
 	public class FieldItem : ConsumableItem {
+		public Buff Buff => _buff;
 
 		[SerializeField] Buff _buffPrefab = default;
 
