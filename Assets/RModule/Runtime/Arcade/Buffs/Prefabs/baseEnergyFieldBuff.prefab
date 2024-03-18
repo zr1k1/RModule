@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6929975956361899033, guid: d5f9ef777100b42aa9f67853bbaf1f56, type: 3}
       propertyPath: m_Name
-      value: energyFieldBuff
+      value: baseEnergyFieldBuff
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

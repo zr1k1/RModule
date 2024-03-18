@@ -5,7 +5,7 @@ namespace RModule.Runtime.Arcade {
 
 	public class BuffsController : MonoBehaviour, IBuffUser {
 		// Outlets
-		[SerializeField] protected Transform _buffsParent = default;
+		[SerializeField] protected Transform _buffsContainer = default;
 		[SerializeField] protected List<Buff> _buffs = default;
 
 		// Privats
@@ -16,7 +16,7 @@ namespace RModule.Runtime.Arcade {
 		}
 
 		public void ApplyBuff(Buff buff) {
-			buff.transform.SetParent(_buffsParent, false);
+			buff.gameObject.transform.SetParent(_buffsContainer);
 			buff.DidEnd.AddListener(OnBuffEnded);
 			_buffs.Add(buff);
 

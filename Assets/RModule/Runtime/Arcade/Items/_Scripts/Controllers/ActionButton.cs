@@ -6,6 +6,8 @@ namespace RModule.Runtime.Arcade {
 	public class ActionButton : UnPickableItem, IUseable {
 		// Outlets
 		[SerializeField] UnityEvent DidUse = default;
+		[SerializeField] UnityEvent DidPress = default;
+		[SerializeField] UnityEvent DidUnPress = default;
 
 		[SerializeField] Transform _pressedBtn = default;
 		[SerializeField] Vector2 _pressedStateLocalPosition = default;
@@ -38,11 +40,13 @@ namespace RModule.Runtime.Arcade {
 			_isPressed = true;
 			_pressedBtn.localPosition = _pressedStateLocalPosition;
 			TryPlaySound();
+			DidPress?.Invoke();
 		}
 
 		public void UnPress() {
 			_isPressed = false;
 			_pressedBtn.localPosition = Vector2.zero;
+			DidUnPress?.Invoke();
 		}
 
 		protected override void TryPlaySound() {
