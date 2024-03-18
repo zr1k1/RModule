@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8277450691684905941, guid: 1846b25c5a1f643dab08f65e52c7d9dc, type: 3}
       propertyPath: m_Name
-      value: baseStopMoveItem Variant
+      value: baseStopMoveItem
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
