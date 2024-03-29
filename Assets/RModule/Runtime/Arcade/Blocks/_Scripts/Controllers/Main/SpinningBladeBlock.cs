@@ -19,6 +19,7 @@ namespace RModule.Runtime.Arcade {
 		[SerializeField] protected LeanTweenType _moveLoopLeanTweenType = default;
 		[SerializeField] protected bool _setOrientToPath = default;
 		[SerializeField] protected bool _notMove = default;
+		[SerializeField] protected float _dieTime = default;
 
 		// Privats
 		protected DamageDealerComponent _damageDealerComponent;
@@ -47,7 +48,7 @@ namespace RModule.Runtime.Arcade {
 			_rotationTween.pause();
 			_rigidbody2D.constraints = RigidbodyConstraints2D.None;
 			_collider2D.enabled = false;
-			Destroy(gameObject, 5);
+			Destroy(gameObject, _dieTime);
 		}
 
 		public void Pause(float seconds) {
