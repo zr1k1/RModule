@@ -11,7 +11,6 @@ namespace RModule.Runtime.Arcade {
 
 		[SerializeField] StopObstacleObjMover _stopObstacleObjMover = default;
 		[SerializeField] float reloadTime = default;
-		//[SerializeField] Degrees90DirectionsCalculator _degrees90DirectionsCalculator = default;
 		[SerializeField] Vector2 _direction = default;
 
 		bool _isReady = true;
@@ -26,8 +25,12 @@ namespace RModule.Runtime.Arcade {
 				_stopObstacleObjMover.SetSize(fireUnit.GetSize());
 				_stopObstacleObjMover.MoveTo(_direction);
 
-				LeanTween.move(fireUnit.gameObject, transform.position + (Vector3)_direction * 10, 1f).setOnComplete(fireUnit.Die);
-				//_stopObstacleObjMover.MoveDidEnd.AddListener(fireUnit.Die);
+				Quaternion rotation = Quaternion.AngleAxis(transform.localEulerAngles.z, Vector3.forward);
+				float angle = transform.localEulerAngles.z;
+				var finallyDirection = rotation * _direction;
+				fireUnit.transform.localEulerAngles = transform.localEulerAngles;
+				fireUnit.GetComponent<ViewDirectionController>().ChangeDirection(finallyDirection);
+				LeanTween.move(fireUnit.gameObject, transform.position + finallyDirection * 10, 1f).setOnComplete(fireUnit.Die);
 				fireUnit.Use(gameObject);
 				StartCoroutine(Reload());
 			}
