@@ -20,7 +20,7 @@ namespace RModule.Runtime.Arcade.Inventory {
 			_itemImage.ResizeRectTransformWithTextureProportions(_itemImage.sprite, _changeImageSizeTo);
 			_itemImage.color = Color.white;
 			_amount.gameObject.SetActive(true);
-			_amount.text = _inventoryItem.Value.ToString();
+			_amount.text = (_inventoryItem.Value != null ? _inventoryItem.Value : 1).ToString();
 
 			return this;
 		}
