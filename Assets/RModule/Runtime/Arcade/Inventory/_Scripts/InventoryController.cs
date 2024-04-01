@@ -9,7 +9,6 @@ namespace RModule.Runtime.Arcade.Inventory {
 	public class InventoryController : MonoBehaviour {
 		// Events
 		public UnityEvent<InventoryController> DidUpdate = default;
-		//public UnityEvent<Item> NewItemDidAdded = default;
 
 		// Accessors
 		public List<InventoryItem> InventoryItems => _inventoryItems;
@@ -118,7 +117,6 @@ namespace RModule.Runtime.Arcade.Inventory {
 					if (inventoryItemWithSameType == null) {
 						_inventoryItems.Add(intInventoryItem);
 					} else {
-						Debug.Log($"InventoryController : allItemsWithSameType.Count != 0");
 						if (((IValueable<int>)item) != null) {
 							inventoryItemWithSameType.TrySum(item, ((IValueable<int>)item).GetValue());
 						} 
@@ -129,7 +127,6 @@ namespace RModule.Runtime.Arcade.Inventory {
 				else if (inventoryItem is FloatInventoryItem) {
 					// TODO when need
 				} else {
-					//Debug.Log($"InventoryVC : Add InventoryItem");
 					_inventoryItems.Add(inventoryItem);
 				}
 
@@ -152,16 +149,11 @@ namespace RModule.Runtime.Arcade.Inventory {
 		}
 
 		public List<T> GetAllItemByType<T>() where T : Item {
-			//UpdateListView();
-
 			return _inventoryItems.Select(inventoryItem => inventoryItem.Item).OfType<T>().ToList();
 		}
 
 		public void UpdateListView() {
 			Debug.Log($"InventoryController : UpdateListView");
-			//for (int i = 0; i < _inventoryItems.Count; i++) {
-			//	_inventoryItems[i].Item.transform.localPosition = new Vector2(-(float)(_inventoryItems.Count / 2f) + 0.5f + (float)i, -1);
-			//}
 			DidUpdate?.Invoke(this);
 		}
 
@@ -179,6 +171,8 @@ namespace RModule.Runtime.Arcade.Inventory {
 						if (totalValue == 0) {
 							foundedInventoryItem.Item.Destroy();
 						}
+
+						DidUpdate?.Invoke(this);
 						return true;
 					}
 				} else {

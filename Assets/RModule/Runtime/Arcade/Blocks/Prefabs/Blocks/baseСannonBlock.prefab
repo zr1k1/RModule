@@ -46,7 +46,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1717382920757413002, guid: 8d4d6c63fa7fe4234b751d0a7807c27a, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.8203125
+      value: 0.80078125
+      objectReference: {fileID: 0}
+    - target: {fileID: 1717382920757413002, guid: 8d4d6c63fa7fe4234b751d0a7807c27a, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.0019531
       objectReference: {fileID: 0}
     - target: {fileID: 5765925644607111462, guid: 8d4d6c63fa7fe4234b751d0a7807c27a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -123,6 +127,11 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 1027263757246259912, guid: 8d4d6c63fa7fe4234b751d0a7807c27a, type: 3}
   m_PrefabInstance: {fileID: 3773359446156828277}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &7230815897489088339 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5765925644607111462, guid: 8d4d6c63fa7fe4234b751d0a7807c27a, type: 3}
+  m_PrefabInstance: {fileID: 3773359446156828277}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7230815898239547765 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5765925644954920704, guid: 8d4d6c63fa7fe4234b751d0a7807c27a, type: 3}
@@ -145,6 +154,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   spriteRenderer: {fileID: 4187284002039741629}
+  _parent: {fileID: 7230815897489088339}
   _stopObstacleObjMover: {fileID: 3737066617415321033}
   reloadTime: 1
   _direction: {x: 0, y: 1}

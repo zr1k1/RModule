@@ -9,6 +9,7 @@ namespace RModule.Runtime.Arcade {
 	public class CannonBlock : BaseBlock {
 		public bool IsReady => _isReady;
 
+		[SerializeField] Transform _parent = default;
 		[SerializeField] StopObstacleObjMover _stopObstacleObjMover = default;
 		[SerializeField] float reloadTime = default;
 		[SerializeField] Vector2 _direction = default;
@@ -25,10 +26,10 @@ namespace RModule.Runtime.Arcade {
 				_stopObstacleObjMover.SetSize(fireUnit.GetSize());
 				_stopObstacleObjMover.MoveTo(_direction);
 
-				Quaternion rotation = Quaternion.AngleAxis(transform.localEulerAngles.z, Vector3.forward);
+				Quaternion rotation = Quaternion.AngleAxis(_parent.localEulerAngles.z, Vector3.forward);
 				float angle = transform.localEulerAngles.z;
 				var finallyDirection = rotation * _direction;
-				fireUnit.transform.localEulerAngles = transform.localEulerAngles;
+				fireUnit.transform.localEulerAngles = _parent.localEulerAngles;
 				fireUnit.GetComponent<ViewDirectionController>().ChangeDirection(finallyDirection);
 				LeanTween.move(fireUnit.gameObject, transform.position + finallyDirection * 10, 1f).setOnComplete(fireUnit.Die);
 				fireUnit.Use(gameObject);
