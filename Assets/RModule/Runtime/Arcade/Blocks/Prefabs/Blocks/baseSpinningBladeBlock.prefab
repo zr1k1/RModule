@@ -81,7 +81,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &2503239311232244153
@@ -203,6 +203,18 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3191036473296257700, guid: 8d4d6c63fa7fe4234b751d0a7807c27a, type: 3}
+      propertyPath: _tweansForPause.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3191036473296257700, guid: 8d4d6c63fa7fe4234b751d0a7807c27a, type: 3}
+      propertyPath: _tweansForPause.Array.data[0]
+      value: 
+      objectReference: {fileID: 428678141159773843}
+    - target: {fileID: 3191036473296257700, guid: 8d4d6c63fa7fe4234b751d0a7807c27a, type: 3}
+      propertyPath: _tweansForPause.Array.data[1]
+      value: 
+      objectReference: {fileID: 3778299132264496668}
     - target: {fileID: 5765925644394509866, guid: 8d4d6c63fa7fe4234b751d0a7807c27a, type: 3}
       propertyPath: m_Size.x
       value: 1
@@ -290,12 +302,6 @@ PrefabInstance:
       addedObject: {fileID: 1607567711335855121}
     - targetCorrespondingSourceObject: {fileID: 5765925644954920704, guid: 8d4d6c63fa7fe4234b751d0a7807c27a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2980464353166785983}
-    - targetCorrespondingSourceObject: {fileID: 5765925644954920704, guid: 8d4d6c63fa7fe4234b751d0a7807c27a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4032490061553827063}
-    - targetCorrespondingSourceObject: {fileID: 5765925644954920704, guid: 8d4d6c63fa7fe4234b751d0a7807c27a, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 3827732853291803401}
     - targetCorrespondingSourceObject: {fileID: 5765925644954920704, guid: 8d4d6c63fa7fe4234b751d0a7807c27a, type: 3}
       insertIndex: -1
@@ -368,7 +374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f467eec5feee2490db4dc10d1b4b1c96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  p_levelPauseComponent: {fileID: 2980464353166785983}
+  p_levelPauseComponent: {fileID: 5198085384331025336}
   WillDestroyed:
     m_PersistentCalls:
       m_Calls: []
@@ -383,41 +389,7 @@ MonoBehaviour:
   _moveLoopLeanTweenType: 37
   _setOrientToPath: 0
   _notMove: 0
---- !u!114 &2980464353166785983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3778299132264496668}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c34ecc61baa8b4e2da90ee1517e677d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DidResumePauseNotFromLevel:
-    m_PersistentCalls:
-      m_Calls: []
-  _tweansForPause:
-  - {fileID: 428678141159773843}
-  - {fileID: 3778299132264496668}
---- !u!114 &4032490061553827063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3778299132264496668}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 996453ffb165745ecb91ff6c74ee8f45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _soundEffectConfig: {fileID: 0}
-  _randomizePitch: 0
-  _playOnStart: 0
-  _isImportantSound: 1
-  _discardSameSoundsInOneFrame: 0
+  _dieTime: 0
 --- !u!114 &3827732853291803401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -460,6 +432,17 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 5765925644954920959, guid: 8d4d6c63fa7fe4234b751d0a7807c27a, type: 3}
   m_PrefabInstance: {fileID: 7236046387028220188}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5198085384331025336 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3191036473296257700, guid: 8d4d6c63fa7fe4234b751d0a7807c27a, type: 3}
+  m_PrefabInstance: {fileID: 7236046387028220188}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3778299132264496668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c34ecc61baa8b4e2da90ee1517e677d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &7649939183474785236 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 1027263757246259912, guid: 8d4d6c63fa7fe4234b751d0a7807c27a, type: 3}

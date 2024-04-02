@@ -42,12 +42,11 @@ namespace RModule.Runtime.Arcade {
 		}
 
 		public override void Die() {
+			Debug.Log($"Die");
 			base.Die();
 			if (!_notMove)
 				_moveTween.pause();
 			_rotationTween.pause();
-			_rigidbody2D.constraints = RigidbodyConstraints2D.None;
-			_collider2D.enabled = false;
 			Destroy(gameObject, _dieTime);
 		}
 
