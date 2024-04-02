@@ -106,14 +106,18 @@ namespace RModule.Runtime.Arcade {
 			OnEndPointDestination();
 		}
 
-		public void CreateMoveAndAddQueueOfMoves(Vector3 startPoint, Vector3 direction) {
+		public bool TryCreateMoveAndAddQueueOfMoves(Vector3 startPoint, Vector3 direction) {
 			if (tryCreateMoveLTDescr(startPoint, direction, out var moveDescr)) {
 				moveDescr.pause();
 				_queueOfMoves.Add(new MoveData {
 					Direction = direction,
 					LTDescr = moveDescr
 				});
+
+				return true;
 			}
+
+			return false;
 		}
 
 		bool tryCreateMoveLTDescr(Vector3 startPoint, Vector3 direction, out LTDescr moveDescr) {
