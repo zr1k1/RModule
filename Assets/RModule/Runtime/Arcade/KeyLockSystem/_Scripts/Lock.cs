@@ -6,6 +6,9 @@ using RModule.Runtime.Arcade;
 using RModule.Runtime.Arcade.Inventory;
 
 public class Lock : UnPickableItem, IStartContactDetector<Key> {
+	// Events
+	public UnityEvent DidUnlocked = default;
+
 	// Enums
 	public enum MaterialType { Steel = 0 }
 
@@ -18,7 +21,6 @@ public class Lock : UnPickableItem, IStartContactDetector<Key> {
 	[SerializeField] ColorTypeEnum _colorType = default;
 
 	[SerializeField] List<Lock> _locks = default;
-	[SerializeField] UnityEvent DidUnlocked = default;
 
 	// Privats
 	bool _isUnlocked;
@@ -52,8 +54,6 @@ public class Lock : UnPickableItem, IStartContactDetector<Key> {
 
 		enabled = false;
 		p_collider2D.enabled = false;
-		GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-		Destroy(gameObject, 5);
 	}
 
 	public void OnStartContact(Key contactedObject) {

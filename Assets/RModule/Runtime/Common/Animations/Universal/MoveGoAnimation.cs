@@ -5,30 +5,57 @@ using RModule.Runtime.LeanTween;
 using RModule.Runtime.Utils;
 
 public class MoveGoAnimation : MonoBehaviour {
+	// Accessors
+	public float Duration => _duration;
+	public GameObject Obj => _obj;
+
 	// Outlets
 	[SerializeField] GameObject _obj = default;
 	[SerializeField] float _duration = default;
-
-	[Tooltip("Path need minimn 2 points to work")]
-	[SerializeField] List<Vector3> _localPathPoints = new List<Vector3>(2);
-	[SerializeField] LeanTweenType _moveLoopLeanTweenType = default;
+	[SerializeField] List<Vector3> _localPathPoints = default;
+	[SerializeField] LeanTweenType _moveLoopLeanTweenType = LeanTweenType.once;
+	[SerializeField] bool _playAtStart = default;
 
 	// Privats
-	Vector3 _defaultPosition;
 	LTDescr _tween;
+	public List<Vector3> _pathPoints;
 
 	void Start() {
+		if (_playAtStart)
+			Play();
+	}
 
-		if (_localPathPoints.Count < 2) {
-			Debug.LogError("Need minimum 2 point to work move animation");
-			return;
+	public void Play() {
+		if (TrySetupPath())
+			Move();
+	}
+
+	public void Stop() {
+		if (_tween != null)
+			_tween.pause();
+		LeanTween.cancel(gameObject);
+	}
+
+	bool TrySetupPath() {
+		_pathPoints = new List<Vector3>();
+
+		if (_localPathPoints.Count == 1) {
+			_pathPoints.Add(_obj.transform.localPosition);
 		}
 
-		_defaultPosition = transform.position;
-		var worldPathPoints = new List<Vector3>();
 		foreach (var localPathPoint in _localPathPoints) {
-			worldPathPoints.Add(_defaultPosition + localPathPoint);
+			_pathPoints.Add(localPathPoint);
 		}
-		_tween = LeanTween.move(_obj, Utils.GeneratePathToLeanTwean(worldPathPoints), _duration).setLoopType(_moveLoopLeanTweenType);
+
+		if (_pathPoints.Count < 2) {
+			Debug.LogError("Need minimum 2 point in _localPathPoints to work move animation");
+			return false;
+		}
+
+		return true;
+	}
+
+	void Move() {
+		_tween = LeanTween.moveLocal(_obj, Utils.GeneratePathToLeanTwean(_pathPoints), _duration).setLoopType(_moveLoopLeanTweenType);
 	}
 }

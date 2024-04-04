@@ -175,18 +175,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   p_levelPauseComponent: {fileID: 0}
-  DidDestroyed:
+  WillDestroyed:
     m_PersistentCalls:
       m_Calls: []
-  p_spriteRenderer: {fileID: 1097486822701897513}
-  p_sfx: {fileID: 2534147855364651471}
-  p_itemAnimationComponent: {fileID: 7558534350547009793}
+  spriteRenderer: {fileID: 1097486822701897513}
   DidOpened:
     m_PersistentCalls:
       m_Calls: []
   DidClosed:
     m_PersistentCalls:
       m_Calls: []
+  p_doorAnimationComponent: {fileID: 0}
+  p_disableColliderDelay: 1
 --- !u!114 &2534147855364651471
 MonoBehaviour:
   m_ObjectHideFlags: 0

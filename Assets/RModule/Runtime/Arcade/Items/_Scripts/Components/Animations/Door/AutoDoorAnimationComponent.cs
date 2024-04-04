@@ -6,7 +6,7 @@ namespace RModule.Runtime.Arcade {
 	using System.Collections.Generic;
 	using UnityEngine;
 
-	public class AutoDoorAnimationComponent : DoorAnimationComponent {
+	public class AutoDoorAnimationComponent : HideDoorAnimationComponent {
 		// Enums
 		public enum IconsIdleAnimationType { PingPongMove, PingPongScale }
 

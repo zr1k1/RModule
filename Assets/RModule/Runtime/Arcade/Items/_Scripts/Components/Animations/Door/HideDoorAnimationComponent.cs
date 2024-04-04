@@ -1,10 +1,9 @@
 namespace RModule.Runtime.Arcade {
-
 	using System.Collections;
 	using RModule.Runtime.LeanTween;
 	using UnityEngine;
 
-	public class DoorAnimationComponent : ItemAnimationComponent, IDoorAnimationComponent {
+	public class HideDoorAnimationComponent : MonoBehaviour, IDoorAnimationComponent {
 		// Outlets
 		[SerializeField] protected float p_alphaDuration = default;
 

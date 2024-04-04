@@ -48,7 +48,7 @@ namespace RModule.Runtime.Arcade {
 		}
 
 		public void CloseAndSkipAnimation() {
-			((AutoDoorAnimationComponent)p_itemAnimationComponent).CloseAndSkipAnimation();
+			p_doorAnimationComponent.GetComponent<AutoDoorAnimationComponent>()?.CloseAndSkipAnimation();
 		}
 	}
 }
