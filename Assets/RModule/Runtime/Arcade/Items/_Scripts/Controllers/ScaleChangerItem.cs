@@ -5,11 +5,13 @@ namespace RModule.Runtime.Arcade {
 	public class ScaleChangerItem : ConsumableItem, IPickable {
 		//Acessors
 		public float ScaleModifier => _scaleModifier;
+		public Vector3 MoveGoToPointAfterTransformation => _transformationPoint.position;
 
 		// Outlets
 		[SerializeField] Sprite _lessThanOne = default;
 		[SerializeField] Sprite _moreThanOne = default;
 		[SerializeField] float _scaleModifier = default;
+		[SerializeField] Transform _transformationPoint = default;
 
 		protected override void Awake() {
 			base.Awake();
