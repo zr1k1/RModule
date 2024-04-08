@@ -10,7 +10,7 @@ namespace RModule.Runtime.Arcade {
 	// TODO Refactor duplicates
 	public class StopObstacleObjMover : MonoBehaviour, ICustomRoundEnabler, ISizeSetter {
 
-		public UnityEvent<Vector2> MoveDidBegan = default;
+		public UnityEvent<StopObstacleObjMover> MoveDidBegan = default;
 		public UnityEvent<StopObstacleObjMover> MoveDidChange = default;
 		public UnityEvent MoveDidEnd = default;
 
@@ -227,7 +227,7 @@ namespace RModule.Runtime.Arcade {
 				Direction = _direction
 			};
 
-			MoveDidBegan?.Invoke(_direction);
+			MoveDidBegan?.Invoke(this);
 			return true;
 		}
 

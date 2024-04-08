@@ -19,18 +19,29 @@ namespace RModule.Runtime.Utils.Vectors {
 		//begin from up
 		public enum Direction { Up = 0, Right = 1, Down = 2, Left = 3, Unknown = 4 }
 
+		public class Data {
+			public Direction direction;
+			public float angle;
+		}
+
 		//beginFrom = new Vector3(-1, 1)
-		public static Direction CalculateDirection(Vector3 startPoint, Vector3 endPoint, Vector3 beginAngleFrom) {
+		public static Data CalculateDirection(Vector3 startPoint, Vector3 endPoint, Vector3 beginAngleFrom) {
 			var angle = VectorsHelper.CalculateAngle(startPoint, endPoint, beginAngleFrom);
 			int directionPartsCount = 4;
 			float angleForDirection = 360f / (float)directionPartsCount;
 			for (int i = 0; i < directionPartsCount; i++) {
 				if ((angleForDirection * i <= angle) && angle < (angleForDirection * (i + 1))) {
-					return (Direction)i;
+					return new Data {
+						direction = (Direction)i,
+						angle = angle
+					}; ;
 				}
 			}
 
-			return 0;
+			return new Data {
+				direction = Direction.Unknown,
+				angle = angle
+			}; ;
 		}
 	}
 }

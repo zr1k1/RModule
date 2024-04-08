@@ -5,13 +5,19 @@ using RModule.Runtime.LeanTween;
 
 public class RotateAnimation : MonoBehaviour {
 	// Outlets
-	[SerializeField] GameObject _objToRotate = default;
-	[SerializeField] float _rotateDuration = default;
-	[Tooltip("Vector3.forward = z axis")]
-	[SerializeField] Vector3 _axis = Vector3.forward;
-	[SerializeField] bool _clockwise = default;
+	public RotateData rotateData = default;
 
 	void Start() {
-		LeanTween.rotateAround(_objToRotate, _axis, _clockwise ? -360 : 360, _rotateDuration).setLoopClamp();
+		if (rotateData.playAtStart)
+			Rotate();
+	}
+
+	public void Rotate() {
+		LeanTween.rotateAround(rotateData.objToRotate, rotateData.axis, rotateData.clockwise ? -rotateData.angle : rotateData.angle, rotateData.rotateDuration)
+			.setLoopType(rotateData.loopLeanTweenType);
+	}
+
+	public void RotateAroundZ() {
+		LeanTween.rotateZ(rotateData.objToRotate, rotateData.angle, rotateData.rotateDuration);
 	}
 }
