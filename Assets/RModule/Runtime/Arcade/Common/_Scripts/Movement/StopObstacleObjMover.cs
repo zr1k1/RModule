@@ -12,7 +12,7 @@ namespace RModule.Runtime.Arcade {
 
 		public UnityEvent<StopObstacleObjMover> MoveDidBegan = default;
 		public UnityEvent<StopObstacleObjMover> MoveDidChange = default;
-		public UnityEvent MoveDidEnd = default;
+		public UnityEvent<StopObstacleObjMover> MoveDidEnd = default;
 
 		//Accessors
 		public bool MoveInProgress => _moveInProgress;
@@ -261,7 +261,7 @@ namespace RModule.Runtime.Arcade {
 			_speedModifier = 1f;
 			_moveInProgress = false;
 			LeanTween.cancel(_objTransform.gameObject);
-			MoveDidEnd?.Invoke();
+			MoveDidEnd?.Invoke(this);
 		}
 
 		public void SetEnableRoundPositionTo0Point5(bool enable) {

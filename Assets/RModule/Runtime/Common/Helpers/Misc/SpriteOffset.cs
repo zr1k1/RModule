@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RModule.Runtime.LeanTween;
 
-//[ExecuteInEditMode]
 public class SpriteOffset : MonoBehaviour {
 
-	[SerializeField] SpriteRenderer _spriteRenderer = default;
-
+	public SpriteRenderer _renderer = default;
 	public Vector2 offset = default;
-	
+
+	Vector2 _lastOffset = default;
+
 	private void Update() {
-		_spriteRenderer.material.SetTextureOffset("_MainTex", offset);
+		if (_lastOffset != offset) {
+			_lastOffset = offset;
+			_renderer.material.SetTextureOffset("_MainTex", offset);
+		}
 	}
 }
