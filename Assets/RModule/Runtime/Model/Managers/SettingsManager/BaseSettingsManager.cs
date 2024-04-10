@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using RModule.Runtime.Data.Configs;
 
 public abstract class BaseSettingsManager<PurchasableGameItem, Placement, OptionalAppConfigSetting, OptionalSetting, OptionaDebugSetting, OptionalCrossPlatformAppConfigSetting>
 	: SingletonMonoBehaviour<BaseSettingsManager<PurchasableGameItem, Placement, OptionalAppConfigSetting, OptionalSetting, OptionaDebugSetting, OptionalCrossPlatformAppConfigSetting>>
