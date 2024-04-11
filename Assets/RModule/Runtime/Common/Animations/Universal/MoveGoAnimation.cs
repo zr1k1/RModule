@@ -18,7 +18,7 @@ public class MoveGoAnimation : MonoBehaviour {
 
 	// Privats
 	LTDescr _tween;
-	public List<Vector3> _pathPoints;
+	List<Vector3> _pathPoints;
 
 	void Start() {
 		if (_playAtStart)
@@ -31,8 +31,6 @@ public class MoveGoAnimation : MonoBehaviour {
 	}
 
 	public void Stop() {
-		if (_tween != null)
-			_tween.pause();
 		LeanTween.cancel(gameObject);
 	}
 

@@ -39,6 +39,9 @@ namespace RModule.Runtime.Arcade {
 
 		IEnumerator ChangeState(bool open) {
 			_isOpen = open;
+			if (!_isOpen) {
+				p_collider2D.enabled = true;
+			}
 
 			if (_isOpen)
 				DidOpened?.Invoke();
@@ -46,7 +49,9 @@ namespace RModule.Runtime.Arcade {
 				DidClosed?.Invoke();
 
 			yield return open ? OpenAnimation() : CloseAnimation();
-			p_collider2D.enabled = !open;
+			if (_isOpen) {
+				p_collider2D.enabled = false;
+			}
 		}
 
 		public IEnumerator OpenAnimation() {

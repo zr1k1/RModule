@@ -41,42 +41,6 @@ namespace RModule.Runtime.Arcade {
 		int _currentPointToMoveIndex = 0;
 		bool _moveInProgress;
 
-		//private void OnTriggerEnter2D(Collider2D collision) {
-		//	var iMoveBlockContactHandler = collision.gameObject.GetComponent<IMoveBlockContactHandler>();
-		//	if(iMoveBlockContactHandler != null) {
-		//		iMoveBlockContactHandler.OnStartMoveBlockContact(this);
-		//		AddStopperPauseMove(iMoveBlockContactHandler);
-		//	}
-		//}
-
-		//private void OnTriggerExit2D(Collider2D collision) {
-		//	var iMoveBlockContactHandler = collision.gameObject.GetComponent<IMoveBlockContactHandler>();
-		//	if (iMoveBlockContactHandler != null) {
-		//		iMoveBlockContactHandler.OnEndMoveBlockContact(this);
-		//		RemoveStopperAndTryResumeMove(iMoveBlockContactHandler);
-		//	}
-		//}
-
-		//private void OnCollisionEnter2D(Collision2D collision) {
-		//	var iMoveBlockContactHandler = collision.gameObject.GetComponent<IMoveBlockContactHandler>();
-		//	if (iMoveBlockContactHandler != null) {
-		//		iMoveBlockContactHandler.OnStartMoveBlockContact(this);
-		//		AddStopperPauseMove(iMoveBlockContactHandler);
-		//	}
-		//}
-
-		//private void OnCollisionExit2D(Collision2D collision) {
-		//	var iMoveBlockContactHandler = collision.gameObject.GetComponent<IMoveBlockContactHandler>();
-		//	if (iMoveBlockContactHandler != null) {
-		//		iMoveBlockContactHandler.OnEndMoveBlockContact(this);
-		//		RemoveStopperAndTryResumeMove(iMoveBlockContactHandler);
-		//	}
-		//}
-
-		//void OnStartUserContact(IMoveBlockContactHandler moveBlockContactHandler) {
-
-		//}
-
 		void Start() {
 			_contactDetector = gameObject.AddComponent<ContactDetector>();
 			_contactDetector.Setup(this);
