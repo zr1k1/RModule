@@ -107,9 +107,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5765925644954920704, guid: 8d4d6c63fa7fe4234b751d0a7807c27a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6769614289450001579}
-    - targetCorrespondingSourceObject: {fileID: 5765925644954920704, guid: 8d4d6c63fa7fe4234b751d0a7807c27a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3737066617415321033}
   m_SourcePrefab: {fileID: 100100000, guid: 8d4d6c63fa7fe4234b751d0a7807c27a, type: 3}
 --- !u!114 &1735430294936837329 stripped
 MonoBehaviour:
@@ -155,40 +152,7 @@ MonoBehaviour:
       m_Calls: []
   spriteRenderer: {fileID: 4187284002039741629}
   _parent: {fileID: 7230815897489088339}
-  _stopObstacleObjMover: {fileID: 3737066617415321033}
-  reloadTime: 1
-  _direction: {x: 0, y: 1}
---- !u!114 &3737066617415321033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7230815898239547765}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a34a026dde740431e8fbfbaa98778a78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MoveDidBegan:
-    m_PersistentCalls:
-      m_Calls: []
-  MoveDidChange:
-    m_PersistentCalls:
-      m_Calls: []
-  MoveDidEnd:
-    m_PersistentCalls:
-      m_Calls: []
-  _objTransform: {fileID: 0}
-  _objSize: {x: 0, y: 0}
-  _degrees90DirectionsCalculator:
-    _directionVectors:
-      m_keys: 
-      m_values: []
-  _obstacleLayerMask:
-    serializedVersion: 2
-    m_Bits: 1
-  _movementSpeed: 10
-  _roundPositionTo0Point5: 0
-  _createMoveEndPoint: 0
-  _endMovePoint: {fileID: 0}
+  _directionPoint: {fileID: 0}
+  _stopObstacleObjMover: {fileID: 0}
+  _reloadTime: 0
+  _speed: 1

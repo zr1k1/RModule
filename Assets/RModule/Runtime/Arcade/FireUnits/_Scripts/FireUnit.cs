@@ -4,8 +4,13 @@ namespace RModule.Runtime.Arcade {
 	using UnityEngine;
 
 	public class FireUnit : LevelElement, ISizeGetter, IUseable {
+		// Accessors
+		public float Range => _range;
+
 		// Outlets
 		[SerializeField] protected DamageConfig p_damageConfig = default;
+		// TODO when add new few fire units can be refactored to make config for FireUnits
+		[SerializeField] protected float _range = default;
 		[SerializeField] protected Vector3 _size = default;
 
 		// Privats
@@ -13,11 +18,6 @@ namespace RModule.Runtime.Arcade {
 
 		protected override void Awake() {
 			base.Awake();
-			//if (spriteRenderer == null)
-			//	spriteRenderer = GetComponent<SpriteRenderer>();
-
-			//p_collider2D = GetComponent<Collider2D>();
-			//p_rigidbody2D = GetComponent<Rigidbody2D>();
 			p_contactDetector = gameObject.AddComponent<ContactDetector>();
 			p_contactDetector.DidStartContact.AddListener(OnStartContact);
 			p_contactDetector.DidEndContact.AddListener(OnEndContact);

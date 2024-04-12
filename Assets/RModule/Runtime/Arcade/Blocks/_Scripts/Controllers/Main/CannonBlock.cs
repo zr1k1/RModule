@@ -9,29 +9,26 @@ namespace RModule.Runtime.Arcade {
 	public class CannonBlock : BaseBlock {
 		public bool IsReady => _isReady;
 
-		[SerializeField] Transform _parent = default;
-		[SerializeField] StopObstacleObjMover _stopObstacleObjMover = default;
-		[SerializeField] float reloadTime = default;
-		[SerializeField] Vector2 _direction = default;
+		[SerializeField] Transform _directionPoint = default;
+		// TODO when add new few cannons can be refactored to make config for CannonBlocks
+		[Header("Properties")]
+		[SerializeField] float _reloadTime = default;
+		[SerializeField] float _speed = default;
 
+		Vector2 _direction = default;
 		bool _isReady = true;
 
 		protected override void Start() {
 			p_contactDetector.Setup(this);
+			_direction = (_directionPoint.position - transform.position).normalized;
 		}
 
 		public void Fire(FireUnit fireUnit) {
 			if (_isReady) {
-				_stopObstacleObjMover.SetObjToMoveTransfrm(fireUnit.transform);
-				_stopObstacleObjMover.SetSize(fireUnit.GetSize());
-				_stopObstacleObjMover.MoveTo(_direction);
-
-				Quaternion rotation = Quaternion.AngleAxis(_parent.localEulerAngles.z, Vector3.forward);
-				float angle = transform.localEulerAngles.z;
-				var finallyDirection = rotation * _direction;
-				fireUnit.transform.localEulerAngles = _parent.localEulerAngles;
-				fireUnit.GetComponent<ViewDirectionController>().ChangeDirection(finallyDirection);
-				LeanTween.move(fireUnit.gameObject, transform.position + finallyDirection * 10, 1f).setOnComplete(fireUnit.Die);
+				fireUnit.GetComponent<ViewDirectionController>().ChangeDirection(_direction);
+				LeanTween.move(fireUnit.gameObject, transform.position + (Vector3)_direction * fireUnit.Range, fireUnit.Range)
+					.setSpeed(_speed)
+					.setOnComplete(fireUnit.Die);
 				fireUnit.Use(gameObject);
 				StartCoroutine(Reload());
 			}
@@ -39,7 +36,7 @@ namespace RModule.Runtime.Arcade {
 
 		IEnumerator Reload() {
 			_isReady = false;
-			yield return new WaitForSeconds(reloadTime);
+			yield return new WaitForSeconds(_reloadTime);
 			_isReady = true;
 		}
 	}

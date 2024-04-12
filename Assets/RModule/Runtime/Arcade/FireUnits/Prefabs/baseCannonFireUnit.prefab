@@ -9,6 +9,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 877237326919452656, guid: 18f2ba12edf5344d4ad2245c9e9c72ff, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 877237326919452656, guid: 18f2ba12edf5344d4ad2245c9e9c72ff, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 877237326919452656, guid: 18f2ba12edf5344d4ad2245c9e9c72ff, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -99,6 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   p_levelPauseComponent: {fileID: 4114201709076178244}
   p_damageConfig: {fileID: 11400000, guid: 6da781d25e82f4581a163a4a4f6f26f4, type: 2}
+  _range: 0
   _size: {x: 0.25, y: 0.25, z: 0}
 --- !u!114 &7896729122980655318
 MonoBehaviour:
@@ -115,3 +124,4 @@ MonoBehaviour:
   target: {fileID: 4120711476830919191}
   faceDirection: {x: 0, y: 1}
   direction: {x: 0, y: 1}
+  rotateAnimation: {fileID: 0}
