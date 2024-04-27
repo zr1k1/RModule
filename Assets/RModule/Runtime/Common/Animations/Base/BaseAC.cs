@@ -12,6 +12,7 @@ public class BaseAC : MonoBehaviour {
 	public bool IsPlaying => _isPlaying;
 
 	// Outlets
+	[SerializeField] bool playAtStart = default;
 	[SerializeField] float delayBeforeDestroy = 0;
 	[SerializeField] float delayBeforeCallEndEvent = 0;
 	[SerializeField] bool notDestroyOnEnd = default;
@@ -21,6 +22,11 @@ public class BaseAC : MonoBehaviour {
 
 	// ---------------------------------------------------------------
 	// Setup
+
+	void Start() {
+		if (playAtStart)
+			Play();
+	}
 
 	public virtual BaseAC SetupAnimation(UnityAction endCallback = null) {
 		gameObject.SetActive(false);
