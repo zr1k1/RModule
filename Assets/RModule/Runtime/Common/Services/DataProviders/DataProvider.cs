@@ -60,7 +60,7 @@ public class Data<OptionalValuesNames> : IValueSetter<OptionalValuesNames>, IVal
 		string decodedText = encodedDataString;
 
 		JData jData = JsonConvert.DeserializeObject<JData>(decodedText);
-		Data<OptionalValuesNames> data = new (jData.values);
+		Data<OptionalValuesNames> data = new(jData.values);
 
 		return data;
 	}
@@ -95,7 +95,7 @@ public class Data<OptionalValuesNames> : IValueSetter<OptionalValuesNames>, IVal
 	}
 
 	public T1 GetValue<T1>(OptionalValuesNames enumType) {
-		return (T1) _values[Convert.ToInt32(enumType)];
+		return (T1)Convert.ChangeType(_values[Convert.ToInt32(enumType)], typeof(T1));
 	}
 }
 

@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class BaseGameDataManager<PlayerDataValuesNames, DataConfigClass> : SingletonMonoBehaviour<BaseGameDataManager<PlayerDataValuesNames, DataConfigClass>>, IInitializable
+public class BaseGameDataManager<PlayerDataValuesNames> : SingletonMonoBehaviour<BaseGameDataManager<PlayerDataValuesNames>>, IInitializable
 	where PlayerDataValuesNames : Enum {
 	// Accessors
+	public static Data<PlayerDataValuesNames> PlayerData => Instance._playerDataProvider.Data;
 	//public StoreProductsProvider StoreProductsProvider => _storeProductsProvider;
 	//public NotificationsService NotificationsService => _notificationsService;
 	//public PlayerDataProvider PlayerDataProvider => _playerDataProvider;
@@ -19,24 +20,23 @@ public class BaseGameDataManager<PlayerDataValuesNames, DataConfigClass> : Singl
 	// Outlets 
 	//[SerializeField] StoreProductsProvider _storeProductsProvider = new StoreProductsProvider();
 	//[SerializeField] NotificationsService _notificationsService = new NotificationsService();
-	[SerializeField] PersistentSavedDataConfig<PlayerDataValuesNames> _playerConfig = default;
+	[SerializeField] protected PersistentSavedDataConfig<PlayerDataValuesNames> _playerConfig = default;
 	//[SerializeField] GameConfig _gameConfig = default;
 	//[SerializeField] AppEconomicsData _appEconomicsData = default;
 
 	// Private vars
 	//PlayerDataProvider _playerDataProvider = new PlayerDataProvider();
 	//GameProgressDataProvider _gameProgressDataProvider = new GameProgressDataProvider();
-	DataProvider<PlayerDataValuesNames, PersistentSavedDataConfig<PlayerDataValuesNames>> _playerDataProvider;
-	bool _dataPreparingFinished = false;
+	protected DataProvider<PlayerDataValuesNames, PersistentSavedDataConfig<PlayerDataValuesNames>> _playerDataProvider;
+	protected bool _dataPreparingFinished = false;
 
 	// Init
-	public IEnumerator Initialize() {
+	public virtual IEnumerator Initialize() {
     	_dataPreparingFinished = false;
-		_playerDataProvider = new DataProvider<PlayerDataValuesNames, PersistentSavedDataConfig<PlayerDataValuesNames>>(_playerConfig);
 
-		LoadPlayerAndProgressData();
 		PrepareData();
 
+		_dataPreparingFinished = true;
 		yield return WaitForInitialized();
 		//ExampleSettingsManager.Instance.GetSettingValue(ExampleSetting.SoundEffectsVolume);
 
@@ -59,14 +59,12 @@ public class BaseGameDataManager<PlayerDataValuesNames, DataConfigClass> : Singl
 	// ---------------------------------------------------------------
 	// General Methods
 
-	void LoadPlayerAndProgressData() {
-		_playerDataProvider.LoadData();
-		//_gameProgressDataProvider.LoadData();
-	}
-
-	void PrepareData() {
+	protected virtual void PrepareData() {
 		Debug.Log($"GameDataManager : PrepareData");
-			_dataPreparingFinished = true;
+		_playerDataProvider = new DataProvider<PlayerDataValuesNames, PersistentSavedDataConfig<PlayerDataValuesNames>>(_playerConfig);
+		_playerDataProvider.LoadData();
+
+		//_gameProgressDataProvider.LoadData();
 	}
 
 	// Resets
@@ -92,7 +90,7 @@ public class BaseGameDataManager<PlayerDataValuesNames, DataConfigClass> : Singl
 	//}
 
 	// Debug Actions
-	public void DebugActions() {
+	public virtual void DebugActions() {
 		if (Application.isEditor) {
 		}
 	}

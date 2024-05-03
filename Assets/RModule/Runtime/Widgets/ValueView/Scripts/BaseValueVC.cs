@@ -10,7 +10,7 @@ public class BaseValueVC : MonoBehaviour {
 	int _value;
 
 	public void SetValue(int value) {
-		_value += value;
+		_value = value;
 		_countLabel.text = $"{_value}";
 	}
 }
