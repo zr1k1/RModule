@@ -110,7 +110,11 @@ public abstract class BaseSettingsManager<PurchasableGameItem, Placement, Option
 	}
 
 	public virtual T1 GetSetting<T1>(OptionalCrossPlatformAppConfigSetting enumType) {
-		return ((IValueGetter<OptionalCrossPlatformAppConfigSetting>)_appConfigData).GetValue<T1>(enumType);
+		return _appConfigData.GetValue<T1>(enumType);
+	}
+
+	public virtual T1 GetSetting<T1>(OptionalAppConfigSetting enumType) {
+		return _appConfigData.GetValue<T1>(enumType);
 	}
 
 	public virtual T1 GetSetting<T1>(OptionaDebugSetting enumType) {

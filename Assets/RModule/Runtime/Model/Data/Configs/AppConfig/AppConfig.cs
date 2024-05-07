@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using RModule.Runtime.Data.Configs;
 
-public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue, CrossPlatformValue> : ScriptableObject, IValueGetter<CrossPlatformValue>
+public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue, CrossPlatformValue> : ScriptableObject
+	
 	where PurchasableGameItem : Enum
 	where Placement : Enum
 	where OptionaAppConfigValue : Enum
@@ -87,8 +88,8 @@ public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue, Cr
 			Debug.LogError($"Value {valueType} is not present on dictionary _optionalValuesDict");
 			return default(T1);
 		}
-		var value = _optionalValuesDict[valueType].GetValue<object>();
-		return (T1)value;
+
+		return _optionalValuesDict[valueType].GetValue<T1>();
 	}
 
 	public T1 GetValue<T1>(CrossPlatformValue key) {
