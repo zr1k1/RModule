@@ -15,8 +15,8 @@ public class PersistentSavedDataConfig<OptionalValuesNames> : ScriptableObject w
 
 	[SerializeField] SerializableDictionary<OptionalValuesNames, BaseValueConfig> _valuesDict = default;
 
-	public bool DataIsNotExist() {
-		return !File.Exists(generateFullPath());
+	public bool DataIsExist() {
+		return File.Exists(generateFullPath());
 	}
 
 	public string GetPath(int number = -1) {

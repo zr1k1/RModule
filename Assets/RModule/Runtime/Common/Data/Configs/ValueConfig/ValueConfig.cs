@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ValueConfig<T> : BaseValueConfig{
+public class ValueConfig<T> : BaseValueConfig {
 	[SerializeField] protected T _value = default;
 
 	public override T1 GetValue<T1>() {

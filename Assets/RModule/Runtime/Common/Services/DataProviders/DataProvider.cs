@@ -1,5 +1,8 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 using System.Collections.Generic;
 using Newtonsoft.Json;
@@ -60,7 +63,7 @@ public class Data<OptionalValuesNames> : IValueSetter<OptionalValuesNames>, IVal
 		string decodedText = encodedDataString;
 
 		JData jData = JsonConvert.DeserializeObject<JData>(decodedText);
-		Data<OptionalValuesNames> data = new(jData.values);
+		Data<OptionalValuesNames> data = new (jData.values);
 
 		return data;
 	}
@@ -128,7 +131,27 @@ public class DataProvider<OptionalValuesNames, DataConfigClass>
 	public void LoadData(int number = -1) {
 		//_dataConfig = dataConfig;
 		Debug.Log($"DataProvider : {_dataConfig.GetPath()}");
-		_data = _dataConfig.DataIsNotExist() ? Data<OptionalValuesNames>.CreateDefaultData(_dataConfig) : Data<OptionalValuesNames>.DecodeJsonAndGenerateGameData(File.ReadAllText(_dataConfig.GetPath(number)));
+		if (_dataConfig.DataIsExist()) {
+			_data = Data<OptionalValuesNames>.DecodeJsonAndGenerateGameData(File.ReadAllText(_dataConfig.GetPath(number)));
+			var currentConfigValues = _dataConfig.GetAllValues();
+			// Remove from loaded _data not existed keys in current config
+			var keyToRemove = _data.Values.Keys.ToList().FindAll(key => !currentConfigValues.ContainsKey(key));
+			foreach (var key in keyToRemove) {
+				_data.Values.Remove(key);
+			}
+			// Add key values from current config not existed in _data.Values 
+			foreach (var keyPair in currentConfigValues) {
+				if (!_data.Values.ContainsKey(keyPair.Key))
+					_data.Values.Add(keyPair.Key, keyPair.Value);
+			}
+
+
+		} else {
+			_data = Data<OptionalValuesNames>.CreateDefaultData(_dataConfig);
+		}
+
+		//_data = _dataConfig.DataIsExist() ? Data<OptionalValuesNames>.CreateDefaultData(_dataConfig) : Data<OptionalValuesNames>.DecodeJsonAndGenerateGameData(File.ReadAllText(_dataConfig.GetPath(number)));
+
 
 		SaveData();
 	}
