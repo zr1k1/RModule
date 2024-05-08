@@ -5,6 +5,7 @@ using RModule.Runtime.Data.Configs;
 
 public abstract class BaseSettingsManager<PurchasableGameItem, Placement, OptionalAppConfigSetting, OptionalSetting, OptionaDebugSetting, OptionalCrossPlatformAppConfigSetting>
 	: SingletonMonoBehaviour<BaseSettingsManager<PurchasableGameItem, Placement, OptionalAppConfigSetting, OptionalSetting, OptionaDebugSetting, OptionalCrossPlatformAppConfigSetting>>
+	, IPlacementsContainer<Placement>
 
 	where PurchasableGameItem : Enum
 	where Placement : Enum
@@ -119,5 +120,9 @@ public abstract class BaseSettingsManager<PurchasableGameItem, Placement, Option
 
 	public virtual T1 GetSetting<T1>(OptionaDebugSetting enumType) {
 		return ((IValueGetter<OptionaDebugSetting>)_debugConfig).GetValue<T1>(enumType);
+	}
+
+	public string GetPlacement(Placement placementType) {
+		return ((IPlacementsContainer<Placement>)_appConfigData).GetPlacement(placementType);
 	}
 }

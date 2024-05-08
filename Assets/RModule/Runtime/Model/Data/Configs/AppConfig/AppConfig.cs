@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using RModule.Runtime.Data.Configs;
 
-public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue, CrossPlatformValue> : ScriptableObject
-	
+public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue, CrossPlatformValue> : ScriptableObject, IPlacementsContainer<Placement>
+
 	where PurchasableGameItem : Enum
 	where Placement : Enum
 	where OptionaAppConfigValue : Enum
@@ -106,5 +106,9 @@ public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue, Cr
 		} else {
 			return (T1)(object)_crossPlatformValuesDict[key].values[Store.GooglePlayStore];
 		}
+	}
+
+	public string GetPlacement(Placement placementType) {
+		return ((IPlacementsContainer<Placement>)_adPlacementsConfig).GetPlacement(placementType);
 	}
 }
