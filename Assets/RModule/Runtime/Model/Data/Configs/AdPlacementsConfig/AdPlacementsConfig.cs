@@ -5,11 +5,7 @@ using UnityEngine;
 // Create a class and inherit from AdPlacementsConfig<CustomPlacementType>
 namespace RModule.Runtime.Data.Configs {
 
-	public interface IPlacementsContainer<PlacementEnum> {
-		public string GetPlacement(PlacementEnum placementType);
-	}
-
-	public class AdPlacementsConfig<PlacementEnum> : BaseConfig<PlacementEnum>, IPlacementsContainer<PlacementEnum> where PlacementEnum : Enum {
+	public class AdPlacementsConfig<PlacementEnum> : BaseConfig<PlacementEnum>, IPlacementsProvider<PlacementEnum> where PlacementEnum : Enum {
 
 		// ---------------------------------------------------------------
 		// Accessors
