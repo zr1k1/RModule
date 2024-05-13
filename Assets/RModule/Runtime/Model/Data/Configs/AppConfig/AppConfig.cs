@@ -21,15 +21,19 @@ public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue, Cr
 	public bool EnableRemoteConfig => _enableRemoteConfig;
 	public int DragBeginTreeshold => _dragBeginTreeshold;
 
+	public bool EnableTestAdsMode => _enableTestAdsMode;
+
 	public string AppPolicyLink => _appPolicyLink;
 	public string AppTermsLink => _appTermsLink;
 	public string ContactEmail => _contactEmail;
 	public string VkLink => _vkLink;
 	public string FbLink => _fbLink;
 	public string AppSiteLink => _appSiteLink;
+
 	public string IOSGADApplicationIdentifier => _iosGADApplicationIdentifier;
+	public string AppMetricaKey => _appMetricaKey;
+
 	public string TrackingUsageDescription => _trackingUsageDescription;
-	public bool EnableTestAdsMode => _enableTestAdsMode;
 
 	// Outlets
 	[Header("Misc app settings"), Space]
@@ -56,7 +60,10 @@ public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue, Cr
 	[SerializeField] protected string _vkLink = default;
 	[SerializeField] protected string _fbLink = default;
 	[SerializeField] protected string _appSiteLink = default;
+
+	[Header("Keys"), Space]
 	[SerializeField] protected string _iosGADApplicationIdentifier = default;
+	[SerializeField] protected string _appMetricaKey = default;
 
 	[Header("Plist descriptions"), Space]
 	[SerializeField] protected string _trackingUsageDescription = default;
