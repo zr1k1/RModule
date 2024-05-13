@@ -36,8 +36,6 @@ public class PersistentSavedDataConfig<OptionalValuesNames> : ScriptableObject w
 		var allValuesDictionary = new Dictionary<int, object>();
 		foreach (var keyValuePair in _valuesDict) {
 			var valueconfig = keyValuePair.Value ;
-			Debug.Log($"valueconfig {valueconfig == null}");
-			Debug.Log($"valueconfig {valueconfig.GetValue<object>()}");
 			var value = valueconfig.GetValue<object>();
 			allValuesDictionary.Add(Convert.ToInt32(keyValuePair.Key), value);
 		}

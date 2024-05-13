@@ -1,13 +1,12 @@
-﻿#if USE_APPODEAL
+﻿#if USE_RMODULE_ADS && USE_APPODEAL
 
 using System;
 using System.Collections.Generic;
 using AppodealAds.Unity.Api;
 using AppodealAds.Unity.Common;
-using RModule.Runtime.Plugins;
 using UnityEngine;
-using RModule.Runtime.Managers.Ads;
 using AppodealApi = AppodealAds.Unity.Api.Appodeal;
+using MTUnityCore.Runtime.Managers.Ads;
 
 #if UNITY_IOS
 using UnityEngine.Advertisements;

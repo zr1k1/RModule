@@ -3,15 +3,15 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SceneFader : MonoBehaviour {
+public class SceneFader : BaseSceneFader {
 
-	public Image fadeOutUIImage;
-	public float fadeSpeed = 0.8f;
-	public bool enableFadeIn = true;
-	[Range(0f, 1f)] public float initialAlpha = 0f;
-	public bool waitForSpriteInGraphicComponentIsNotNull;
+	[SerializeField] Image fadeOutUIImage;
+	[SerializeField] float fadeSpeed = 0.8f;
+	[SerializeField] bool enableFadeIn = true;
+	[Range(0f, 1f)] [SerializeField] float initialAlpha = 0f;
+	[SerializeField] bool waitForSpriteInGraphicComponentIsNotNull;
 
-	enum FadeDirection { In, Out }
+	//enum FadeDirection { In, Out }
 
 	// ---------------------------------------------------------------
 	// GameObject Lifecycle
@@ -35,18 +35,26 @@ public class SceneFader : MonoBehaviour {
 	// ---------------------------------------------------------------
 	// General Methods
 
-	public void FadeOut(Action callback) {
+	public override void FadeOut(Action callback = null) {
 		StartCoroutine(FadeCo(FadeDirection.Out, callback));
 	}
 
-	public void FadeIn(Action callback = null) {
+	public override void FadeIn(Action callback = null) {
 		StartCoroutine(FadeCo(FadeDirection.In, callback));
+	}
+
+	public override IEnumerator FadeOut() {
+		 yield return StartCoroutine(FadeCo(FadeDirection.Out));
+	}
+
+	public override IEnumerator FadeIn() {
+		yield return StartCoroutine(FadeCo(FadeDirection.In));
 	}
 
 	// ---------------------------------------------------------------
 	// Helpers
 
-	IEnumerator FadeCo(FadeDirection fadeDirection, Action callback) {
+	IEnumerator FadeCo(FadeDirection fadeDirection, Action callback = null) {
 		yield return Fade(fadeDirection);
 
 		callback?.Invoke();
