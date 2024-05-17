@@ -97,7 +97,7 @@ public class Data<OptionalValuesNames> : IValueSetter<OptionalValuesNames>, IVal
 	}
 
 	public T1 GetValue<T1>(OptionalValuesNames enumType) {
-		// for avoid convertions problems
+		// for avoid convertions and reference types problems
 		var serializedObject = JsonConvert.SerializeObject(_values[Convert.ToInt32(enumType)], Formatting.Indented,
 			new JsonSerializerSettings() {
 				ReferenceLoopHandling = ReferenceLoopHandling.Ignore
