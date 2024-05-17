@@ -3,14 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using UnityEngine;
-using System.Collections.Generic;
 using Newtonsoft.Json;
-
-//public interface IDataFileSaveLoader {
-//	void SaveData();
-//	void LoadData();
-//}
+using UnityEngine;
 
 public class Data<OptionalValuesNames> : IValueSetter<OptionalValuesNames>, IValueGetter<OptionalValuesNames> where OptionalValuesNames : Enum {
 	public static Data<OptionalValuesNames> CreateDefaultData(PersistentSavedDataConfig<OptionalValuesNames> dataConfig) {
@@ -22,8 +16,7 @@ public class Data<OptionalValuesNames> : IValueSetter<OptionalValuesNames>, IVal
 
 	// JSON Generation
 	PersistentSavedDataConfig<OptionalValuesNames> _persistentDataConfig;
-	//JData _jData;
-	Dictionary<int, object> _values;
+	Dictionary<int, object> _values = new Dictionary<int, object>();
 
 	public class JData {
 		public Dictionary<int, object> values;
@@ -31,15 +24,25 @@ public class Data<OptionalValuesNames> : IValueSetter<OptionalValuesNames>, IVal
 
 	public Data(PersistentSavedDataConfig<OptionalValuesNames> persistentDataConfig) {
 		_persistentDataConfig = persistentDataConfig;
-		_values = _persistentDataConfig.GetAllValues();
+		var readOnly = _persistentDataConfig.GetAllValues();
+		foreach (var keypair in readOnly) {
+			_values.Add(keypair.Key, keypair.Value);
+		}
 	}
 
 	public Data(Dictionary<int, object> values) {
 		_values = values;
+
+		//foreach (var keyValue in _values) {
+		//	if (keyValue.Value is IList list) {
+		//		foreach (var pos in list) {
+		//			Debug.Log($"TEST : pos {pos}");
+		//		}
+		//	}
+		//}
 	}
 
 	public string GenerateJsonAndEncodeData() {
-		Debug.Log($"GenerateJsonAndEncodeData");
 		string serializedDict = generateJsonDataString();
 
 		//// Encode
@@ -52,7 +55,6 @@ public class Data<OptionalValuesNames> : IValueSetter<OptionalValuesNames>, IVal
 	}
 
 	public static Data<OptionalValuesNames> DecodeJsonAndGenerateGameData(string encodedDataString) {
-		Debug.Log($"DecodeData {encodedDataString}");
 		if (string.IsNullOrEmpty(encodedDataString))
 			return null;
 
@@ -63,22 +65,19 @@ public class Data<OptionalValuesNames> : IValueSetter<OptionalValuesNames>, IVal
 		string decodedText = encodedDataString;
 
 		JData jData = JsonConvert.DeserializeObject<JData>(decodedText);
-		Data<OptionalValuesNames> data = new (jData.values);
+		Data<OptionalValuesNames> data = new(jData.values);
 
 		return data;
 	}
 
 	string generateJsonDataString() {
-		//JPlayerData jPlayerData = new JPlayerData();
-		//jPlayerData.coins = _coins;
-		//jPlayerData.disableAds = _disableAds;
-		//jPlayerData.heroGraphicKitKey = _heroGraphicKitKey;
-		//jPlayerData.heroGraphicKitKeysCollection = _heroGraphicKitKeysCollection;
-		//jPlayerData.purchasedProducts = _purchasedProducts;
 		JData jData = new JData();
 		jData.values = _values;
 
-		return JsonConvert.SerializeObject(jData, Formatting.Indented);
+		return JsonConvert.SerializeObject(jData, Formatting.Indented,
+			new JsonSerializerSettings() {
+				ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+			});
 	}
 
 	public void Reset() {
@@ -98,13 +97,19 @@ public class Data<OptionalValuesNames> : IValueSetter<OptionalValuesNames>, IVal
 	}
 
 	public T1 GetValue<T1>(OptionalValuesNames enumType) {
-		return (T1)Convert.ChangeType(_values[Convert.ToInt32(enumType)], typeof(T1));
+		// for avoid convertions problems
+		var serializedObject = JsonConvert.SerializeObject(_values[Convert.ToInt32(enumType)], Formatting.Indented,
+			new JsonSerializerSettings() {
+				ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+			});
+		var deserializedObject = JsonConvert.DeserializeObject<T1>(serializedObject);
+
+		return deserializedObject;
 	}
 }
 
 [Serializable]
 public class DataProvider<OptionalValuesNames, DataConfigClass>
-	//where DataClass : Data<OptionalValuesNames>
 	where DataConfigClass : PersistentSavedDataConfig<OptionalValuesNames>
 	where OptionalValuesNames : Enum {
 
@@ -115,24 +120,23 @@ public class DataProvider<OptionalValuesNames, DataConfigClass>
 	Data<OptionalValuesNames> _data;
 	DataConfigClass _dataConfig;
 
+	int _id = -1;
+
 	public DataProvider(DataConfigClass dataConfigClass) {
 		_dataConfig = dataConfigClass;
 	}
 
-	// ---------------------------------------------------------------
-	// Player Data Management
-
 	public void SaveData() {
-		Debug.Log("SavePlayerData");
+		Debug.Log("DataProvider : Save");
 		CreateDirectoryIfNotExists();
-		File.WriteAllText(_dataConfig.GetPath(), _data.GenerateJsonAndEncodeData());
+		File.WriteAllText(_dataConfig.GetPath(_id), _data.GenerateJsonAndEncodeData());
 	}
 
-	public void LoadData(int number = -1) {
-		//_dataConfig = dataConfig;
-		Debug.Log($"DataProvider : {_dataConfig.GetPath()}");
-		if (_dataConfig.DataIsExist()) {
-			_data = Data<OptionalValuesNames>.DecodeJsonAndGenerateGameData(File.ReadAllText(_dataConfig.GetPath(number)));
+	public void LoadData(int id = -1) {
+		_id = id;
+		Debug.Log($"DataProvider : Load {_dataConfig.GetPath()}");
+		if (_dataConfig.DataIsExist(_id)) {
+			_data = Data<OptionalValuesNames>.DecodeJsonAndGenerateGameData(File.ReadAllText(_dataConfig.GetPath(_id)));
 			var currentConfigValues = _dataConfig.GetAllValues();
 			// Remove from loaded _data not existed keys in current config
 			var keyToRemove = _data.Values.Keys.ToList().FindAll(key => !currentConfigValues.ContainsKey(key));
@@ -144,14 +148,9 @@ public class DataProvider<OptionalValuesNames, DataConfigClass>
 				if (!_data.Values.ContainsKey(keyPair.Key))
 					_data.Values.Add(keyPair.Key, keyPair.Value);
 			}
-
-
 		} else {
 			_data = Data<OptionalValuesNames>.CreateDefaultData(_dataConfig);
 		}
-
-		//_data = _dataConfig.DataIsExist() ? Data<OptionalValuesNames>.CreateDefaultData(_dataConfig) : Data<OptionalValuesNames>.DecodeJsonAndGenerateGameData(File.ReadAllText(_dataConfig.GetPath(number)));
-
 
 		SaveData();
 	}
@@ -165,18 +164,6 @@ public class DataProvider<OptionalValuesNames, DataConfigClass>
 		if (!Directory.Exists(_dataConfig.GetDirectoryPath()))
 			Directory.CreateDirectory(_dataConfig.GetDirectoryPath());
 	}
-
-	//static string generateFullPath() {
-	//	return generateDirectoryPath() + c_playerDataFileName;
-	//}
-
-	//static string generateDirectoryPath() {
-	//	return Application.persistentDataPath + "/" + c_playerDataFolderName + "/";
-	//}
-
-	//bool dataIsNotExist() {
-	//	return !File.Exists(generateFullPath());
-	//}
 
 	public static void Reset(DataConfigClass dataConfigClass) {
 		FileInfo fileInfo = new FileInfo(dataConfigClass.GetPath());
