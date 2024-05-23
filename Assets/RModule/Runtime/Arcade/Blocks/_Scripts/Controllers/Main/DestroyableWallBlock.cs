@@ -5,10 +5,14 @@ namespace RModule.Runtime.Arcade {
 	using UnityEngine;
 	using RModule.Runtime.LeanTween;
 
-	public class DestroyableWallBlock : WallBlock, IStartContactDetector<CannonBlockFireUnit> {
+	public class DestroyableWallBlock : WallBlock {
 
 		// Outlets
 		[SerializeField] protected float _destroyAnimationDuration = default;
+
+		//protected override void Start() {
+		//	p_contactDetector.Setup(this);
+		//}
 
 		public override void Die() {
 			base.Die();
@@ -21,9 +25,8 @@ namespace RModule.Runtime.Arcade {
 			p_collider2D.enabled = false;
 		}
 
-		public void OnStartContact(CannonBlockFireUnit contactedObject) {
+		public override void OnStartContact(CannonBlockFireUnit contactedObject) {
 			Die();
-			Destroy(contactedObject.gameObject);
 		}
 	}
 }

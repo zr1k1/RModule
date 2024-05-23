@@ -10,8 +10,7 @@ namespace RModule.Runtime.Arcade {
 		[SerializeField] protected int _value = 1;
 
 		public virtual void PickUp(GameObject pickerGo) {
-			p_sfx.PlayEffect();
-			gameObject.SetActive(false);
+			Destroy();
 		}
 
 		public virtual void Drop(GameObject droperGo) {

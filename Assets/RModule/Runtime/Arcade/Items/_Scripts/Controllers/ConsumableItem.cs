@@ -12,7 +12,6 @@ namespace RModule.Runtime.Arcade {
 		}
 
 		public virtual void PickUp(GameObject pickerGo) {
-			TryPlaySound();
 		}
 
 		public virtual void Consume(GameObject consumer) {

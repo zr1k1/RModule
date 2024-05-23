@@ -3,7 +3,7 @@ namespace RModule.Runtime.Arcade {
 	using UnityEngine;
 	using UnityEngine.Events;
 
-	public class ActionButton : UnPickableItem, IUseable {
+	public class ActionButton : UnPickableItem {
 		// Outlets
 		[SerializeField] UnityEvent DidUse = default;
 		[SerializeField] UnityEvent DidPress = default;
@@ -27,7 +27,7 @@ namespace RModule.Runtime.Arcade {
 			p_contactDetector.Setup(this);
 		}
 
-		public void Use(GameObject userGo) {
+		public override void Use(GameObject userGo) {
 			Debug.Log($"ActionButton : Use");
 			if (_isPressed)
 				return;
@@ -39,7 +39,6 @@ namespace RModule.Runtime.Arcade {
 		public void Press() {
 			_isPressed = true;
 			_pressedBtn.localPosition = _pressedStateLocalPosition;
-			TryPlaySound();
 			DidPress?.Invoke();
 		}
 
@@ -47,11 +46,6 @@ namespace RModule.Runtime.Arcade {
 			_isPressed = false;
 			_pressedBtn.localPosition = Vector2.zero;
 			DidUnPress?.Invoke();
-		}
-
-		protected override void TryPlaySound() {
-			if (_isPressed)
-				base.TryPlaySound();
 		}
 	}
 }

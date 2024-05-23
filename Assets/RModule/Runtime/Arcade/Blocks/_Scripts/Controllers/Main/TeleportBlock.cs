@@ -3,8 +3,12 @@ using System.Collections;
 using RModule.Runtime.Arcade;
 using RModule.Runtime.LeanTween;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TeleportBlock : BaseBlock {
+	//Events
+	public UnityEvent<TeleportBlock, GameObject> DidStartTeleportIn = default;
+	public UnityEvent<TeleportBlock, GameObject> DidStartTeleportOut = default;
 
 	// Delegates
 	public delegate IEnumerator Animation(GameObject teleportedGo);
@@ -43,8 +47,10 @@ public class TeleportBlock : BaseBlock {
 	}
 
 	protected virtual IEnumerator Teleport(GameObject go, Action finishCallback) {
+		DidStartTeleportIn?.Invoke(this, go);
 		yield return AnimationIn(go);
 		go.transform.position = _destinationTeleport.transform.position;
+		DidStartTeleportOut?.Invoke(this, go);
 		yield return _destinationTeleport.AnimationOut(go);
 		finishCallback?.Invoke();
 	}

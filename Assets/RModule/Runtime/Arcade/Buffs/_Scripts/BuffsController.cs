@@ -16,7 +16,8 @@ namespace RModule.Runtime.Arcade {
 		}
 
 		public void ApplyBuff(Buff buff) {
-			buff.gameObject.transform.SetParent(_buffsContainer);
+			buff.Setup(-1);
+			buff.transform.SetParent(_buffsContainer, false);
 			buff.DidEnd.AddListener(OnBuffEnded);
 			_buffs.Add(buff);
 

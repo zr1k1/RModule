@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 8749422244835737111}
   - component: {fileID: 7173541156905876322}
   - component: {fileID: 2978131232714228587}
-  - component: {fileID: 6085450965255272173}
   - component: {fileID: 3230461557958322269}
   m_Layer: 6
   m_Name: collectedItem
@@ -168,23 +167,6 @@ MonoBehaviour:
       m_Calls: []
   _tweansForPause:
   - {fileID: 8749422244835737320}
---- !u!114 &6085450965255272173
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8749422244835737320}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 996453ffb165745ecb91ff6c74ee8f45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _soundEffectConfig: {fileID: 0}
-  _randomizePitch: 0
-  _playOnStart: 0
-  _isImportantSound: 1
-  _discardSameSoundsInOneFrame: 0
 --- !u!114 &3230461557958322269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,6 +184,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   p_spriteRenderer: {fileID: 647486115050580181}
-  p_sfx: {fileID: 6085450965255272173}
+  p_sfx: {fileID: 0}
   p_itemAnimationComponent: {fileID: 0}
   _value: 1

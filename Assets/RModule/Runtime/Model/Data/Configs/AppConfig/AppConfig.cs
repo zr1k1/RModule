@@ -43,9 +43,6 @@ public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue, Cr
 	[SerializeField] protected int _dragBeginTreeshold = default;
 	[SerializeField] protected int _copyrightBeginYear = default;
 
-	[Header("Sounds"), Space]
-	[SerializeField] protected SoundsConfig _soundsConfig = default;
-
 	[Header("Economics"), Space]
 	[SerializeField] protected AppEconomicsConfig<PurchasableGameItem> _appEconomicsData = default;
 

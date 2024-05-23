@@ -2,8 +2,12 @@ namespace RModule.Runtime.Arcade {
 	using System.Collections;
 	using System.Collections.Generic;
 	using UnityEngine;
+	using UnityEngine.Events;
 
 	public class FireUnit : LevelElement, ISizeGetter, IUseable {
+		// Events
+		public UnityEvent<FireUnit> DidDestroyed = default;
+
 		// Accessors
 		public float Range => _range;
 
@@ -41,6 +45,7 @@ namespace RModule.Runtime.Arcade {
 		}
 
 		public virtual void Die() {
+			DidDestroyed?.Invoke(this);
 			Destroy(gameObject);
 		}
 	}

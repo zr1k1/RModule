@@ -11,20 +11,17 @@ namespace RModule.Runtime.Arcade {
 
 	public class Buff : LevelElement {
 		// Events
+		public UnityEvent<Buff> DidStart = default;
 		public UnityEvent<Buff> DidEnd = default;
 
 		// Privats
 		int _remainingTime;
 		bool _infinityTime;
 
-		Action<Buff> _endCalback;
-
-		public virtual Buff Setup(float timeInSeconds, Action<Buff> endCalback) {
+		public virtual Buff Setup(float timeInSeconds) {
 			_infinityTime = timeInSeconds == -1;
-			DidEnd?.AddListener(endCalback.Invoke);
 
-			_endCalback = endCalback;
-			_endCalback += DidEnd.Invoke;
+			DidStart?.Invoke(this);
 			StartCoroutine(StartTimer());
 
 			return this;
@@ -36,7 +33,7 @@ namespace RModule.Runtime.Arcade {
 					yield return new WaitForSeconds(1);
 					_remainingTime -= 1;
 				} else if (_remainingTime == 0) {
-					_endCalback?.Invoke(this);
+					DidEnd?.Invoke(this);
 				}
 			}
 		}
