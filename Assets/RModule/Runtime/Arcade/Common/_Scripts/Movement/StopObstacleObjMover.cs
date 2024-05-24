@@ -271,5 +271,31 @@ namespace RModule.Runtime.Arcade {
 		public void SetSize(Vector3 size) {
 			_objSize = size;
 		}
+
+		public List<Vector2> GetPossibleDirections(Vector2 exceptDirectionToCheck) {
+			var possibleDirections = new List<Vector2>();
+			TryAddPossibleDirectionToList(Vector2.up, exceptDirectionToCheck, possibleDirections);
+			TryAddPossibleDirectionToList(Vector2.right, exceptDirectionToCheck, possibleDirections);
+			TryAddPossibleDirectionToList(Vector2.down, exceptDirectionToCheck, possibleDirections);
+			TryAddPossibleDirectionToList(Vector2.left, exceptDirectionToCheck, possibleDirections);
+
+			return possibleDirections;
+		}
+
+		void TryAddPossibleDirectionToList(Vector2 directionToCheck, Vector2 exceptDirectionToCheck, List<Vector2> possibleDirections) {
+			if (exceptDirectionToCheck != directionToCheck && IsPossibleDirection(directionToCheck))
+				possibleDirections.Add(directionToCheck);
+		}
+
+		public bool IsPossibleDirection(Vector2 direction, float minDistanceToPossible = 1f) {
+			if (!_degrees90DirectionsCalculator.DirectionVectors.Values.Contains(direction)) {
+				Debug.Log($"Directon {direction} is not present on _degrees90DirectionsCalculator dictionary!");
+				return false;
+			}
+
+			var hit = Physics2D.Raycast(transform.position, direction, minDistanceToPossible, _obstacleLayerMask);
+
+			return hit.collider == null;
+		}
 	}
 }
