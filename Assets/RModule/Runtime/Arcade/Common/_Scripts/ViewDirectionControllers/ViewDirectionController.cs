@@ -41,6 +41,7 @@ public class ViewDirectionController : MonoBehaviour {
 		} else {
 			angle = target.localEulerAngles.z + angle;
 			target.localEulerAngles = new Vector3(0, 0, angle);
+			_directionChangedCallback?.Invoke();
 		}
 	}
 

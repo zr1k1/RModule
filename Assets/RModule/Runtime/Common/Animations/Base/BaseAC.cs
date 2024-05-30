@@ -29,7 +29,8 @@ public class BaseAC : MonoBehaviour {
 	}
 
 	public virtual BaseAC SetupAnimation(UnityAction endCallback = null) {
-		gameObject.SetActive(false);
+		if (gameObject != null)
+			gameObject.SetActive(false);
 		if (endCallback != null)
 			DidEndCallback.AddListener(endCallback);
 
@@ -44,7 +45,8 @@ public class BaseAC : MonoBehaviour {
 	public void Play() {
 		DidPlayCallback?.Invoke();
 		_isPlaying = true;
-		gameObject.SetActive(true);
+		if (gameObject != null)
+			gameObject.SetActive(true);
 		StartCoroutine(Animate());
 	}
 
@@ -55,7 +57,7 @@ public class BaseAC : MonoBehaviour {
 		_isPlaying = false;
 
 		yield return new WaitForSeconds(delayBeforeDestroy - delayBeforeCallEndEvent);
-		if (!notDestroyOnEnd)
+		if (!notDestroyOnEnd && gameObject != null)
 			Destroy(gameObject);
 	}
 
