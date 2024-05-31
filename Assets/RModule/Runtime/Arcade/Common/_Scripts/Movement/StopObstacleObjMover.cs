@@ -61,17 +61,19 @@ namespace RModule.Runtime.Arcade {
 			_speedModifier += amount;
 		}
 
-		public void MoveTo(Degrees90DirectionsCalculator.Direction direction, float correctVectorLenght = 0f) {
+		public bool MoveTo(Degrees90DirectionsCalculator.Direction direction, float correctVectorLenght = 0f) {
 			_correctVectorLenght = correctVectorLenght;
 			_direction = ConvertEnumDirectionToVector(direction);
-			CalculateEndPointAndMove();
+
+			return CalculateEndPointAndTryMove();
 		}
 
-		public void MoveTo(Vector2 direction, float correctVectorLenght = 0f) {
+		public bool MoveTo(Vector2 direction, float correctVectorLenght = 0f) {
 			OnEndPointDestination();
 			_correctVectorLenght = correctVectorLenght;
 			_direction = direction;
-			CalculateEndPointAndMove();
+
+			return CalculateEndPointAndTryMove();
 		}
 
 		public bool TryChangeEndPointAndMove(Vector2 endPoint, float correctVectorLenght = 0f) {
@@ -169,9 +171,10 @@ namespace RModule.Runtime.Arcade {
 			return _movementSpeed * _speedModifier;
 		}
 
-		void CalculateEndPointAndMove() {
+		bool CalculateEndPointAndTryMove() {
 			CalculateEndPoint(_objTransform.position, _direction);
-			TryMove();
+
+			return TryMove();
 		}
 
 		Vector2 ConvertEnumDirectionToVector(Degrees90DirectionsCalculator.Direction direction) {
