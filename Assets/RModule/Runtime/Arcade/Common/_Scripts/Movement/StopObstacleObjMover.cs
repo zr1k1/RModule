@@ -62,10 +62,7 @@ namespace RModule.Runtime.Arcade {
 		}
 
 		public bool MoveTo(Degrees90DirectionsCalculator.Direction direction, float correctVectorLenght = 0f) {
-			_correctVectorLenght = correctVectorLenght;
-			_direction = ConvertEnumDirectionToVector(direction);
-
-			return CalculateEndPointAndTryMove();
+			return MoveTo(ConvertEnumDirectionToVector(direction), correctVectorLenght);
 		}
 
 		public bool MoveTo(Vector2 direction, float correctVectorLenght = 0f) {
@@ -79,12 +76,12 @@ namespace RModule.Runtime.Arcade {
 		public bool TryChangeEndPointAndMove(Vector2 endPoint, float correctVectorLenght = 0f) {
 			_correctVectorLenght = correctVectorLenght;
 			_endPoint = endPoint;
-			_endPoint -= _direction * _correctVectorLenght;
+			_endPoint += _direction * _correctVectorLenght;
 
 			return TryMove();
 		}
 
-		public void MoveToPoint(Vector2 endPoint) {
+		public void CancelMoveAndMoveToPoint(Vector2 endPoint) {
 			if (!_moveInProgress)
 				return;
 
@@ -101,7 +98,7 @@ namespace RModule.Runtime.Arcade {
 		}
 
 		public void MoveToCurrentWayPointAndStop() {
-			MoveToPoint(_currentWayPoint);
+			CancelMoveAndMoveToPoint(_currentWayPoint);
 		}
 
 		public void StopMove() {
@@ -188,7 +185,7 @@ namespace RModule.Runtime.Arcade {
 				var reflectVector = Vector2.Reflect(direction, direction);
 				_endPoint = hit.point + new Vector2(reflectVector.x * _objSize.x, reflectVector.y * _objSize.y) * 0.5f;
 			}
-			_endPoint -= direction * _correctVectorLenght;
+			_endPoint += direction * _correctVectorLenght;
 			Debug.Log($"startPoint {startPoint} direction {direction} hit.point {hit.point} _endPoint {_endPoint}");
 
 			if (_createMoveEndPoint) {
