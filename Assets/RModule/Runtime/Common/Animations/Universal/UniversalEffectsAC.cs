@@ -41,7 +41,7 @@ public class UniversalEffectsAC : BaseAC {
 		}
 	}
 
-	public override BaseAC SetupAnimation(UnityAction endCallback = null) {
+	public override BaseAC SetupAnimation(Action endCallback = null) {
 		base.SetupAnimation(endCallback);
 		for (int i = 0; i < _propertiesOfObjectToShowUp.Count; i++) {
 			if (_skipStepsIndexes.Contains(i))

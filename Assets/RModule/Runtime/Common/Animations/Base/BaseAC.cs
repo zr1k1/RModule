@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -28,18 +29,22 @@ public class BaseAC : MonoBehaviour {
 			Play();
 	}
 
-	public virtual BaseAC SetupAnimation(UnityAction endCallback = null) {
+	public virtual BaseAC SetupAnimation(Action endCallback = null) {
 		if (gameObject != null)
 			gameObject.SetActive(false);
 		if (endCallback != null)
-			DidEndCallback.AddListener(endCallback);
+			DidEndCallback.AddListener(endCallback.Invoke);
 
 		return this;
 	}
 
-	public void AddDidEndCallback(UnityAction endCallback) {
+	public void RemoveDidEndListeners() {
+		DidEndCallback?.RemoveAllListeners();
+	}
+
+	public void AddDidEndCallback(Action endCallback = null) {
 		if (endCallback != null)
-			DidEndCallback.AddListener(endCallback);
+			DidEndCallback.AddListener(endCallback.Invoke);
 	}
 
 	public void Play() {
