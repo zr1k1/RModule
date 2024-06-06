@@ -66,7 +66,9 @@ public class Timer : MonoBehaviour {
 				_pauseDateTime = DateTime.Now;
 			} else {
 				_totalTime = Mathf.Clamp(_totalTime - (int)(DateTime.Now - _pauseDateTime).TotalSeconds, 0, 9999999);
-				Debug.Log($"Timer : _totalTime {_totalTime}");
+				if (_totalTime <= 0) {
+					End();
+				}
 			}
 		}
 	}
@@ -76,7 +78,7 @@ public class Timer : MonoBehaviour {
 	}
 
 	IEnumerator Wait() {
-		while(_totalTime > 0) { 
+		while (_totalTime > 0) {
 			yield return new WaitForSeconds(1);
 			_totalTime -= 1;
 			_tickCallback?.Invoke(_totalTime);
@@ -85,6 +87,8 @@ public class Timer : MonoBehaviour {
 	}
 
 	void End() {
+		Debug.Log($"Timer : End");
+		StopTimer();
 		_endCallback?.Invoke();
 		if (_destroyHimselfOnEnd)
 			Destroy();

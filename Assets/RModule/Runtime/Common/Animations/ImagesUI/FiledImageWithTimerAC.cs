@@ -20,21 +20,27 @@ public class FiledImageWithTimerAC : BaseAC {
 		_timerLabel.text = timerSeconds.ToString();
 		_timer = Timer.Create(timerSeconds);
 		_timer.SetDestroyHimselfOnEnd();
+		LeanTween.value(gameObject, (float)timerSeconds / (float)timerSeconds, (float)(timerSeconds - 1) / (float)timerSeconds, 1f).setOnUpdate(UpdateImageView);
 		_timer.SetTickCallback((remainingTime) => {
 			_timerLabel.text = remainingTime.ToString();
+			LeanTween.value(gameObject, (float)remainingTime / (float)timerSeconds, (float)(remainingTime - 1) / (float)timerSeconds, 1f).setOnUpdate(UpdateImageView);
 		});
 		_timer.StartTimer();
 
-		return (FiledImageWithTimerAC) base.SetupAnimation(() => {
+		return (FiledImageWithTimerAC)base.SetupAnimation(() => {
 			if (endCallback != null) {
 				endCallback.Invoke();
 			}
 		});
 	}
 
+	void UpdateImageView(float value) {
+		_img.fillAmount = value;
+	}
+
 	protected override IEnumerator Animate() {
-		LeanTween.value(gameObject, _fromFillAmount, _toFillAmount, _timer.TotalTime).setOnUpdate(UpdateImageView);
-		yield return new WaitForSeconds(_timer.TotalTime);
+		while (_timer.IsStarted)
+			yield return null;
 
 		yield return base.Animate();
 	}
@@ -46,9 +52,5 @@ public class FiledImageWithTimerAC : BaseAC {
 			_timer.StopTimer();
 			_timer.Destroy();
 		}
-	}
-
-	public void UpdateImageView(float value) {
-		_img.fillAmount = value;
 	}
 }
