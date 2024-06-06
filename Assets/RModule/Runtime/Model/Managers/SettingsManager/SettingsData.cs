@@ -40,8 +40,8 @@ public class SettingsData<OptionalSettingEnum> : IValueSetter<OptionalSettingEnu
 			Debug.LogError($"Setting {setting} is not present on dictionary _settingsDict");
 			return default(T1);
 		}
-		var value = _settingsDict[setting].SettingConfig.GetValue<object>();
-		return (T1)value;
+
+		return ((IKeyValueGetter<string, T1>)_playerPrefsSaveService).GetValue($"{c_save_key_prefix}{setting}");
 	}
 
 	public void AddValueChangedListener(OptionalSettingEnum setting, UnityAction<object> action) {
