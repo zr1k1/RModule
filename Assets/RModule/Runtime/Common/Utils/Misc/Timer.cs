@@ -17,8 +17,9 @@ public class Timer : MonoBehaviour {
 	bool _isLooping;
 	bool _isStarted;
 	DateTime _pauseDateTime;
+	bool _destroyHimselfOnEnd;
 
-	public static Timer Create(int secondsTime, Action endCallback) {
+	public static Timer Create(int secondsTime, Action endCallback = null) {
 		GameObject timerGO = new GameObject("timer", typeof(Timer));
 		Timer timer = timerGO.GetComponent<Timer>();
 		timer.Setup(secondsTime, endCallback);
@@ -52,6 +53,12 @@ public class Timer : MonoBehaviour {
 		_tickCallback = tickCallback;
 	}
 
+	public Timer SetDestroyHimselfOnEnd() {
+		_destroyHimselfOnEnd = true;
+
+		return this;
+	}
+
 	public void OnApplicationPause(bool pause) {
 		Debug.Log($"Timer : OnApplicationPause {pause}");
 		if (_isStarted) {
@@ -69,8 +76,7 @@ public class Timer : MonoBehaviour {
 	}
 
 	IEnumerator Wait() {
-		while(_totalTime >= 0) { 
-		//for (int i = _totalTime - 1; i >= 0; i--) {
+		while(_totalTime > 0) { 
 			yield return new WaitForSeconds(1);
 			_totalTime -= 1;
 			_tickCallback?.Invoke(_totalTime);
@@ -80,6 +86,8 @@ public class Timer : MonoBehaviour {
 
 	void End() {
 		_endCallback?.Invoke();
+		if (_destroyHimselfOnEnd)
+			Destroy();
 	}
 
 	// Settings
