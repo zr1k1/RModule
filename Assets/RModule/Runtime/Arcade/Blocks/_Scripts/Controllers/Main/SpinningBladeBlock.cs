@@ -30,7 +30,7 @@ namespace RModule.Runtime.Arcade {
 		// Interfaces
 		public interface ISpinningBladeBlockDestroyer { }
 
-		protected virtual void Start() {
+		protected override void Start() {
 			_damageDealerComponent = GetComponent<DamageDealerComponent>();
 			foreach (Transform pointTr in _pointsToMoveParent)
 				_pointsToMove.Add(pointTr.position);

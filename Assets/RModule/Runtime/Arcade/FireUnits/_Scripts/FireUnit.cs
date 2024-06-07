@@ -3,6 +3,7 @@ namespace RModule.Runtime.Arcade {
 	using System.Collections.Generic;
 	using UnityEngine;
 	using UnityEngine.Events;
+	using RModule.Runtime.DealDamageSystem;
 
 	public class FireUnit : LevelElement, ISizeGetter, IUseable {
 		// Events

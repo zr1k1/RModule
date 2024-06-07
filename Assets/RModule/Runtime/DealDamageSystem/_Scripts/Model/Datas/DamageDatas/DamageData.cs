@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using RModule.Runtime.DealDamageSystem;
 
 [Serializable]
 public class DamageData {

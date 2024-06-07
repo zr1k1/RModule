@@ -1,5 +1,5 @@
 namespace RModule.Runtime.Arcade {
-	public interface IDamageAbsorber : IBuffEffect {
+	public interface IDamageAbsorber : IBuffEffect{
 		void AbsorbDamage(DamageData damageData);
 	}
 

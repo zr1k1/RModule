@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 using RModule.Runtime.Sounds;
+using RModule.Runtime.DealDamageSystem;
 
 public class DamageDealerComponent : MonoBehaviour {
 	// Delegates
