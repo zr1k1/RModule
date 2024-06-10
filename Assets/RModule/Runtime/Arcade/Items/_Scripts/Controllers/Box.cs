@@ -2,7 +2,7 @@ namespace RModule.Runtime.Arcade {
 
 	using UnityEngine;
 
-	public class Box : PickedAtHandItem, IPickable, SpinningBladeBlock.ISpinningBladeBlockDestroyer {
+	public class Box : PickedAtHandItem, IPickable, IDoingDamageToObject<SpinningBladeBlock> {
 
 		public override void Destroy() {
 			base.Destroy();

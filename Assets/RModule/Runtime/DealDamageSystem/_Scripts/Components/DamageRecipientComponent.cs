@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DamageRecipientComponent : MonoBehaviour, IDamagable {
+public class DamageRecipientComponent : MonoBehaviour {
 
 	// Outlets
 	[Tooltip("Object with implemented IDamagable interface for take damage")]

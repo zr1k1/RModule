@@ -2,5 +2,5 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpeedComponent : ValueComponent<float> {
+public class SpeedComponent : FloatValueComponent {
 }

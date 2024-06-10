@@ -31,6 +31,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6929975956361899033, guid: d5f9ef777100b42aa9f67853bbaf1f56, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1485865264560522379}
+    - targetCorrespondingSourceObject: {fileID: 6929975956361899033, guid: d5f9ef777100b42aa9f67853bbaf1f56, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3750267508997648953}
   m_SourcePrefab: {fileID: 100100000, guid: d5f9ef777100b42aa9f67853bbaf1f56, type: 3}
 --- !u!1 &925399105089206797 stripped
 GameObject:
@@ -50,10 +53,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   p_levelPauseComponent: {fileID: 3539597899263457082}
+  DidStart:
+    m_PersistentCalls:
+      m_Calls: []
   DidEnd:
     m_PersistentCalls:
       m_Calls: []
-  _value: 1
+  _healthComponent: {fileID: 3750267508997648953}
+--- !u!114 &3750267508997648953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 925399105089206797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e940e8ecc288e47d5af13311fa57817c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ValueDidChange:
+    m_PersistentCalls:
+      m_Calls: []
+  p_defaultValue: 1
+  p_value: 1
+  HealthDidLessThanZeroOrZero:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &3539597899263457082 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6765735357228884270, guid: d5f9ef777100b42aa9f67853bbaf1f56, type: 3}

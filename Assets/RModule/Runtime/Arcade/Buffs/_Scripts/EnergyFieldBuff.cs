@@ -4,21 +4,29 @@ namespace RModule.Runtime.Arcade {
 	using UnityEngine;
 	using RModule.Runtime.DealDamageSystem;
 
-	public class EnergyFieldBuff : Buff, IDamageAbsorber {
+	public class EnergyFieldBuff : Buff, IDamageAbsorber, IDoingDamageToObject<SpinningBladeBlock> {
 		// Outlets
-		[SerializeField] protected int _value = default;
+		[SerializeField] protected HealthComponent _healthComponent = default;
+
+		public override Buff Setup(float timeInSeconds) {
+			_healthComponent.HealthDidLessThanZeroOrZero.AddListener(Die);
+
+			return base.Setup(timeInSeconds);
+		}
 
 		public void AbsorbDamage(DamageData damageData) {
+			Debug.Log("EnergyFieldBuff : AbsorbDamage");
 			if (damageData.damageConfig is ICannotBeAbsorbDamage)
 				return;			
 
-			var tempValue = Mathf.Clamp(_value - damageData.GetDamage(), 0, _value);
-			damageData.ModifyDamage(-_value);
-			_value = tempValue;
+			var tempValue = Mathf.Clamp(_healthComponent.Value - damageData.GetDamage(), 0, _healthComponent.Value);
+			damageData.ModifyDamage((int)-_healthComponent.Value);
+			_healthComponent.SetValue(tempValue);
+		}
 
-			if (_value == 0) {
-				DidEnd?.Invoke(this);
-			}
+		protected virtual void Die() {
+			Debug.Log("EnergyFieldBuff : Die");
+			DidEnd?.Invoke(this);			
 		}
 	}
 }

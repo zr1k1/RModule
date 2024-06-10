@@ -6,7 +6,7 @@ namespace RModule.Runtime.Arcade {
 	using RModule.Runtime.LeanTween;
 	using RModule.Runtime.Utils;
 
-	public class SpinningBladeBlock : BaseBlock, IDamagable, IHeroDamager {
+	public class SpinningBladeBlock : BaseBlock, IDamagable {
 
 		// Outlets
 		[SerializeField] protected Transform _container = default;
@@ -20,6 +20,7 @@ namespace RModule.Runtime.Arcade {
 		[SerializeField] protected bool _setOrientToPath = default;
 		[SerializeField] protected bool _notMove = default;
 		[SerializeField] protected float _dieTime = default;
+		[SerializeField] protected HealthComponent _healthComponent = default;
 
 		// Privats
 		protected DamageDealerComponent _damageDealerComponent;
@@ -27,10 +28,9 @@ namespace RModule.Runtime.Arcade {
 		protected LTDescr _moveTween;
 		protected LTDescr _rotationTween;
 
-		// Interfaces
-		public interface ISpinningBladeBlockDestroyer { }
-
 		protected override void Start() {
+			_healthComponent.HealthDidLessThanZeroOrZero.AddListener(Die);
+			p_contactDetector.Setup(this);
 			_damageDealerComponent = GetComponent<DamageDealerComponent>();
 			foreach (Transform pointTr in _pointsToMoveParent)
 				_pointsToMove.Add(pointTr.position);
@@ -42,7 +42,7 @@ namespace RModule.Runtime.Arcade {
 		}
 
 		public override void Die() {
-			Debug.Log($"Die");
+			Debug.Log($"SpinningBladeBlock : Die");
 			base.Die();
 			if (!_notMove)
 				_moveTween.pause();
@@ -60,8 +60,10 @@ namespace RModule.Runtime.Arcade {
 		}
 
 		public virtual bool TryTakeDmg(DamageData damageData) {
-			if (damageData.damageSourceGameObject.GetComponent<ISpinningBladeBlockDestroyer>() != null) {
-				Die();
+			Debug.Log($"SpinningBladeBlock : TryTakeDmg from {gameObject.name}");
+			if (damageData.damageSourceGameObject.GetComponent<IDoingDamageToObject<SpinningBladeBlock>>() != null) {
+				_healthComponent.SetValueByAmount(-damageData.damageConfig.Damage);
+
 				return true;
 			}
 

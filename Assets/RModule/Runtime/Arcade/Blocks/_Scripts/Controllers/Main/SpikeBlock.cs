@@ -1,6 +1,6 @@
 namespace RModule.Runtime.Arcade {
 
-	public class SpikeBlock : BaseBlock, IDangerousRadarObject, IHeroDamager {
+	public class SpikeBlock : BaseBlock, IDangerousRadarObject {
 		protected DamageDealerComponent _damageDealerComponent;
 
 		protected override void Start() {

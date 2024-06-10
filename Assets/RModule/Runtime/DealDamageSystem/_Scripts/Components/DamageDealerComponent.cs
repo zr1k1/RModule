@@ -6,8 +6,9 @@ using RModule.Runtime.DealDamageSystem;
 
 public class DamageDealerComponent : MonoBehaviour {
 	// Delegates
-	public delegate bool DealDamageCondition();
-	public DealDamageCondition D_DealDamageCondition = () => { return true; };
+	public delegate bool DealDamageCondition(GameObject gameObjectToDealDamage);
+
+	public DealDamageCondition D_DealDamageCondition = (gameObjectToDealDamage) => { return true; };
 
 	// Events
 	public UnityEvent<DamageData> DamageDidDeal = default;
@@ -19,7 +20,7 @@ public class DamageDealerComponent : MonoBehaviour {
 
 	public virtual void OnCollisionEnter2D(Collision2D collision) {
 		var damageRecipientComponent = collision.collider.GetComponent<DamageRecipientComponent>();
-		if (damageRecipientComponent != null && D_DealDamageCondition()) {
+		if (damageRecipientComponent != null && D_DealDamageCondition(collision.gameObject)) {		
 			DealDamage(damageRecipientComponent, new DamageData {
 				damageConfig = p_damageConfig,
 				damageSourceGameObject = gameObject,
@@ -29,9 +30,8 @@ public class DamageDealerComponent : MonoBehaviour {
 	}
 
 	public virtual void OnTriggerEnter2D(Collider2D collider) {
-		Debug.Log($"DamageDealerComponent : OnTriggerEnter2D {collider.gameObject.name}");
 		var damageRecipientComponent = collider.GetComponent<DamageRecipientComponent>();
-		if (damageRecipientComponent != null && D_DealDamageCondition()) {
+		if (damageRecipientComponent != null && D_DealDamageCondition(collider.gameObject)) {		
 			DealDamage(damageRecipientComponent, new DamageData {
 				damageConfig = p_damageConfig,
 				damageSourceGameObject = gameObject,
@@ -41,7 +41,8 @@ public class DamageDealerComponent : MonoBehaviour {
 	}
 
 	protected virtual void DealDamage(DamageRecipientComponent damageRecipientComponent, DamageData damageData) {
-		if (((IDamagable)damageRecipientComponent).TryTakeDmg(damageData)) {
+		if (damageRecipientComponent.TryTakeDmg(damageData)) {
+			Debug.Log($"DamageDealerComponent : DealDamage from {gameObject.name} to {damageRecipientComponent.gameObject.name} dmg = {damageData.damageConfig.Damage}");
 			p_contactSfx?.PlayEffect();
 			TryPlayAnimation(damageData);
 			DamageDidDeal?.Invoke(damageData);
