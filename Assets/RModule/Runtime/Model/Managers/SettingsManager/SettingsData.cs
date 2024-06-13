@@ -41,7 +41,7 @@ public class SettingsData<OptionalSettingEnum> : IValueSetter<OptionalSettingEnu
 			return default(T1);
 		}
 
-		return ((IKeyValueGetter<string, T1>)_playerPrefsSaveService).GetValue($"{c_save_key_prefix}{setting}");
+		return ((IKeyValueGetter<string, T1>)_playerPrefsSaveService).GetValue($"{c_save_key_prefix}{setting}", ((ValueConfig<T1>)_settingsDict[setting].SettingConfig).GetValue<T1>());
 	}
 
 	public void AddValueChangedListener(OptionalSettingEnum setting, UnityAction<object> action) {

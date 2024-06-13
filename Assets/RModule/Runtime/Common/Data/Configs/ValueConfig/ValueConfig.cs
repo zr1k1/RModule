@@ -3,6 +3,7 @@ using UnityEngine;
 
 [Serializable]
 public class ValueConfig<T> : BaseValueConfig {
+	public T DefaultValue => _value;
 
 	[Header("Default value")]
 	[SerializeField] protected T _value = default;
