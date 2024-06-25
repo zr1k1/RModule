@@ -25,7 +25,7 @@ public class SpriteGameObjectResizerHelper {
 		var totalSizeAspect = totalSizeWithCamFieldView.x / totalSizeWithCamFieldView.y;
 		var spriteAspect = spriteSize.x / spriteSize.y;
 		float scale = spriteAspect > totalSizeAspect ? totalSizeWithCamFieldView.y * sprite.pixelsPerUnit / spriteSize.y
-			: totalSizeWithCamFieldView.y * sprite.pixelsPerUnit / spriteSize.x;
+			: totalSizeWithCamFieldView.x * sprite.pixelsPerUnit / spriteSize.x;
 		toResizeSpriteGameObject.transform.localScale = new Vector3(scale, scale, 1f);
 
 		if (_createPrimitiveImitationTarget) {
