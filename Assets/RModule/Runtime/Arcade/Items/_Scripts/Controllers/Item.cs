@@ -38,8 +38,8 @@ namespace RModule.Runtime.Arcade {
 		}
 
 		public virtual void Destroy() {
-			DidDestroyed?.Invoke();
 			Destroy(gameObject);
+			DidDestroyed?.Invoke();
 		}
 
 		public virtual void OnLevelPause() {
