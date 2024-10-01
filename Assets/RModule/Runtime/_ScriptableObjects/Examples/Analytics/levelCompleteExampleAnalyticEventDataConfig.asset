@@ -15,5 +15,5 @@ MonoBehaviour:
   _analyticEventData:
     _name: LevelComplete
     _prefsKey: k_level_complete_
-    _isOneTimeSend: 0
+    _isOneTimeSend: 1
     _parametersToUse: 0000000001000000
