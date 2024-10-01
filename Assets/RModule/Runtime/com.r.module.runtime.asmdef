@@ -14,7 +14,8 @@
         "LeanTweenPlugin",
         "Arcade",
         "com.appodeal",
-        "com.codefabric.mt.unity.core"
+        "com.codefabric.mt.unity.core",
+        "Analytics"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
