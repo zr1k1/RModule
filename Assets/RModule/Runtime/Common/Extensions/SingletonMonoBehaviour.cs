@@ -35,7 +35,7 @@ public abstract class SingletonMonoBehaviour<T> : MonoBehaviour, IInitializable 
 
 	public abstract bool IsInitialized();
 
-	public IEnumerator WaitForInitialized() {
+	public virtual IEnumerator WaitForInitialized() {
 		while (!IsInitialized())
 			yield return null;
 	}
