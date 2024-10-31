@@ -4,20 +4,26 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class InputHandlerUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler, IPointerUpHandler {
+public class InputHandlerUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler, IPointerUpHandler, IInputHandler {
+
+    public Canvas Canvas => _canvas;
+    public Camera UICamera => _camera;
 
     // Events
-    public UnityEvent DidClick = default;
-    public UnityEvent DidBeginDrag = default;
-    public UnityEvent DidOnDrag = default;
-    public UnityEvent DidEndDrag = default;
-    public UnityEvent DidDown = default;
-    public UnityEvent DidUp = default;
+    public event Action DidClick = default;
+    public event Action DidBeginDrag = default;
+    public event Action DidOnDrag = default;
+    public event Action DidEndDrag = default;
+    public event Action DidDown = default;
+    public event Action DidUp = default;
 
-    // Private vars
+    // Outlets
+    [SerializeField] Canvas _canvas = default;
+    [SerializeField] Camera _camera = default;
 
-    public void OnPointerClick(PointerEventData eventData) {
-        Debug.Log($"HandController : OnPointerClick");
+	// Private vars
+
+	public void OnPointerClick(PointerEventData eventData) {
         DidClick?.Invoke();
     }
 
