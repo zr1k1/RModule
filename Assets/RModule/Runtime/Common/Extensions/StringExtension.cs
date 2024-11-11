@@ -119,4 +119,14 @@ public static class StringExtension {
 
         return result;
     }
+
+    public static string TryReplaceNum(this string str, int num, string stringBeforeNum) {
+        var foundedIndexes = str.AllIndexesOf(stringBeforeNum);
+		if (foundedIndexes.Count > 0) {
+            str = str.Remove(foundedIndexes[0]);
+        }
+        str += $"{stringBeforeNum}{num}";
+
+        return str;
+    }
 }

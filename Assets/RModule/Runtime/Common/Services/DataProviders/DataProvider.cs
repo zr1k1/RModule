@@ -7,6 +7,9 @@ using Newtonsoft.Json;
 using UnityEngine;
 
 public class Data<OptionalValuesNames> : IValueSetter<OptionalValuesNames>, IValueGetter<OptionalValuesNames> where OptionalValuesNames : Enum {
+	// Delegates
+	public delegate string ConvertIntKeyToEnum(int intKey);
+
 	public static Data<OptionalValuesNames> CreateDefaultData(PersistentSavedDataConfig<OptionalValuesNames> dataConfig) {
 		return new Data<OptionalValuesNames>(dataConfig);
 	}
@@ -105,6 +108,14 @@ public class Data<OptionalValuesNames> : IValueSetter<OptionalValuesNames>, IVal
 		var deserializedObject = JsonConvert.DeserializeObject<T1>(serializedObject);
 
 		return deserializedObject;
+	}
+
+	public void PrintDataValues(ConvertIntKeyToEnum dConvertIntKeyToEnum) {
+		string printString = $"Data {this.GetType().ToString()} : \n";
+		foreach (var keyPair in _values) {
+			printString += $"KeyValuePair {dConvertIntKeyToEnum(keyPair.Key)} : {keyPair.Value} \n";
+		}
+		Debug.Log($"{printString}");
 	}
 }
 

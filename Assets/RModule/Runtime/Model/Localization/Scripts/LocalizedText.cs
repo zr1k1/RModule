@@ -5,7 +5,16 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class LocalizedText : MonoBehaviour {
-	
+	public enum PunctuationMark {
+		None = 0,
+		TwoDots = 1
+	}
+
+	// Outlets
+	[SerializeField] PunctuationMark _addToTextEnding = default;
+	[Tooltip("Can be null. Use only for hard behaviour.")]
+	[SerializeField] LocalizationTextDataConfig _localizationTextDataConfig = default;
+
 	// Private vars
 	bool _localized;
 
@@ -14,7 +23,7 @@ public class LocalizedText : MonoBehaviour {
 
 	IEnumerator Start() {
 		yield return LocalizationManager.WaitForInstanceCreatedAndInitialized();
-	
+
 		TryToLocalize();
 	}
 
@@ -33,24 +42,41 @@ public class LocalizedText : MonoBehaviour {
 	public static string T(string key) {
 		return LocalizationManager.Instance.GetLocalizedValue(key);
 	}
-	
+
 	// ---------------------------------------------------------------
 	// Helpers
 
 	void TryToLocalize() {
 		if (_localized)
 			return;
-		
+
 		var text = GetComponent<Text>();
 		if (text != null) {
-			text.text = LocalizationManager.Instance.GetLocalizedValue(text.text);
+			if(_localizationTextDataConfig != null) {
+				text.text = _localizationTextDataConfig.GetKey();
+			}
+			text.text = GetLocalizedValue(text.text);
 		}
 
 		var tmProText = GetComponent<TextMeshProUGUI>();
 		if (tmProText != null) {
-			tmProText.text = LocalizationManager.Instance.GetLocalizedValue(tmProText.text);
+			if (_localizationTextDataConfig != null) {
+				tmProText.text = _localizationTextDataConfig.GetKey();
+			}
+			tmProText.text = GetLocalizedValue(tmProText.text);
 		}
 
 		_localized = true;
+	}
+
+	string GetLocalizedValue(string localizationKey) {
+		return $"{ LocalizationManager.Instance.GetLocalizedValue(localizationKey)}{GetTextEnding()}";
+	}
+
+	string GetTextEnding() {
+		if (_addToTextEnding == PunctuationMark.TwoDots)
+			return ":";
+
+		return string.Empty;
 	}
 }

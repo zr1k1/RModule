@@ -34,6 +34,7 @@ public class BaseGameDataManager<PlayerDataValuesNames> : SingletonMonoBehaviour
 	}
 
 	void OnDisable() {
+		_playerDataProvider.SaveData();
 	}
 
 	// ---------------------------------------------------------------
@@ -45,6 +46,9 @@ public class BaseGameDataManager<PlayerDataValuesNames> : SingletonMonoBehaviour
 		_playerDataProvider.LoadData();
 	}
 
+	public void SavePlayerData() {
+		_playerDataProvider.SaveData();
+	}
 
 	// Debug Actions
 	public virtual void DebugActions() {
