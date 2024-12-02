@@ -66,6 +66,14 @@ public class LocalizedText : MonoBehaviour {
 			tmProText.text = GetLocalizedValue(tmProText.text);
 		}
 
+		var tmProTextWorld = GetComponent<TextMeshPro>();
+		if (tmProTextWorld != null) {
+			if (_localizationTextDataConfig != null) {
+				tmProTextWorld.text = _localizationTextDataConfig.GetKey();
+			}
+			tmProTextWorld.text = GetLocalizedValue(tmProTextWorld.text);
+		}
+
 		_localized = true;
 	}
 

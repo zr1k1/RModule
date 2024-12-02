@@ -4,8 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(TextMeshProUGUI))]
 public class TMPValueVC<T> : ValueVC<T> {
 
-	[Tooltip("For example string like [Score: YOURVALUE]. _symbolBeforeNum = ' ' ")]
-	[SerializeField] protected string _stringBeforeNum = default;
+	[Tooltip("For example string like [Score: YOURVALUE]. _symbolBeforeValue = ' ' ")]
+	[SerializeField] protected string _symbolBeforeValue = default;
 
 	protected TextMeshProUGUI _valueLabel;
 

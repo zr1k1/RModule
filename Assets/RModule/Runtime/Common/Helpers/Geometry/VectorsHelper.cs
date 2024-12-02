@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public static class VectorsHelper {
@@ -27,6 +28,20 @@ public static class VectorsHelper {
 			}
 		}
 
+		return result;
+	}
+
+	public static bool PointIsInsidePolygon(List<Vector2> polygon, Vector2 testPoint) {
+		bool result = false;
+		int j = polygon.Count() - 1;
+		for (int i = 0; i < polygon.Count(); i++) {
+			if (polygon[i].y < testPoint.y && polygon[j].y >= testPoint.y || polygon[j].y < testPoint.y && polygon[i].y >= testPoint.y) {
+				if (polygon[i].x + (testPoint.y - polygon[i].y) / (polygon[j].y - polygon[i].y) * (polygon[j].x - polygon[i].x) < testPoint.x) {
+					result = !result;
+				}
+			}
+			j = i;
+		}
 		return result;
 	}
 }

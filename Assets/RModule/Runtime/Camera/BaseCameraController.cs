@@ -3,6 +3,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class BaseCameraController : MonoBehaviour, ICameraController {
+	// Enums
+	public enum ViewDirection {
+		Default = 0,
+		TopView = 1,
+	}
+
 	// Accessors
 	public Camera Camera => _gameCamera;
 	public float TopMainOffsetHeightInUnits => _gameObjectCentralizer.TopMainOffsetHeightInUnits;
@@ -11,6 +17,7 @@ public class BaseCameraController : MonoBehaviour, ICameraController {
 	public float RightMainOffsetWidthInUnits => _gameObjectCentralizer.GetRightMainOffsetWidthInUnits;
 
 	// Outlets
+	[SerializeField] protected ViewDirection _viewDirection = default;
 	[SerializeField] protected RectTransform _safeAreaContainer = default;
 	[SerializeField] protected Camera _gameCamera = default;
 
@@ -68,17 +75,29 @@ public class BaseCameraController : MonoBehaviour, ICameraController {
 		   .SetLeftAdditionalOffsetUnits(_leftAdditionalOffsetInUnits)
 		   .SetRightAdditionalOffsetUnits(_rightAdditionalOffsetInUnits);
 
-		if(_safeAreaContainer != null)
+		if (_safeAreaContainer != null)
 			_gameObjectCentralizer.SetSafeAreaAnchoredMinMax(_safeAreaContainer.anchorMin, _safeAreaContainer.anchorMax);
 
 		_resultData = _gameObjectCentralizer.Calculate();
 
-		_cameraPosition = new Vector3(_resultData.PositionCamera.x, _resultData.PositionCamera.y, _gameCamera.transform.position.z);
-
-		_gameCamera.transform.position = _cameraPosition;
+		SetupTransformParamsByViewType();
 		_gameCamera.orthographicSize = _resultData.OrthographicSizeCamera;
 
 		setupFinishCallback?.Invoke();
+	}
+
+	void SetupTransformParamsByViewType() {
+		_cameraPosition = new Vector3(_resultData.PositionCamera.x, _resultData.PositionCamera.y, _gameCamera.transform.position.z);
+		var cameraRotation = Vector3.zero;
+
+		if (_viewDirection == ViewDirection.TopView) {
+			_cameraPosition = new Vector3(_resultData.PositionCamera.x, _gameCamera.transform.position.y, _resultData.PositionCamera.y);
+			//_cameraPosition = new Vector3(_cameraPosition.x, _cameraPosition.z, _cameraPosition.y);
+			cameraRotation = new Vector3(90, 0, 0);
+		}
+
+		_gameCamera.transform.position = _cameraPosition;
+		_gameCamera.transform.localEulerAngles = cameraRotation;
 	}
 
 	public BaseCameraController SetSafeAreaContainer(RectTransform safeAreaContainer) {

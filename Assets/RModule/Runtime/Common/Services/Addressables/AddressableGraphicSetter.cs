@@ -87,7 +87,7 @@ public class AddressableGraphicSetter : MonoBehaviour {
 		SetSprite(null);
 		_beginCheckWhenSpriteComponentOnDisabled = false;
 		_beginCheckWhenSpriteComponentOnEnabled = true;
-		Destroy(_graphicProvider.AddressableDataTempGameObjectContainer);
+		//Destroy(_graphicProvider.AddressableDataTempGameObjectContainer);
 		_graphicProvider = null;
 
 		SetColor(new Color(_sourceColor.r, _sourceColor.g, _sourceColor.b, 0f));

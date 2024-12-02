@@ -26,6 +26,11 @@ public class ContactDetector : MonoBehaviour {
 	Action<Collider2D> _checkOnTriggerExit2DStartContactDetection;
 	Action<Collision2D> _checkOnColliderEnter2DStartContactDetection;
 	Action<Collision2D> _checkOnColliderExit2DStartContactDetection;
+	// 3d
+	Action<Collider> _checkOnTriggerEnterStartContactDetection;
+	Action<Collider> _checkOnTriggerExitStartContactDetection;
+	Action<Collision> _checkOnColliderEnterStartContactDetection;
+	Action<Collision> _checkOnColliderExitStartContactDetection;
 
 	public void Setup<T>(T obj) {
 		_checkOnTriggerEnter2DStartContactDetection = (collision) => {
@@ -40,22 +45,52 @@ public class ContactDetector : MonoBehaviour {
 		_checkOnColliderExit2DStartContactDetection = (collision) => {
 			CheckEndContactDetection(obj, collision);
 		};
+
+		_checkOnTriggerEnterStartContactDetection = (collider) => {
+			CheckStartContactDetection(obj, collider);
+		};
+		_checkOnTriggerExitStartContactDetection = (collider) => {
+			CheckEndContactDetection(obj, collider);
+		};
+		_checkOnColliderEnterStartContactDetection = (collision) => {
+			CheckStartContactDetection(obj, collision);
+		};
+		_checkOnColliderExitStartContactDetection = (collision) => {
+			CheckEndContactDetection(obj, collision);
+		};
 	}
 
-	private void OnTriggerEnter2D(Collider2D collision) {
-		_checkOnTriggerEnter2DStartContactDetection?.Invoke(collision);
+	private void OnTriggerEnter2D(Collider2D collider2d) {
+		_checkOnTriggerEnter2DStartContactDetection?.Invoke(collider2d);
 	}
 
-	private void OnTriggerExit2D(Collider2D collision) {
-		_checkOnTriggerExit2DStartContactDetection?.Invoke(collision);
+	private void OnTriggerExit2D(Collider2D collider2d) {
+		_checkOnTriggerExit2DStartContactDetection?.Invoke(collider2d);
 	}
 
-	private void OnCollisionEnter2D(Collision2D collision) {
-		_checkOnColliderEnter2DStartContactDetection?.Invoke(collision);
+	private void OnCollisionEnter2D(Collision2D collision2d) {
+		_checkOnColliderEnter2DStartContactDetection?.Invoke(collision2d);
 	}
 
-	private void OnCollisionExit2D(Collision2D collision) {
-		_checkOnColliderExit2DStartContactDetection?.Invoke(collision);
+	private void OnCollisionExit2D(Collision2D collision2d) {
+		_checkOnColliderExit2DStartContactDetection?.Invoke(collision2d);
+	}
+
+	//3d
+	private void OnTriggerEnter(Collider collider) {
+		_checkOnTriggerEnterStartContactDetection?.Invoke(collider);
+	}
+
+	private void OnTriggerExit(Collider collider) {
+		_checkOnTriggerExitStartContactDetection?.Invoke(collider);
+	}
+
+	private void OnCollisionEnter(Collision collision) {
+		_checkOnColliderEnterStartContactDetection?.Invoke(collision);
+	}
+
+	private void OnCollisionExit(Collision collision) {
+		_checkOnColliderExitStartContactDetection?.Invoke(collision);
 	}
 
 	void CheckStartContactDetection<T>(T obj, Collider2D collision) {
@@ -71,6 +106,23 @@ public class ContactDetector : MonoBehaviour {
 	}
 
 	void CheckEndContactDetection<T>(T obj, Collision2D collision) {
+		OnEndContact(obj, collision.gameObject);
+	}
+
+	//3d
+	void CheckStartContactDetection<T>(T obj, Collider collider) {
+		OnStartContact(obj, collider.gameObject);
+	}
+
+	void CheckEndContactDetection<T>(T obj, Collider collider) {
+		OnEndContact(obj, collider.gameObject);
+	}
+
+	void CheckStartContactDetection<T>(T obj, Collision collision) {
+		OnStartContact(obj, collision.gameObject);
+	}
+
+	void CheckEndContactDetection<T>(T obj, Collision collision) {
 		OnEndContact(obj, collision.gameObject);
 	}
 
