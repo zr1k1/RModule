@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [Serializable]
-public class SettingsData<OptionalSettingEnum> : IValueSetter<OptionalSettingEnum>, IValueGetter<OptionalSettingEnum> where OptionalSettingEnum : Enum {
+public class SettingsData<OptionalSettingEnum> : IValueSetter<OptionalSettingEnum>, IValueGetterByEnum<OptionalSettingEnum> where OptionalSettingEnum : Enum {
 	// Outlets
 	[SerializeField] protected SerializableDictionary<OptionalSettingEnum, ValueConfigWithEvent> _settingsDict = default;
 

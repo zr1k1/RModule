@@ -6,7 +6,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using UnityEngine;
 
-public class Data<OptionalValuesNames> : IValueSetter<OptionalValuesNames>, IValueGetter<OptionalValuesNames> where OptionalValuesNames : Enum {
+public class Data<OptionalValuesNames> : IValueSetter<OptionalValuesNames>, IValueGetterByEnum<OptionalValuesNames> where OptionalValuesNames : Enum {
 	// Delegates
 	public delegate string ConvertIntKeyToEnum(int intKey);
 

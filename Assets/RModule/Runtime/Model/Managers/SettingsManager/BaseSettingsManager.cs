@@ -103,11 +103,11 @@ public abstract class BaseSettingsManager<PurchasableGameItem, Placement, Option
 	}
 
 	public virtual T1 GetSetting<T1>(CommonSetting setting) {
-		return ((IValueGetter<CommonSetting>)_commonSettings).GetValue<T1>(setting);
+		return ((IValueGetterByEnum<CommonSetting>)_commonSettings).GetValue<T1>(setting);
 	}
 
 	public virtual T1 GetSetting<T1>(OptionalSetting setting) {
-		return ((IValueGetter<OptionalSetting>)_optionalSettings).GetValue<T1>(setting);
+		return ((IValueGetterByEnum<OptionalSetting>)_optionalSettings).GetValue<T1>(setting);
 	}
 
 	public virtual T1 GetSetting<T1>(OptionalCrossPlatformAppConfigSetting enumType) {
@@ -119,7 +119,7 @@ public abstract class BaseSettingsManager<PurchasableGameItem, Placement, Option
 	}
 
 	public virtual T1 GetSetting<T1>(OptionaDebugSetting enumType) {
-		return ((IValueGetter<OptionaDebugSetting>)_debugConfig).GetValue<T1>(enumType);
+		return ((IValueGetterByEnum<OptionaDebugSetting>)_debugConfig).GetValue<T1>(enumType);
 	}
 
 	public string GetPlacement(Placement placementType) {

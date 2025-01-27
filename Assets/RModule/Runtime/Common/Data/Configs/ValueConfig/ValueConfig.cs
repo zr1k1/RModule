@@ -12,3 +12,10 @@ public class ValueConfig<T> : BaseValueConfig {
 		return (T1)(object)_value;
 	}
 }
+
+public abstract class ParameterValueConfig<TClass, TValueType> : ValueConfig<TClass> where TClass : ParametrableValue<TValueType> {
+
+	public override T GetValue<T>() {
+		return (T)(object)_value.GetValue();
+	}
+}

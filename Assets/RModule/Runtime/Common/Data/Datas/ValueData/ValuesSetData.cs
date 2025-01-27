@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 [Serializable]
-public class ValuesSetData<SomeValueType> : IValueGetter<SomeValueType> where SomeValueType : Enum {
+public class ValuesSetData<SomeValueType> : IValueGetterByEnum<SomeValueType> where SomeValueType : Enum {
 	// Outlets
 	// After add new settingsDictionary you need to add condition to TryFindDictionaryByValueType, GetAllValues method
 	[SerializeField] protected BoolValuesData<SomeValueType> _boolValues = default;
@@ -60,12 +60,12 @@ public class ValuesSetData<SomeValueType> : IValueGetter<SomeValueType> where So
 			return default(T1);
 		}
 
-		return foundedDictionary[valueType].Value;
+		return foundedDictionary[valueType].GetValue();
 	}
 
 	void AddDictionaryToAllValuesDictionary<T>(ref Dictionary<int, object> allValuesDictionary, ValuesData<SomeValueType, ValueData<T>, T> toAddDictionary) {
 		foreach (var keyPair in toAddDictionary) {
-			allValuesDictionary.Add(Convert.ToInt32(keyPair.Key), keyPair.Value.Value);
+			allValuesDictionary.Add(Convert.ToInt32(keyPair.Key), keyPair.Value.GetValue());
 		}
 	}
 }
