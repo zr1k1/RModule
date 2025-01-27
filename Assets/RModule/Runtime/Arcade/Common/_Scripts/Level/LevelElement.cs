@@ -5,10 +5,12 @@ namespace RModule.Runtime.Arcade {
 	public class LevelElement : MonoBehaviour {
 
 		// Outlets
+		[Tooltip("If null will try GetComponent from this game object")]
 		[SerializeField] protected LevelPauseComponent p_levelPauseComponent = default;
 
 		protected virtual void Awake() {
-			p_levelPauseComponent = GetComponent<LevelPauseComponent>();
+			if(p_levelPauseComponent == null)
+				p_levelPauseComponent = GetComponent<LevelPauseComponent>();
 		}
 	}
 }
