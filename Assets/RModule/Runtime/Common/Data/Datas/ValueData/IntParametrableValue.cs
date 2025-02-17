@@ -1,7 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 [Serializable]
 public class IntParametrableValue : ParametrableValue<int>, IRandomValueGenerator<int>, IValueGetter<int> {
@@ -15,11 +15,4 @@ public class IntParametrableValue : ParametrableValue<int>, IRandomValueGenerato
 	public override int GetValue() {
 		return _random ? GetRandomValue() : base.GetValue();
 	}
-}
-
-[Serializable]
-public class StringParametrableValue : ParametrableValue<string>, IValueGetter<string> {
-}
-
-public class ParametrableValue<T> : ValueData<T> {
 }

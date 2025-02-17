@@ -12,7 +12,7 @@ namespace RModule.Runtime.Data.Configs {
 
 		public virtual T GetValue<T>(OptionalValue valueType) {
 			if (!_valuesDict.ContainsKey(valueType)) {
-				Debug.LogError($"Value {valueType} is not present on dictionary _optionalValuesDict");
+				Debug.LogError($"Value {valueType} is not present on dictionary _optionalValuesDict in {name}");
 				return default(T);
 			}
 			var value = _valuesDict[valueType].GetValue<object>();

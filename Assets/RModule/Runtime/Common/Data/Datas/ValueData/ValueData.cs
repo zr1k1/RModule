@@ -8,4 +8,10 @@ public class ValueData<T> : IValueGetter<T> {
 	public virtual T GetValue() {
 		return _value;
 	}
+
+	public virtual void SetValue(T value) {
+		Debug.LogError($"ValueData<T> : SetValue");
+		_value = value;
+		Debug.LogError($"ValueData<T> : SetValue {_value}");
+	}
 }
