@@ -15,7 +15,9 @@
         "Arcade",
         "com.appodeal",
         "com.codefabric.mt.unity.core",
-        "Analytics"
+        "Analytics",
+        "MotivationMessages",
+        "Popups"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

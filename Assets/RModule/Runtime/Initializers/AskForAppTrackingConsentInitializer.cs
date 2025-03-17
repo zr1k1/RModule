@@ -1,20 +1,19 @@
 using System.Collections;
-#if USE_MTUNITY
-using MTUnityCore.Runtime.Plugins;
-#endif
 using UnityEngine;
+using MTUnityCore.Runtime.Plugins;
 
 public class AskForAppTrackingConsentInitializer : Initializer {
 
 	public override IEnumerator Initialize() {
 		Debug.Log("AskForAppTrackingConsentInitializer : TryAskForAppTrackingConsent");
-#if USE_APPODEAL
+
+#if USE_MTUNITYCORE
+	#if USE_APPODEAL
 		Debug.Log("AskForAppTrackingConsentInitializer : Use Appodeal AskForAppTrackingConsent logic");
-#elif USE_MTUNITY
+	#else
 		Debug.Log("AskForAppTrackingConsentInitializer : Use Native AskForAppTrackingConsent");
 		yield return AppTrackingConsentManager.AskForAppTrackingConsent();
-#else
-		Debug.LogWarning("AskForAppTrackingConsentInitializer : NOT REALIZED");
+	#endif
 #endif
 		yield return null;
 	}

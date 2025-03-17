@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5723904438354186841}
-  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &146329641177576651
 MonoBehaviour:
@@ -46,10 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _appConfigData: {fileID: 11400000, guid: af6bd8f8fddb3454b954d765374a7916, type: 2}
   _debugConfig: {fileID: 11400000, guid: 8386d5bcde49046a1bc2f535fd81636a, type: 2}
-  _databaseNames:
-    m_keys: 00000000
-    m_values:
-    - 
   _commonSettings:
     _settingsDict:
       m_keys: 000000000100000002000000030000000400000005000000060000000700000008000000
@@ -98,20 +94,7 @@ MonoBehaviour:
         _settingConfig: {fileID: 11400000, guid: ede2653c9c6324690b5a51ed35323bce, type: 2}
       - ValueDidChange:
           m_PersistentCalls:
-            m_Calls:
-            - m_Target: {fileID: 146329641177576651}
-              m_TargetAssemblyTypeName: BaseSettingsManager`6[[ExampleGameItemToPurchase,
-                Model
-              m_MethodName: OnVibrationStateChanged
-              m_Mode: 6
-              m_Arguments:
-                m_ObjectArgument: {fileID: 0}
-                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-                m_IntArgument: 0
-                m_FloatArgument: 0
-                m_StringArgument: 
-                m_BoolArgument: 0
-              m_CallState: 2
+            m_Calls: []
         _settingConfig: {fileID: 11400000, guid: d032a79ca8589430eb7d1e154913a40b, type: 2}
       - ValueDidChange:
           m_PersistentCalls:

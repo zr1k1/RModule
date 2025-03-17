@@ -1,9 +1,7 @@
 using System.Collections;
 using UnityEngine;
-#if USE_FIREBASE
-using Imported.Managers.MTFirebase;
-using MTUnityCore.Runtime.Extensions;
-#endif
+//using Imported.Managers.MTFirebase;
+//using MTUnityCore.Runtime.Extensions;
 
 public class FirebaseManagerInitializer : Initializer {
 

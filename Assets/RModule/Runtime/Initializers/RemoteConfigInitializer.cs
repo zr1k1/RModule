@@ -1,8 +1,6 @@
 using System.Collections;
 using UnityEngine;
-#if USE_FIREBASE
-using Imported.Managers.MTFirebase;
-#endif
+//using Imported.Managers.MTFirebase;
 
 public class RemoteConfigInitializer : Initializer {
 
@@ -16,7 +14,8 @@ public class RemoteConfigInitializer : Initializer {
 	public override IEnumerator Initialize() {
 #if USE_FIREBASE
 		Debug.Log("RemoteConfigInitializer : Try Initialize Firebase Remote Config");
-		yield return EnableRemoteConfigOrTimeOut();
+		if (SettingsManager.Instance.AppConfigData.Common.EnableRemoteConfig)
+			yield return EnableRemoteConfigOrTimeOut();
 #endif
 		yield return null;
 	}
