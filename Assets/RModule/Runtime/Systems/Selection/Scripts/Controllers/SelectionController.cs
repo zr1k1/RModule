@@ -9,6 +9,7 @@ public static class SelectionController<T> where T : MonoBehaviour {
 	static SelectionComponent<T> s_firstSelectedSelectionComponent = default;
 
 	public static void Reset() {
+		Debug.Log($"SelectionController : Reset");
 		if (s_firstSelected != null) {
 			s_firstSelectedSelectionComponent.Deselect();
 			s_firstSelectedSelectionComponent = null;
@@ -29,9 +30,11 @@ public static class SelectionController<T> where T : MonoBehaviour {
 				SetSelectionFirst(selectionComponent);
 			}
 		} else {
+			Debug.Log($"SelectionController : T {typeof(T).ToString()}");
 			var interactingWithOthersGameElements = levelElement.GetComponent<IInteractingWithOthersGameElements<T>>();
 			if (interactingWithOthersGameElements != null) {
 				if (!interactingWithOthersGameElements.TryInteract(s_firstSelected.GetComponent<T>())) {
+					Debug.Log($"SelectionController : TryInteract false");
 					Reset();
 					SetSelectionFirst(selectionComponent);
 					return;
@@ -42,6 +45,7 @@ public static class SelectionController<T> where T : MonoBehaviour {
 	}
 
 	static void SetSelectionFirst(SelectionComponent<T> selectionComponent) {
+		Debug.Log($"SelectionController : SetSelectionFirst {selectionComponent.GameObject.name}");
 		var levelElement = selectionComponent.GameObject;
 		s_firstSelectedSelectionComponent = selectionComponent;
 		selectionComponent.Select();

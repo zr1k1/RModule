@@ -43,6 +43,7 @@ public class SelectionComponent<T> : MonoBehaviour, ISelectable where T : MonoBe
 
 	public void SetEnableSelection(bool enable) {
 		enabled = enable;
+		GetComponent<Collider>().enabled = enable;
 	}
 
 	public virtual void Select() {
