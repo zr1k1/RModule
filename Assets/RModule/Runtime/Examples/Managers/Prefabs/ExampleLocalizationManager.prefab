@@ -10,11 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 458679965481194352, guid: ed6bd75ac81404074aec0d5c7ba8d739, type: 3}
       propertyPath: m_Name
-      value: ExampleLocalizationManager Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 967015313355729601, guid: ed6bd75ac81404074aec0d5c7ba8d739, type: 3}
-      propertyPath: _supportedLanguages.Array.size
-      value: 3
+      value: ExampleLocalizationManager
       objectReference: {fileID: 0}
     - target: {fileID: 967015313355729601, guid: ed6bd75ac81404074aec0d5c7ba8d739, type: 3}
       propertyPath: _supportedLanguages.Array.data[2]

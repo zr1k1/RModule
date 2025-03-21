@@ -57,13 +57,13 @@ namespace RModule.Runtime.Sounds {
 		// ---------------------------------------------------------------
 		// General Methods
 
-		public void OnSoundsStateChanged(bool soundEnabled) {
+		public virtual void OnSoundsStateChanged(bool soundEnabled) {
 			_soundEnabled = soundEnabled;
 			PlayerPrefs.SetInt(k_soundEnabled, soundEnabled ? 1 : 0);
 			PlayerPrefs.Save();
 		}
 
-		public void OnMusicStateChanged(bool musicEnabled) {
+		public virtual void OnMusicStateChanged(bool musicEnabled) {
 			_musicEnabled = musicEnabled;
 			PlayerPrefs.SetInt(k_musicEnabled, musicEnabled ? 1 : 0);
 			PlayerPrefs.Save();
