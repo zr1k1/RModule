@@ -13,11 +13,12 @@ namespace RModule.Runtime.Arcade {
 		// Privats
 		bool _isActivated;
 
-		void Start() {
+		protected override void Start() {
 			p_spriteRenderer.enabled = false;
 		}
 
-		public void Use(GameObject userGo) {
+		public override void Use(GameObject userGo) {
+			base.Use(userGo);
 			if (_isActivated)
 				return;
 			_isActivated = true;

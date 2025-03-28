@@ -10,8 +10,8 @@ public class FiledImageWithTimerAC : BaseAC {
 	// Outlets
 	[SerializeField] Image _img = default;
 	[SerializeField] TextMeshProUGUI _timerLabel = default;
-	[SerializeField] float _fromFillAmount = 1f;
-	[SerializeField] float _toFillAmount = 0f;
+	//[SerializeField] float _fromFillAmount = 1f;
+	//[SerializeField] float _toFillAmount = 0f;
 
 	// Private vars
 	Timer _timer;

@@ -7,7 +7,8 @@ public class InteractDetector<T, TInteractingElementsBaseClass> : IInteractingWi
 	where TInteractingElementsBaseClass : MonoBehaviour {
 
 	protected T _obj;
-	//protected bool _interactInProgress;
+	//protected bool _interactInProgress;// TODO remake to optional
+	ISelectInteractable<T> _detectedObject;
 
 	public InteractDetector(T obj) {
 		_obj = obj;
@@ -24,25 +25,33 @@ public class InteractDetector<T, TInteractingElementsBaseClass> : IInteractingWi
 
 	public virtual bool TryInteract(TInteractingElementsBaseClass other) {
 		Debug.Log($"InteractDetector : {other}");
-		if (other == _obj
-			//|| _interactInProgress
-			)
-			return false;
+		//if (other == _obj
+		//	//|| _interactInProgress
+		//	)
+		//	return false;
 
-		if (TryDetectObject(other))
-			return true;
-
-		return false;
-	}
-
-	public virtual bool TryDetectObject(TInteractingElementsBaseClass other) {
-		var detectedObject = other.GetComponent<ISelectInteractable<T>>();
-		if (detectedObject != null) {
-			if (detectedObject.TryInteract(_obj)) {
+		if (CanInteract(other)) {
+			Debug.Log($"InteractDetector : CanInteract true {other}");
+			if (_detectedObject.TryInteract(_obj)) {
+				Debug.Log($"InteractDetector : TryInteract true {other}");
 				return true;
 			}
 		}
 
 		return false;
+	}
+
+	public virtual bool TryDetectObject(TInteractingElementsBaseClass other) {
+		_detectedObject = other.GetComponent<ISelectInteractable<T>>();
+		if (_detectedObject != null ) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public bool CanInteract(TInteractingElementsBaseClass other) {
+		return other != _obj && TryDetectObject(other) && _detectedObject.CanInteract(_obj);
+			//|| _interactInProgress;
 	}
 }

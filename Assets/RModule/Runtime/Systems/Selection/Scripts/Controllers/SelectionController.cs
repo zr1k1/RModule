@@ -7,6 +7,18 @@ public static class SelectionController<T> where T : MonoBehaviour {
 
 	static GameObject s_firstSelected = default;
 	static SelectionComponent<T> s_firstSelectedSelectionComponent = default;
+	static List<SelectionComponent<T>> s_selectionComponents = new List<SelectionComponent<T>>();
+	static List<SelectionComponent<T>> s_canInteractWithFirstSelectedSelectionComponents = new List<SelectionComponent<T>>();
+
+	public static void AddSelectionComponent(SelectionComponent<T> selectionComponent) {
+		if (!s_selectionComponents.Contains(selectionComponent))
+			s_selectionComponents.Add(selectionComponent);
+	}
+
+	public static void RemoveSelectionComponent(SelectionComponent<T> selectionComponent) {
+		if (s_selectionComponents.Contains(selectionComponent))
+			s_selectionComponents.Remove(selectionComponent);
+	}
 
 	public static void Reset() {
 		Debug.Log($"SelectionController : Reset");
@@ -15,6 +27,11 @@ public static class SelectionController<T> where T : MonoBehaviour {
 			s_firstSelectedSelectionComponent = null;
 		}
 		s_firstSelected = null;
+
+		foreach (var selectionComponent in s_canInteractWithFirstSelectedSelectionComponents) {
+			selectionComponent.ShowSelectionView(false);
+		}
+		s_canInteractWithFirstSelectedSelectionComponents.Clear();
 	}
 
 	public static void TryResetSelection(SelectionComponent<T> selectionComponent) {
@@ -35,6 +52,7 @@ public static class SelectionController<T> where T : MonoBehaviour {
 			if (interactingWithOthersGameElements != null) {
 				if (!interactingWithOthersGameElements.TryInteract(s_firstSelected.GetComponent<T>())) {
 					Debug.Log($"SelectionController : TryInteract false");
+
 					Reset();
 					SetSelectionFirst(selectionComponent);
 					return;
@@ -45,10 +63,38 @@ public static class SelectionController<T> where T : MonoBehaviour {
 	}
 
 	static void SetSelectionFirst(SelectionComponent<T> selectionComponent) {
-		Debug.Log($"SelectionController : SetSelectionFirst {selectionComponent.GameObject.name}");
+		//Debug.Log($"SelectionController : SetSelectionFirst {selectionComponent.GameObject.name}");
+		if (selectionComponent.DisableSelectionFirst)
+			return;
+
 		var levelElement = selectionComponent.GameObject;
 		s_firstSelectedSelectionComponent = selectionComponent;
 		selectionComponent.Select();
 		s_firstSelected = levelElement;
+
+		SelectInteractableSelectionComponentsWithFirstSelected();
+	}
+
+	public static void TryUpdateSelections() {
+		if (s_firstSelected == null)
+			return;
+
+		foreach (var selectionComponent in s_canInteractWithFirstSelectedSelectionComponents) {
+			selectionComponent.ShowSelectionView(false);
+		}
+		s_canInteractWithFirstSelectedSelectionComponents.Clear();
+		SelectInteractableSelectionComponentsWithFirstSelected();
+	}
+
+	static void SelectInteractableSelectionComponentsWithFirstSelected() {
+		foreach(var selectionComponent in s_selectionComponents) {
+			var interactingWithOthersGameElements = selectionComponent.GameObject?.GetComponent<IInteractingWithOthersGameElements<T>>();
+			if (interactingWithOthersGameElements != null) {
+				if (interactingWithOthersGameElements.CanInteract(s_firstSelected.GetComponent<T>())) {
+					selectionComponent.ShowSelectionView(true);
+					s_canInteractWithFirstSelectedSelectionComponents.Add(selectionComponent);
+				}
+			}
+		}
 	}
 }
