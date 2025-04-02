@@ -1,27 +1,35 @@
+using System;
 using System.Collections;
 using UnityEngine;
-//using Imported.Managers.MTFirebase;
+#if USE_FIREBASE && USE_MTUNITYCORE
+using Imported.Managers.MTFirebase;
+#endif
 
 public class RemoteConfigInitializer : Initializer {
 
 	// Privats
 	float _firebaseRemoteConfigActivationTimeOut;
+	Action<bool> _initializationFinishCallback;
 
-	public RemoteConfigInitializer(float firebaseRemoteConfigActivationTimeOut) {
+	public RemoteConfigInitializer(float firebaseRemoteConfigActivationTimeOut, Action<bool> initializationFinishCallback) {
 		_firebaseRemoteConfigActivationTimeOut = firebaseRemoteConfigActivationTimeOut;
+		_initializationFinishCallback = initializationFinishCallback;
 	}
 
 	public override IEnumerator Initialize() {
-#if USE_FIREBASE
+#if USE_FIREBASE && USE_MTUNITYCORE
 		Debug.Log("RemoteConfigInitializer : Try Initialize Firebase Remote Config");
-		if (SettingsManager.Instance.AppConfigData.Common.EnableRemoteConfig)
-			yield return EnableRemoteConfigOrTimeOut();
+		yield return EnableRemoteConfigOrTimeOut();
 #endif
 		yield return null;
 	}
 
+	//protected override void OnInitializationFinished() {
+	//	OnInitializationFinishedCallback(_remoteConfigActivationSuccess);
+	//}
+
 	IEnumerator EnableRemoteConfigOrTimeOut() {
-#if USE_FIREBASE
+#if USE_FIREBASE && USE_MTUNITYCORE
 		Debug.Log($"RemoteConfigInitializer : EnableRemoteConfigOrTimeOut");
 		bool remoteConfigActivationDidFinish = false;
 		bool remoteConfigActivationSuccess = false;
@@ -40,8 +48,7 @@ public class RemoteConfigInitializer : Initializer {
 			yield return null;
 		}
 
-		if (remoteConfigActivationSuccess)
-			AnalyticsHelper.LogFirebaseRemoteConfigLoaded();
+		_initializationFinishCallback?.Invoke(remoteConfigActivationSuccess);
 #endif
 		yield return null;
 	}

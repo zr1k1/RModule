@@ -5,7 +5,7 @@ namespace RModule.Runtime.Data.Configs {
 	using System;
 
 	//Dont forget to add "where OptionalValue : Enum" on child class
-	public class BaseConfig<OptionalValue> : ScriptableObject where OptionalValue : Enum {
+	public class BaseConfig<OptionalValue> : ScriptableObject, IValueGetterByEnum<OptionalValue> where OptionalValue : Enum {
 
 		[Header("OptionaConfigValue"), Space]
 		[SerializeField] protected SerializableDictionary<OptionalValue, BaseValueConfig> _valuesDict = default;
