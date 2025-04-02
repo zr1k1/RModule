@@ -24,10 +24,6 @@ public class RemoteConfigInitializer : Initializer {
 		yield return null;
 	}
 
-	//protected override void OnInitializationFinished() {
-	//	OnInitializationFinishedCallback(_remoteConfigActivationSuccess);
-	//}
-
 	IEnumerator EnableRemoteConfigOrTimeOut() {
 #if USE_FIREBASE && USE_MTUNITYCORE
 		Debug.Log($"RemoteConfigInitializer : EnableRemoteConfigOrTimeOut");
