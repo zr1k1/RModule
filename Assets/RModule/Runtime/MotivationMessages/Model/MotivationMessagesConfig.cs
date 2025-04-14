@@ -39,8 +39,13 @@ public class MotivationMessagesConfig : ScriptableObject {
        return _motivationMessagesDictionary[showType].ConditionForShowIsTrue(showType);
     }
 
-    public Sprite GetRandomImg() {
-        return _images[UnityEngine.Random.Range(0, _images.Count)];
+    public bool TryGetRandomImg(out Sprite randomImg) {
+        randomImg = null;
+        if (_images.Count > 0) {
+            return _images[UnityEngine.Random.Range(0, _images.Count)];
+        }
+
+        return false;
 
     }
 }

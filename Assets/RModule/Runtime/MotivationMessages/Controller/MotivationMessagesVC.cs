@@ -15,34 +15,40 @@ public class MotivationMessagesVC : MonoBehaviour {
 
     // Private vars
     IEnumerator _showMessageCo;
+
     void Start() {
         _motivationMessagesConfig.Reset();
         StartCoroutine(ChangeAlpha(0f, false));
+        _messageLabel.gameObject.SetActive(false);
     }
 
     public void TryShowMessage() {
-        string message = "";
+        string key = "";
         float viewDuration = 0;
         for (int i = 0; i < _motivationMessagesConfig.MotivationMessagesDictionary.Count; i++)
             if (_motivationMessagesConfig.ConditionForShowIsTrue((MotivationMessages.ShowType)i)) {
-                message = _motivationMessagesConfig.GetRandomString((MotivationMessages.ShowType)i);
+                key = _motivationMessagesConfig.GetRandomString((MotivationMessages.ShowType)i);
                 viewDuration = _motivationMessagesConfig.GetViewDuration((MotivationMessages.ShowType)i);
             }
 
-        if (!string.IsNullOrEmpty(message)) {
+        if (!string.IsNullOrEmpty(key)) {
             if (_showMessageCo != null)
                 StopCoroutine(_showMessageCo);
-            _showMessageCo = ShowAndDeactiveAfterDelay(message, viewDuration);
+            _showMessageCo = ShowAndDeactiveAfterDelay(key, viewDuration);
             StartCoroutine(_showMessageCo);
-            _image.sprite = _motivationMessagesConfig.GetRandomImg();
+            if(_motivationMessagesConfig.TryGetRandomImg(out var randomImg)) {
+                _image.sprite = randomImg;
+            }
         }
     }
 
-    IEnumerator ShowAndDeactiveAfterDelay(string message, float viewDuration) {
-        _messageLabel.text = message;
+    IEnumerator ShowAndDeactiveAfterDelay(string key, float viewDuration) {
+        _messageLabel.text = LocalizedText.T(key);
+        _messageLabel.gameObject.SetActive(true);
         yield return ChangeAlpha(1f, true);
         yield return new WaitForSeconds(viewDuration - 2 * _animTime);
         yield return ChangeAlpha(0f, true);
+        _messageLabel.gameObject.SetActive(false);
     }
 
     IEnumerator ChangeAlpha(float alpha, bool animate) {
