@@ -12,6 +12,8 @@ public class MotivationMessagesVC : MonoBehaviour {
     [SerializeField] RectTransform[] _rectTransformsForChangeAlpha = default;
     [Header("Animation properties")]
     [SerializeField] float _animTime = default;
+    [SerializeField] float _delayBeforeShow = default;
+    [SerializeField] bool _autoHideAfterShowUp = true;
 
     // Private vars
     IEnumerator _showMessageCo;
@@ -43,12 +45,15 @@ public class MotivationMessagesVC : MonoBehaviour {
     }
 
     IEnumerator ShowAndDeactiveAfterDelay(string key, float viewDuration) {
+        yield return new WaitForSeconds(_delayBeforeShow);
         _messageLabel.text = LocalizedText.T(key);
         _messageLabel.gameObject.SetActive(true);
         yield return ChangeAlpha(1f, true);
         yield return new WaitForSeconds(viewDuration - 2 * _animTime);
-        yield return ChangeAlpha(0f, true);
-        _messageLabel.gameObject.SetActive(false);
+		if (_autoHideAfterShowUp) {
+            yield return ChangeAlpha(0f, true);
+            _messageLabel.gameObject.SetActive(false);
+        }
     }
 
     IEnumerator ChangeAlpha(float alpha, bool animate) {
