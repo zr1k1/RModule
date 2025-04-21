@@ -77,10 +77,12 @@ public class Data<OptionalValuesNames> : IValueSetter<OptionalValuesNames>, IVal
 		JData jData = new JData();
 		jData.values = _values;
 
-		return JsonConvert.SerializeObject(jData, Formatting.Indented,
-			new JsonSerializerSettings() {
-				ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-			});
+		return JsonConvert.SerializeObject(jData, Formatting.Indented
+			, new JsonSerializerSettings() {
+				ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+				FloatParseHandling = FloatParseHandling.Decimal
+			}
+			);
 	}
 
 	public void Reset() {
@@ -96,15 +98,37 @@ public class Data<OptionalValuesNames> : IValueSetter<OptionalValuesNames>, IVal
 			_values.Add(numberKey, value);
 			return;
 		}
-		_values[numberKey] = value;
+
+		 //После рестарта хуета - меняется тип сохранненого значения, апример с Single ан Double хз почему
+		Debug.LogError($"Key {enumType} {_values[numberKey].GetType()} == {value.GetType()}");
+		Debug.LogError($"Key {enumType} {_values[numberKey] is T1}");
+		Debug.LogError($"Key {enumType} {value is T1}");
+		Debug.LogError($"Key {enumType} {_values[numberKey].GetType().IsAssignableFrom(value.GetType())}");
+		Debug.LogError($"Key {enumType} {value.GetType().IsAssignableFrom(_values[numberKey].GetType())}");
+		//isass
+
+		if(value is not IConvertible) {
+			Debug.LogError($"Check setted value is IConvertible and setted value type ({value.GetType()}) is correct!");
+			return;
+		}
+		var convertedObj = Convert.ChangeType(value, _values[numberKey].GetType());
+
+		Debug.LogError($"Key {convertedObj.GetType()}");
+		if (convertedObj != null)
+			_values[numberKey] = convertedObj;
+		else {
+			Debug.LogError($"The type of value ({value.GetType()}) to set differs from the one that is present in the dictionary.");
+		}
 	}
 
 	public T1 GetValue<T1>(OptionalValuesNames enumType) {
 		// for avoid convertions and reference types problems
-		var serializedObject = JsonConvert.SerializeObject(_values[Convert.ToInt32(enumType)], Formatting.Indented,
-			new JsonSerializerSettings() {
+		var serializedObject = JsonConvert.SerializeObject(_values[Convert.ToInt32(enumType)], Formatting.Indented
+			, new JsonSerializerSettings() {
 				ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-			});
+			}
+		);
+
 		var deserializedObject = JsonConvert.DeserializeObject<T1>(serializedObject);
 
 		return deserializedObject;
