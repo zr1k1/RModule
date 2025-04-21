@@ -99,14 +99,6 @@ public class Data<OptionalValuesNames> : IValueSetter<OptionalValuesNames>, IVal
 			return;
 		}
 
-		 //После рестарта хуета - меняется тип сохранненого значения, апример с Single ан Double хз почему
-		Debug.LogError($"Key {enumType} {_values[numberKey].GetType()} == {value.GetType()}");
-		Debug.LogError($"Key {enumType} {_values[numberKey] is T1}");
-		Debug.LogError($"Key {enumType} {value is T1}");
-		Debug.LogError($"Key {enumType} {_values[numberKey].GetType().IsAssignableFrom(value.GetType())}");
-		Debug.LogError($"Key {enumType} {value.GetType().IsAssignableFrom(_values[numberKey].GetType())}");
-		//isass
-
 		if(value is not IConvertible) {
 			Debug.LogError($"Check setted value is IConvertible and setted value type ({value.GetType()}) is correct!");
 			return;
