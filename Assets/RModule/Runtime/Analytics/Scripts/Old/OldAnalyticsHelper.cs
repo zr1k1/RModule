@@ -4,6 +4,7 @@ using System.Linq;
 using RModule.Runtime.Utils;
 using UnityEngine;
 using RModule.Runtime.Services;
+using RModule.Runtime.Analytics;
 
 public class AppMetricaSenderInputData : OldAnalyticsHelper.SenderInputData {
 	public bool trackAdRevenue;
@@ -74,24 +75,24 @@ public static class OldAnalyticsHelper {
 
 		// Setup analytics senders
 #if USE_FIREBASE
-		if (SettingsManager.Instance.AppConfigData.Common.EnableFirebaseInitialization) {
-			if (s_inputData.TryGetSenderInputData<FirebaseSenderInputData>(out var firebaseSenderInputData)) {
-				_senders.Add(new FirebaseAnalyticsSender(s_inputData.userAge, firebaseSenderInputData.trackAdRevenue));
-			} else {
-				Debug.LogError($"FirebaseSenderInputData not exist in s_senderInputDatas list!");
-			}
-		}
+		//if (SettingsManager.Instance.AppConfigData.Common.EnableFirebaseInitialization) {
+		//	if (s_inputData.TryGetSenderInputData<FirebaseSenderInputData>(out var firebaseSenderInputData)) {
+		//		_senders.Add(new FirebaseAnalyticsSender(s_inputData.userAge, firebaseSenderInputData.trackAdRevenue));
+		//	} else {
+		//		Debug.LogError($"FirebaseSenderInputData not exist in s_senderInputDatas list!");
+		//	}
+		//}
 #endif
 
 #if USE_APPMETRICA
-		if (s_inputData.TryGetSenderInputData<AppMetricaSenderInputData>(out var appMetricaSenderInputData)) {
-			_senders.Add(AppMetricaSender.Create(appMetricaSenderInputData.apiKey
-				, appMetricaSenderInputData.trackAdRevenue, s_inputData.isFirstLaunch
-				, appMetricaSenderInputData.sessionTimeout, appMetricaSenderInputData.enableLogs)
-			);
-		} else {
-			Debug.LogError($"AppMetricaSenderInputData not exist in s_senderInputDatas list!");
-		}
+		//if (s_inputData.TryGetSenderInputData<AppMetricaSenderInputData>(out var appMetricaSenderInputData)) {
+		//	_senders.Add(AppMetricaSender.Create(appMetricaSenderInputData.apiKey
+		//		, appMetricaSenderInputData.trackAdRevenue, s_inputData.isFirstLaunch
+		//		, appMetricaSenderInputData.sessionTimeout, appMetricaSenderInputData.enableLogs)
+		//	);
+		//} else {
+		//	Debug.LogError($"AppMetricaSenderInputData not exist in s_senderInputDatas list!");
+		//}
 #endif
 		s_analyticsService.Initialize(_senders);
 	}
