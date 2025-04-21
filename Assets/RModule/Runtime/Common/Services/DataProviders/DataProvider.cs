@@ -105,7 +105,6 @@ public class Data<OptionalValuesNames> : IValueSetter<OptionalValuesNames>, IVal
 		}
 		var convertedObj = Convert.ChangeType(value, _values[numberKey].GetType());
 
-		Debug.LogError($"Key {convertedObj.GetType()}");
 		if (convertedObj != null)
 			_values[numberKey] = convertedObj;
 		else {
