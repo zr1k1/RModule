@@ -3,8 +3,8 @@ namespace RModule.Runtime.Services {
 		public bool AppPolicyAccepted { get; private set; }
 		public int UserAge { get; private set; }
 		public bool HasTargetedAdsConsent { get; private set; }
-		public string AppPolicyLink { get; private set; }
-		public string AppTermsLink { get; private set; }
+		public string AppPolicyLink => _inputData.appPolicyLink;
+		public string AppTermsLink => _inputData.appTermsLink;
 
 		// Const
 		const string K_userAge = "LNP_userAge";
@@ -12,6 +12,7 @@ namespace RModule.Runtime.Services {
 		const string K_hasTargetedAdsConsent = "LNP_hasTargetedAdsConsent";
 
 		readonly ISaveService _saveService;
+		InputData _inputData;
 
 		public class InputData {
 			public ISaveService saveService;
@@ -20,12 +21,11 @@ namespace RModule.Runtime.Services {
 		}
 
 		public AppPolicyService(InputData inputData) {
-			_saveService = inputData.saveService;
+			_inputData = inputData;
+			_saveService = _inputData.saveService;
 			UserAge = _saveService.GetValue(K_userAge, 0);
 			AppPolicyAccepted = _saveService.GetValue(K_appPolicyAccepted, false);
 			HasTargetedAdsConsent = _saveService.GetValue(K_hasTargetedAdsConsent, false);
-			AppPolicyLink = inputData.appPolicyLink;
-			AppTermsLink = inputData.appTermsLink;
 		}
 
 		// ---------------------------------------------------------------
