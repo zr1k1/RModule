@@ -28,7 +28,7 @@ namespace RModule.Runtime.Arcade {
 			public Transform Parent;
 		}
 
-		void Start() {
+		protected override void Start() {
 			_blockMover = GetComponent<BlockMover>();
 			if (_blockMover != null)
 				_isMove = true;

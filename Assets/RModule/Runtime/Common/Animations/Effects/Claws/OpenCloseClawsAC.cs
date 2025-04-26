@@ -5,16 +5,12 @@ using UnityEngine;
 using RModule.Runtime.LeanTween;
 
 public class OpenCloseClawsAC : BaseAC {
-	public enum OpenCloseType { OpenClose, OnlyOpen, OnlyClose }
+	//public enum OpenCloseType { OpenClose, OnlyOpen, OnlyClose }
 
-	public OpenCloseType openCloseType = default;
+	//public OpenCloseType openCloseType = default;
 
 	[SerializeField] List<ClawData> _clawDatas = default;
 	[SerializeField] float _delayAfterStartOpening = default;
-	[SerializeField] float _delayAfterStartClosing = default;
-	[SerializeField] int _openCloseClawsCount = 1;
-	[SerializeField] bool onlyOpen = default;
-	[SerializeField] bool onlyClo = default;
 
 	[Serializable]
 	public class ClawData {

@@ -13,6 +13,7 @@ public class MoveGoAnimation : MonoBehaviour {
 	[SerializeField] GameObject _obj = default;
 	[SerializeField] float _duration = default;
 	[SerializeField] List<Vector3> _localPathPoints = default;
+	[SerializeField] LeanTweenType _moveLeanTweenType = LeanTweenType.linear;
 	[SerializeField] LeanTweenType _moveLoopLeanTweenType = LeanTweenType.once;
 	[SerializeField] bool _playAtStart = default;
 
@@ -54,6 +55,6 @@ public class MoveGoAnimation : MonoBehaviour {
 	}
 
 	void Move() {
-		_tween = LeanTween.moveLocal(_obj, Utils.GeneratePathToLeanTwean(_pathPoints), _duration).setLoopType(_moveLoopLeanTweenType);
+		_tween = LeanTween.moveLocal(_obj, Utils.GeneratePathToLeanTwean(_pathPoints), _duration).setLoopType(_moveLoopLeanTweenType).setEase(_moveLeanTweenType);
 	}
 }

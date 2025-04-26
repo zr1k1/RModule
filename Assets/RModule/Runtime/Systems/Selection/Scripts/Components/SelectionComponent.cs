@@ -9,22 +9,24 @@ public class SelectionComponent<T> : MonoBehaviour, ISelectable where T : MonoBe
 	public UnityEvent DidSelect = default;
 	public UnityEvent DidDeselect = default;
 
+	// Accessors
 	public GameObject GameObject => _gameObject;
+	public bool IsSelected => _isSelected;
+	public bool DisableSelectionFirst => _disableSelectionFirst;
 
 	[Tooltip("Setup game object with realized IInteractingWithOthersGameElements!")]
 	[SerializeField] protected GameObject _gameObject = default;//todo change to t?
 	[SerializeField] protected GameObject _selectionView = default;
+	[SerializeField] protected bool _disableSelectionFirst = default;
 
-	public bool IsSelected => _isSelected;
-
-	[SerializeField] protected bool _isSelected;
+	protected bool _isSelected;
 
 	private void OnEnable() {
-
+		SelectionController<T>.AddSelectionComponent(this);
 	}
 
 	private void OnDisable() {
-
+		SelectionController<T>.RemoveSelectionComponent(this);
 	}
 
 	protected virtual void OnMouseUpAsButton() {
@@ -41,8 +43,9 @@ public class SelectionComponent<T> : MonoBehaviour, ISelectable where T : MonoBe
 		return !_isSelected;
 	}
 
-	public void SetEnableSelection(bool enable) {
+	public virtual void SetEnableSelection(bool enable) {
 		enabled = enable;
+		GetComponent<Collider>().enabled = enable;
 	}
 
 	public virtual void Select() {
@@ -51,6 +54,11 @@ public class SelectionComponent<T> : MonoBehaviour, ISelectable where T : MonoBe
 		_isSelected = true;
 		OnChangeSelectionState(true);
 		DidSelect?.Invoke();
+	}
+
+	public virtual void ShowSelectionView(bool showHide) {
+		if (_selectionView != null)
+			_selectionView.SetActive(showHide);
 	}
 
 	public virtual void Deselect() {
@@ -62,11 +70,10 @@ public class SelectionComponent<T> : MonoBehaviour, ISelectable where T : MonoBe
 	}
 
 	protected virtual void OnChangeSelectionState(bool enableSelection) {
-		if (_selectionView != null)
-			_selectionView.SetActive(enableSelection);
+		ShowSelectionView(enableSelection);
 	}
 
-	public void Reset() {
+	public virtual void Reset() {
 		SelectionController<T>.TryResetSelection(this);
 	}
 }

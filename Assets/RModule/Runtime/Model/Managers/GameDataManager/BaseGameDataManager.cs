@@ -8,6 +8,7 @@ public class BaseGameDataManager<PlayerDataValuesNames> : SingletonMonoBehaviour
 	where PlayerDataValuesNames : Enum {
 	// Accessors
 	public static Data<PlayerDataValuesNames> PlayerData => Instance._playerDataProvider.Data;
+	public static DataProvider<PlayerDataValuesNames, PersistentSavedDataConfig<PlayerDataValuesNames>> PlayerDataProvider => Instance._playerDataProvider;
 
 	// Outlets 
 	[SerializeField] protected PersistentSavedDataConfig<PlayerDataValuesNames> _playerConfig = default;
