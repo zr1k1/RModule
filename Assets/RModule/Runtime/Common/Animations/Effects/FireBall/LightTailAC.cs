@@ -12,6 +12,11 @@ public class LightTailAC : BaseAC {
 	// Outlets
 	[SerializeField] ParticleSystem _particlesInMove = default;
 	[SerializeField] ParticleSystem _particlesFireWork = default;
+	[SerializeField] bool _outStartScale = true;
+	[SerializeField] bool _inStartScale = true;
+	[SerializeField] bool _outEndScale = true;
+	[SerializeField] bool _inEndScale = true;
+	[SerializeField] LeanTweenType _scaleLeanTweenType = default;
 	[SerializeField] float _scaleToModifier = default;
 	[SerializeField] float _scaleTime = 0.5f;
 	[SerializeField] float _duration = 1;
@@ -45,6 +50,9 @@ public class LightTailAC : BaseAC {
 	}
 
 	void SetupLightTail() {
+		if (_tail == null)
+			return;
+
 		_tail.gameObject.SetActive(false);
 		_moveDirection = _endPosTransform - _startPosTransform;
 		var angle = -Vector2.SignedAngle(_moveDirection.normalized, Vector2.right);
@@ -59,22 +67,39 @@ public class LightTailAC : BaseAC {
 		particlesInMoveRT.position = _startPosTransform;
 		_particlesFireWork.Play();
 		_particlesInMove.Play();
+
 		Vector2 startScale = particlesInMoveRT.localScale;
 		Vector2 endScale = startScale * _scaleToModifier;
-		yield return LeanTween.scale(particlesInMoveRT.gameObject, endScale, _scaleTime);
-		yield return new WaitForSeconds(_scaleTime);
-		yield return LeanTween.scale(particlesInMoveRT.gameObject, startScale, _scaleTime);
-		yield return new WaitForSeconds(_scaleTime);
-		_tail.gameObject.SetActive(true);
-		yield return LeanTween.move(particlesInMoveRT.gameObject, _endPosTransform, _moveTime);
+		if (_outStartScale) {
+			yield return LeanTween.scale(particlesInMoveRT.gameObject, endScale, _scaleTime).setEase(_scaleLeanTweenType);
+			yield return new WaitForSeconds(_scaleTime);
+		}
+		if (_inStartScale) {
+			yield return LeanTween.scale(particlesInMoveRT.gameObject, startScale, _scaleTime).setEase(_scaleLeanTweenType);
+			yield return new WaitForSeconds(_scaleTime);
+		}
+		SetActiveTail(true);
+		LeanTween.move(particlesInMoveRT.gameObject, _endPosTransform, _moveTime);
 		yield return new WaitForSeconds(_moveTime);
 		_particlesInMove.Stop();
-		_tail.gameObject.SetActive(false);
-		yield return LeanTween.scale(particlesInMoveRT.gameObject, endScale, _scaleTime);
-		yield return new WaitForSeconds(_scaleTime);
-		yield return LeanTween.scale(particlesInMoveRT.gameObject, startScale, _scaleTime);
-		yield return new WaitForSeconds(_scaleTime);
+		SetActiveTail(false);
+
+		if (_outEndScale) {
+			yield return LeanTween.scale(particlesInMoveRT.gameObject, endScale, _scaleTime).setEase(_scaleLeanTweenType);
+			yield return new WaitForSeconds(_scaleTime);
+		}
+		if (_inEndScale) {
+			yield return LeanTween.scale(particlesInMoveRT.gameObject, startScale, _scaleTime).setEase(_scaleLeanTweenType);
+			yield return new WaitForSeconds(_scaleTime);
+		}
+
 		yield return base.Animate();
+	}
+
+	public void SetActiveTail(bool isActive) {
+		if (_tail == null)
+			return;
+		_tail?.gameObject.SetActive(isActive);
 	}
 
 	public void SetParticleMaterial(Material material) {
@@ -93,10 +118,16 @@ public class LightTailAC : BaseAC {
 		_fireWorkMaterial.mainTexture = _fireWorkSprite.texture;
 	}
 
+	public void SetParticleMaterial(Material material, Color color) {
+		SetParticleMaterial(material);
+	}
+
 	public void SetInMoveParticleSprite(SpriteRenderer spriteRenderer) {
 		_inMoveSprite = spriteRenderer.sprite;
-		if (_inMoveMaterial != null)
+		if (_inMoveMaterial != null) {
 			_inMoveMaterial.mainTexture = _inMoveSprite.texture;
+			_inMoveMaterial.color = spriteRenderer.color;
+		}
 		_particlesInMove.transform.localScale = new Vector3(spriteRenderer.bounds.size.x, spriteRenderer.bounds.size.y, 1f);
 	}
 

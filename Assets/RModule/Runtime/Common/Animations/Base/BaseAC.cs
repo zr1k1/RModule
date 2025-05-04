@@ -56,7 +56,7 @@ public class BaseAC : MonoBehaviour {
 	}
 
 	protected virtual IEnumerator Animate() {
-		delayBeforeDestroy = Mathf.Clamp(delayBeforeDestroy, delayBeforeCallEndEvent + 0.5f, 999);
+		delayBeforeDestroy = Mathf.Clamp(delayBeforeDestroy, delayBeforeCallEndEvent, 999);
 		yield return new WaitForSeconds(delayBeforeCallEndEvent);
 		DidEndCallback?.Invoke();
 		_isPlaying = false;
