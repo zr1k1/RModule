@@ -9,6 +9,7 @@ public static class SelectionController<T> where T : MonoBehaviour {
 	static SelectionComponent<T> s_firstSelectedSelectionComponent = default;
 	static List<SelectionComponent<T>> s_selectionComponents = new List<SelectionComponent<T>>();
 	static List<SelectionComponent<T>> s_canInteractWithFirstSelectedSelectionComponents = new List<SelectionComponent<T>>();
+	static bool s_selectionIsEnabled = true;
 
 	public static void AddSelectionComponent(SelectionComponent<T> selectionComponent) {
 		if (!s_selectionComponents.Contains(selectionComponent))
@@ -41,6 +42,9 @@ public static class SelectionController<T> where T : MonoBehaviour {
 	}
 
 	public static void Select(SelectionComponent<T> selectionComponent) {
+		if (!s_selectionIsEnabled)
+			return;
+
 		var levelElement = selectionComponent.GameObject;
 		if (s_firstSelected == null) {
 			if (levelElement.GetComponent<IInteractingWithOthersGameElements<T>>() != null) {
@@ -60,6 +64,10 @@ public static class SelectionController<T> where T : MonoBehaviour {
 			}
 			Reset();
 		}
+	}
+
+	public static void SetEnableSelection(bool enableSelection) {
+		s_selectionIsEnabled = enableSelection;
 	}
 
 	static void SetSelectionFirst(SelectionComponent<T> selectionComponent) {
