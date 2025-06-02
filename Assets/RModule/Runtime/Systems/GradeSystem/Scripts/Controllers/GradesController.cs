@@ -21,16 +21,27 @@ public class GradesController : MonoBehaviour, IGradeable, IGradeInstallersConta
 	// Events
 	public UnityEvent<GradesController> DidUpgraded = default;
 	public UnityEvent<GradesController, GradeEventArgs> GradeButtonDidTapped = default;
+	public bool IsReady => _isReady;
 
 	// Outlets
 	[SerializeField] List<GradeInstaller> _gradeInstallers = default;
+	[SerializeField] int _startOnGradeIndex = default;
 
+	bool _isReady = default;
 	int _currentInstalledGradeIndex = 0;
 
 	private void Start() {
 		foreach(var gradeInstaller in _gradeInstallers) {
 			gradeInstaller.Setup(OnGradeButtonTapped);
 		}
+
+		if(_startOnGradeIndex > 0) {
+			for(int i = _startOnGradeIndex; i < _gradeInstallers.Count; i++) {
+				OnGradeButtonTapped(_gradeInstallers[i]);
+			}
+		}
+
+		_isReady = true;
 	}
 
 	protected virtual void OnEnable() {
