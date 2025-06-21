@@ -36,12 +36,13 @@ public class LightTailAC : BaseAC {
 	// ---------------------------------------------------------------
 	// Setup
 
-	public LightTailAC Setup(Vector3 startPosTransform, Vector3 endPosTransform, Action moveEndedCallback) {
+	public LightTailAC Setup(Vector3 startPosTransform, Vector3 endPosTransform, Action moveEndedCallback = null) {
 		base.SetupAnimation(null);
 
 		_startPosTransform = startPosTransform;
 		_endPosTransform = endPosTransform;
-		DidEndCallback.AddListener(moveEndedCallback.Invoke);
+		if (moveEndedCallback != null)
+			DidEndCallback.AddListener(moveEndedCallback.Invoke);
 
 		SetParticleMaterial(_material);
 		SetupLightTail();
@@ -67,6 +68,7 @@ public class LightTailAC : BaseAC {
 		particlesInMoveRT.position = _startPosTransform;
 		_particlesFireWork.Play();
 		_particlesInMove.Play();
+
 
 		Vector2 startScale = particlesInMoveRT.localScale;
 		Vector2 endScale = startScale * _scaleToModifier;
@@ -131,9 +133,26 @@ public class LightTailAC : BaseAC {
 		_particlesInMove.transform.localScale = new Vector3(spriteRenderer.bounds.size.x, spriteRenderer.bounds.size.y, 1f);
 	}
 
+	public void SetInMoveParticleSprite(Image image) {
+		_inMoveSprite = image.sprite;
+		if (_inMoveMaterial != null) {
+			_inMoveMaterial.mainTexture = _inMoveSprite.texture;
+			_inMoveMaterial.color = image.color;
+		}
+		_particlesInMove.transform.localScale = new Vector3(1f, 1f, 1f);
+	}
+
 	public void SetFireWorkParticleSprite(Sprite sprite) {
 		_fireWorkSprite = sprite;
 		if (_fireWorkMaterial != null)
 			_fireWorkMaterial.mainTexture = _inMoveSprite.texture;
+	}
+
+	public void SkipInStartScale() {
+		_inStartScale = true;
+	}
+
+	public void SetScaleToModifier(float scaleToModifier) {
+		_scaleToModifier = scaleToModifier;
 	}
 }

@@ -69,4 +69,8 @@ public class BaseAC : MonoBehaviour {
 	public virtual float GetTotalDuration() {
 		return 0;
 	}
+
+	public void SetDestroyDelay(float destroyDelay) {
+		delayBeforeDestroy = destroyDelay;
+	}
 }
