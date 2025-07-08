@@ -7,11 +7,11 @@ using UnityEngine;
 public class PersistentSavedDataConfig<OptionalValuesNames> : ScriptableObject where OptionalValuesNames : Enum {
 	// Outlets
 	[Tooltip("Example PlayerDataFolder or SomeFolder/PlayerDataFolder")]
-	[SerializeField] string _folderPath = "PlayerData"; // Example PlayerDataFolder
+	[SerializeField] string _folderPath = default; // Example PlayerDataFolder
 	[Tooltip("Example player")]
-	[SerializeField] string _fileName = "player"; // Example player
+	[SerializeField] string _fileName = default; // Example player
 	[Tooltip("Example .json")]
-	[SerializeField] string _fileFormat = ".json"; // Example .json
+	[SerializeField] string _fileFormat = default; // Example .json
 
 	[SerializeField] SerializableDictionary<OptionalValuesNames, BaseValueConfig> _valuesDict = default;
 
@@ -41,11 +41,5 @@ public class PersistentSavedDataConfig<OptionalValuesNames> : ScriptableObject w
 		}
 
 		return new ReadOnlyDictionary<int, object>(allValuesDictionary);
-	}
-
-	public void DeleteData() {
-		FileInfo fileInfo = new FileInfo(GetPath());
-		if (fileInfo.Exists)
-			fileInfo.Delete();
 	}
 }

@@ -192,14 +192,8 @@ public class DataProvider<OptionalValuesNames, DataConfigClass>
 	}
 
 	public static void Reset(DataConfigClass dataConfigClass) {
-		dataConfigClass.DeleteData();
-	}
-
-	public void Reset() {
-		if(_dataConfig != null) {
-			_dataConfig.DeleteData();
-		} else {
-			Debug.LogError($"Data<{typeof(OptionalValuesNames)}> is not loaded");
-		}
+		FileInfo fileInfo = new FileInfo(dataConfigClass.GetPath());
+		if (fileInfo.Exists)
+			fileInfo.Delete();
 	}
 }
