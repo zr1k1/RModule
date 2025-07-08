@@ -1,3 +1,3 @@
-public interface IValueSetter<T0> {
-	void SetValue<T1>(T0 enumType, T1 value);
+public interface IValueSetter<TEnum> {
+	void SetValue<T1>(TEnum enumType, T1 value);
 }

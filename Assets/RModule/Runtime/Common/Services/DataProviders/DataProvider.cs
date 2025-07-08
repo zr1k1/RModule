@@ -67,7 +67,10 @@ public class Data<OptionalValuesNames> : IValueSetter<OptionalValuesNames>, IVal
 
 		string decodedText = encodedDataString;
 
-		JData jData = JsonConvert.DeserializeObject<JData>(decodedText);
+		JData jData = JsonConvert.DeserializeObject<JData>(decodedText, new JsonSerializerSettings() {
+			ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+			FloatParseHandling = FloatParseHandling.Decimal
+		});
 		Data<OptionalValuesNames> data = new(jData.values);
 
 		return data;

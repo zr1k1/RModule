@@ -35,4 +35,22 @@ public static class ListExtensions {
 
 		return wayLenght;
 	}
+
+	public static string SplitElements<T>(this List<T> list, string stringBetweenElements) {
+		string str="";
+		if (list.Count == 1) {
+			str = list[0].ToString();
+		}
+
+		if (list.Count < 2) {
+			return str;
+		}
+
+		for(int i = 0; i < list.Count-1; i++) {
+			str += $"{list[i].ToString()}{stringBetweenElements}";
+		}
+		str += $"{list[^1].ToString()}";
+
+		return str;
+	}
 }
