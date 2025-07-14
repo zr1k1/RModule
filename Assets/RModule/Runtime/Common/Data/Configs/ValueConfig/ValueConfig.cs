@@ -12,3 +12,11 @@ public class ValueConfig<T> : BaseValueConfig {
 		return (T1)(object)_value;
 	}
 }
+
+[Serializable]
+public class SettableValueConfig<T> : ValueConfig<T> {
+
+	public void SetValue(T value) {
+		_value = value;
+	}
+}
