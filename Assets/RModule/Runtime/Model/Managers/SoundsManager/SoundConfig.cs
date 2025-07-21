@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace RModule.Runtime.Sounds {
-	[CreateAssetMenu(fileName = "SoundConfig", menuName = "AppConfig/SoundConfig")]
+	[CreateAssetMenu(fileName = "SoundConfig", menuName = "RModule/Sounds/SoundConfig")]
 	public class SoundConfig : ScriptableObject {
 		// Accessors
 		public AudioClip[] AudioClips => _audioClips;

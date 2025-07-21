@@ -15,13 +15,17 @@ public class AnimationsManager : MonoBehaviour {
 	List<BaseAC> _animations = new List<BaseAC>();
 
 	public T Create<T>() where T : BaseAC {
+		return Create<T>(_animationsParent);
+	}
+
+	public T Create<T>(Transform parent) where T : BaseAC {
 		Assert.IsNotNull(_animationsParent, "Animations's parent must not be null");
 
 		foreach (var popupPrefab in _animationsPrefabs) {
 			if (popupPrefab is T prefab) {
-				var animationController = Instantiate(prefab, _animationsParent);
+				var animationController = Instantiate(prefab, parent);
 				_animations.Add(animationController);
-				animationController.AddDidEndCallback(()=> { RemoveFromListWhenDestroy(animationController); });
+				animationController.AddDidEndCallback(() => { RemoveFromListWhenDestroy(animationController); });
 
 				return animationController;
 			}
@@ -30,7 +34,7 @@ public class AnimationsManager : MonoBehaviour {
 		return null;
 	}
 
-	public int GetIsPlayingCount<T>() where T : BaseAC {
+		public int GetIsPlayingCount<T>() where T : BaseAC {
 		return _animations.FindAll(animation => animation is T).Count;
  	}
 
