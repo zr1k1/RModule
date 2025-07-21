@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ValueComponent<T> : MonoBehaviour{
+public class ValueComponent<T> : MonoBehaviour, IChangeableByAmount<T>, ISettableValue<T> {
 	// Event
 	public UnityEvent<T, GameObject> ValueDidChange = default;
 
@@ -19,5 +19,8 @@ public class ValueComponent<T> : MonoBehaviour{
 		p_value = value;
 
 		ValueDidChange?.Invoke(p_value, gameObject);
+	}
+
+	public virtual void ChangeValueByAmount(T value) {
 	}
 }

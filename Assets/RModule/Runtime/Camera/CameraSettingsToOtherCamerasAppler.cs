@@ -6,26 +6,32 @@ public class CameraSettingsToOtherCamerasAppler : MonoBehaviour {
 
     [SerializeField] Camera _main = default;
     [SerializeField] List<Camera> _camerasToApply = default;
+    [SerializeField] bool _updateAtStart = false;
 
-	bool _updateCameraView;
+    bool _updateCameraView;
 
-	public void UpdateSettingsFromMainCamera() {
-		_updateCameraView = true;
-	}
+    void Start() {
+        if (_updateAtStart)
+            UpdateSettingsFromMainCamera();
+    }
 
-	private void LateUpdate() {
-		if (_updateCameraView) {
-			_updateCameraView = false;
-			UpdateCameraView();
-		}
-	}
+    public void UpdateSettingsFromMainCamera() {
+        _updateCameraView = true;
+    }
 
-	void UpdateCameraView() {
-		foreach (var camera in _camerasToApply) {
-			camera.orthographicSize = _main.orthographicSize;
-			camera.transform.position = _main.transform.position;
-			camera.gameObject.SetActive(false);
-			camera.gameObject.SetActive(true);
-		}
-	}
+    private void LateUpdate() {
+        if (_updateCameraView) {
+            _updateCameraView = false;
+            UpdateCameraView();
+        }
+    }
+
+    void UpdateCameraView() {
+        foreach (var camera in _camerasToApply) {
+            camera.orthographicSize = _main.orthographicSize;
+            camera.transform.position = _main.transform.position;
+            camera.gameObject.SetActive(false);
+            camera.gameObject.SetActive(true);
+        }
+    }
 }

@@ -62,7 +62,7 @@ namespace RModule.Runtime.Arcade {
 		public virtual bool TryTakeDmg(DamageData damageData) {
 			Debug.Log($"SpinningBladeBlock : TryTakeDmg from {gameObject.name}");
 			if (damageData.damageSourceGameObject.GetComponent<IDoingDamageToObject<SpinningBladeBlock>>() != null) {
-				_healthComponent.SetValueByAmount(-damageData.damageConfig.Damage);
+				_healthComponent.ChangeValueByAmount(-damageData.damageConfig.Damage);
 
 				return true;
 			}

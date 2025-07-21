@@ -45,6 +45,11 @@ public class BaseCameraController : MonoBehaviour, ICameraController {
 			Debug.LogError("Set _gameCamera in inspector!");
 	}
 
+	public virtual void Setup(CanvasScaler canvasScaler, Vector2 sizeOfCentralizedObject, Vector2 positionOfCentralizedObject, Action setupFinishCallback = null) {
+		Prepare(canvasScaler, sizeOfCentralizedObject, positionOfCentralizedObject);
+		Setup(setupFinishCallback);
+	}
+
 	public virtual BaseCameraController Prepare(CanvasScaler canvasScaler, Vector2 sizeOfCentralizedObject, Vector2 positionOfCentralizedObject) {
 		Debug.Log($"BaseCameraController : Prepare");
 		Debug.Log($"BaseCameraController : sizeOfCentralizedObject {sizeOfCentralizedObject}");
