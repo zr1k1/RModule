@@ -5,11 +5,11 @@ using UnityEngine;
 using System;
 
 public enum SQLOperation {
-	BEGIN, TRANSACTION, COMMIT, DELETE, INSERT, INTO, FROM, MAX, SELECT, SET, UPDATE, VALUES, WHERE, CREATE_TABLE_IF_NOT_EXISTS, SUM
+	BEGIN, TRANSACTION, COMMIT, DELETE, INSERT, INTO, FROM, MAX, SELECT, SET, UPDATE, VALUES, WHERE, CREATE_TABLE_IF_NOT_EXISTS, SUM, ORDER_BY_RANDOM_LIMIT
 }
 
 public enum LogicOperation {
-	EQUALS, AND, NOT_EQUALS, OR, MORE_THAN
+	EQUALS, AND, NOT_EQUALS, OR, MORE_THAN, LESS_THAN
 }
 
 public enum SQLFieldParametr {
@@ -177,6 +177,29 @@ public static class SqliteConnectionOperationsExtension {
 		return result;
 	}
 
+	public static bool OperationSelectByRandomLimit(this SqliteConnection _sqliteConnection, string field, string fromTableName, int limit, out List<string> result) {
+		result = default;
+		if (_sqliteConnection.State == ConnectionState.Open) {
+			string sql = CombineSQLWithDebug(SQLOperation.SELECT.ToString(), field, SQLOperation.FROM.ToString(), fromTableName, Convert(SQLOperation.ORDER_BY_RANDOM_LIMIT), limit.ToString(), ";");
+			result = _sqliteConnection.stringResultFromCommand(sql);
+
+			return true;
+		}
+
+		return false;
+	}
+
+	public static void OperationSelectByRandomLimit(this SqliteConnection _sqliteConnection, string field, string fromTableName, int limit, List<string> fieldWhere, List<LogicOperation> operations, List<string> valueWhere, List<LogicOperation> operations1, out List<string> result) {
+		result = new List<string>();
+		if (_sqliteConnection.State == ConnectionState.Open) {
+			string sql = CombineSQLWithoutDebug(SQLOperation.SELECT.ToString(), field, SQLOperation.FROM.ToString(), fromTableName, SQLOperation.WHERE.ToString());
+			for (int i = 0; i < operations1.Count; i++)
+				sql += CombineSQLWithoutDebug(fieldWhere[i], Convert(operations[i]), $"'{valueWhere[i]}'", Convert(operations1[i]));
+			sql = CombineSQLWithDebug(sql, fieldWhere[operations1.Count], Convert(operations[operations1.Count]), $"'{valueWhere[operations1.Count]}'", Convert(SQLOperation.ORDER_BY_RANDOM_LIMIT), limit.ToString(), ";");
+			result = _sqliteConnection.stringResultFromCommand(sql);
+		}
+	}
+
 	// Записать данные
 	public static void OperationInsert(this SqliteConnection _sqliteConnection, string tableName, string fields, string values) {
 		if (_sqliteConnection.State == ConnectionState.Open) {
@@ -217,8 +240,8 @@ public static class SqliteConnectionOperationsExtension {
 		string sql = "";
 		for (int i = 0; i < pieces.Length; i++)
 			sql += pieces[i] + " ";
-		//Debug.Log("SQL:");
-		//Debug.Log(sql);
+		Debug.Log("SQL:");
+		Debug.Log(sql);
 		return sql;
 	}
 
@@ -240,6 +263,8 @@ public static class SqliteConnectionOperationsExtension {
 			return " OR ";
 		else if (logicOperation == LogicOperation.MORE_THAN)
 			return " > ";
+		else if (logicOperation == LogicOperation.LESS_THAN)
+			return " < "; 
 		else
 			return "STRING FOR LOGIC OPERATION NOT SETTED";
 	}
@@ -247,7 +272,9 @@ public static class SqliteConnectionOperationsExtension {
 	static string Convert(SQLOperation sqlOperation) {
 		if (sqlOperation == SQLOperation.CREATE_TABLE_IF_NOT_EXISTS)
 			return " CREATE TABLE IF NOT EXISTS ";
-		else
+		else if (sqlOperation == SQLOperation.ORDER_BY_RANDOM_LIMIT) {
+			return " ORDER BY RANDOM() LIMIT ";
+		}
 			return "STRING FOR SQL OPERATION NOT SETTED";
 	}
 

@@ -122,11 +122,28 @@ public static class StringExtension {
 
     public static string TryReplaceNum(this string str, float num, string stringBeforeNum) {
         var foundedIndexes = str.AllIndexesOf(stringBeforeNum);
-		if (foundedIndexes.Count > 0) {
+        if (foundedIndexes.Count > 0) {
             str = str.Remove(foundedIndexes[0]);
         }
         str += $"{stringBeforeNum}{num}";
 
         return str;
+    }
+
+    public static List<string> SplitToCharsList(this List<string> strings) {
+        List<string> charsList = new();
+        foreach (string str in strings)
+            foreach (char c in str)
+                charsList.Add(c.ToString());
+
+        return charsList;
+    }
+
+    public static List<string> SplitToCharsList(this string str) {
+        List<string> charsList = new();
+        foreach (char c in str)
+            charsList.Add(c.ToString());
+
+        return charsList;
     }
 }

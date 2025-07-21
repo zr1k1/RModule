@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class HealthComponent : FloatValueComponent {
 	// Event
 	public UnityEvent HealthDidLessThanZeroOrZero = default;
+
 	bool _cancelSetupHealth;
 
 	public override void SetValue(float value) {
@@ -16,11 +17,11 @@ public class HealthComponent : FloatValueComponent {
 		CheckValueIsLessThanZeroOrZeroAndCallEvent();
 	}
 
-	public override void SetValueByAmount(float value) {
+	public override void ChangeValueByAmount(float value) {
 		if (_cancelSetupHealth)
 			return;
 
-		base.SetValueByAmount(value);
+		base.ChangeValueByAmount(value);
 		CheckValueIsLessThanZeroOrZeroAndCallEvent();
 	}
 
