@@ -1,6 +1,8 @@
 public interface ISelectable {
-	void Deselect();
 	bool IsSelected { get; }
+
+	void Deselect();
 	void Select();
 	void SetEnableSelection(bool enable);
+	bool SelectionIsEnabled();
 }

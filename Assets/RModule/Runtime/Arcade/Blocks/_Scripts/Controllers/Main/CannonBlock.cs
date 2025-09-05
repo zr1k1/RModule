@@ -2,7 +2,6 @@ namespace RModule.Runtime.Arcade {
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
-	using RModule.Runtime.Utils.Vectors;
 	using RModule.Runtime.LeanTween;
 
 

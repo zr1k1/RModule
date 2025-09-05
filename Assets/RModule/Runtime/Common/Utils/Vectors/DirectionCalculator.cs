@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-namespace RModule.Runtime.Utils.Vectors {
+namespace RModule.Runtime.GeometryHelper {
+	//using GeometryHelper;
 
 	public class DirectionCalculator<Directions> {
 		//Accessors
@@ -26,7 +27,7 @@ namespace RModule.Runtime.Utils.Vectors {
 
 		//beginFrom = new Vector3(-1, 1)
 		public static Data CalculateDirection(Vector3 startPoint, Vector3 endPoint, Vector3 beginAngleFrom) {
-			var angle = VectorsHelper.CalculateAngle(startPoint, endPoint, beginAngleFrom);
+			var angle = Vectors.CalculateAngle(startPoint, endPoint, beginAngleFrom);
 			int directionPartsCount = 4;
 			float angleForDirection = 360f / (float)directionPartsCount;
 			for (int i = 0; i < directionPartsCount; i++) {

@@ -4,7 +4,7 @@ namespace RModule.Runtime.Arcade {
 	using UnityEngine;
 	using UnityEngine.Events;
 	using RModule.Runtime.Utils;
-	using RModule.Runtime.Utils.Vectors;
+	using RModule.Runtime.GeometryHelper;
 
 	public class MoveRegulator : BaseBlock {
 		// Events

@@ -6,9 +6,9 @@ public static class SelectionController<T> where T : MonoBehaviour {
 	public static GameObject FirstSelected => s_firstSelected;
 
 	static GameObject s_firstSelected = default;
-	static SelectionComponent<T> s_firstSelectedSelectionComponent = default;
-	static List<SelectionComponent<T>> s_selectionComponents = new List<SelectionComponent<T>>();
-	static List<SelectionComponent<T>> s_canInteractWithFirstSelectedSelectionComponents = new List<SelectionComponent<T>>();
+	static SelectionComponent s_firstSelectedSelectionComponent = default;
+	static List<SelectionComponent> s_selectionComponents = new List<SelectionComponent>();
+	static List<SelectionComponent> s_canInteractWithFirstSelectedSelectionComponents = new List<SelectionComponent>();
 	static bool s_selectionIsEnabled = true;
 
 	public static void AddSelectionComponent(SelectionComponent<T> selectionComponent) {

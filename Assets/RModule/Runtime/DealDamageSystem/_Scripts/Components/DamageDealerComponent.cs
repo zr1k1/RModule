@@ -40,6 +40,12 @@ public class DamageDealerComponent : MonoBehaviour {
 		}
 	}
 
+	public bool CheckCanDealDamageToGameObject(GameObject go,out DamageRecipientComponent damageRecipientComponent) {
+		damageRecipientComponent = go.GetComponent<DamageRecipientComponent>();
+
+		return damageRecipientComponent != null && D_DealDamageCondition(go);
+	}
+
 	protected virtual void DealDamage(DamageRecipientComponent damageRecipientComponent, DamageData damageData) {
 		if (damageRecipientComponent.TryTakeDmg(damageData)) {
 			Debug.Log($"DamageDealerComponent : DealDamage from {gameObject.name} to {damageRecipientComponent.gameObject.name} dmg = {damageData.damageConfig.Damage}");

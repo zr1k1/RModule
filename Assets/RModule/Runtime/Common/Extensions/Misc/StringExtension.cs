@@ -146,4 +146,20 @@ public static class StringExtension {
 
         return charsList;
     }
+
+    public static string CombineToOneString(this List<string> strs) {
+        string resultString = string.Empty;
+        foreach (var str in strs)
+            resultString += str.ToString();
+
+        return resultString;
+    }
+
+    public static string CombineToOneString(this List<object> strs) {
+        string resultString = string.Empty;
+        foreach (var str in strs)
+            resultString += str.ToString();
+
+        return resultString;
+    }
 }

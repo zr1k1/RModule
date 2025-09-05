@@ -3,7 +3,7 @@ namespace RModule.Runtime.Arcade {
 	using System.Collections.Generic;
 	using UnityEngine;
 	using UnityEngine.Events;
-	using RModule.Runtime.Utils.Vectors;
+	using RModule.Runtime.GeometryHelper;
 	using RModule.Runtime.Utils;
 	using RModule.Runtime.LeanTween;
 
