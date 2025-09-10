@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class HealthComponent : FloatValueComponent {
+public class HealthComponent : FloatValueComponent{
 	// Event
 	public UnityEvent HealthDidLessThanZeroOrZero = default;
 

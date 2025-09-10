@@ -1,6 +1,10 @@
 using System;
 using UnityEngine;
 
+public interface IValueByKeyGetter<TKey,TValue> {
+	public bool TryGetValue(TKey key, out TValue value);
+}
+
 [Serializable]
 public class ValueConfig<T> : BaseValueConfig {
 	public T DefaultValue => _value;
