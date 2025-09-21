@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using RModule.Runtime.Services;
+using RModule.Runtime.Analytics;
 
 public class AnalyticsInitializer : Initializer {
 
@@ -31,6 +33,25 @@ public class AnalyticsInitializer : Initializer {
 		//			, enableLogs = false, sessionTimeout = 10, trackAdRevenue = true }
 		//	}
 		//});
+#endif
+		yield return null;
+	}
+}
+
+public class AnalyticsInitializer<TEventName, TEventParameters> : Initializer
+	where TEventName : Enum where TEventParameters : Enum {
+
+	// Privats
+	Analytics<TEventName, TEventParameters>.InputData _inputData;
+
+	public AnalyticsInitializer( Analytics<TEventName, TEventParameters>.InputData inputData) {
+		_inputData = inputData;
+	}
+
+	public override IEnumerator Initialize() {
+#if !USE_YG
+		Debug.Log("AnalyticsInitializer : Initialize Analytics");
+		Analytics<TEventName, TEventParameters>.Init(_inputData);
 #endif
 		yield return null;
 	}
