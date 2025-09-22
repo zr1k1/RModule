@@ -14,4 +14,6 @@ public interface IUnskipable {
 }
 
 public interface ISkipable {
+    bool CanSkip();
+    void SetSkipable(bool skipable);
 }
