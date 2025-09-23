@@ -32,6 +32,16 @@ namespace RModule.Runtime.GeometryHelper {
 
             return result;
         }
+
+        public static Vector2 Rotate(Vector2 v, float degrees) {
+            return RotateRadians(v, degrees * Mathf.Deg2Rad);
+        }
+
+        public static Vector2 RotateRadians(Vector2 v, float radians) {
+            var ca = Mathf.Cos(radians);
+            var sa = Mathf.Sin(radians);
+            return new Vector2(ca * v.x - sa * v.y, sa * v.x + ca * v.y);
+        }
     }
 
     public static class Points {
