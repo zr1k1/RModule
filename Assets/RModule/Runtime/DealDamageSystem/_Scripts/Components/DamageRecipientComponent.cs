@@ -8,6 +8,7 @@ public class DamageRecipientComponent : MonoBehaviour {
 
 	[Header("Animation")]
 	[SerializeField] protected ParticleSystem p_animation = default;
+	[SerializeField] protected BaseAC _baseACPrefab = default;
 
 	public virtual bool TryTakeDmg(DamageData damageData) {
 		if (_damageTakerGameObject != null) {
@@ -27,6 +28,11 @@ public class DamageRecipientComponent : MonoBehaviour {
 		if (p_animation != null) {
 			p_animation.transform.position = damageData.point;
 			p_animation.Play();
+		}
+
+		if(_baseACPrefab != null) {
+			var animGO = Instantiate(_baseACPrefab);
+			animGO.Play();
 		}
 	}
 }
