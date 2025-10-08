@@ -320,6 +320,32 @@ namespace RModule.Runtime.LeanTween {
 			return this;
 		}
 
+		public LTDescr setRotateAroundPoint(Vector3 point) {
+			this.type = TweenAction.ROTATE_AROUND;
+			this.initInternal = () => {
+				this.fromInternal.x = 0f;
+				this._optional.origRotation = trans.rotation;
+			};
+			this.easeInternal = () => {
+				newVect = easeMethod();
+				val = newVect.x;
+				Vector3 origPos = trans.localPosition;
+				Vector3 rotateAroundPt = point;
+				// Debug.Log("this._optional.point:"+this._optional.point);
+				trans.RotateAround(rotateAroundPt, this._optional.axis, -this._optional.lastVal);
+				Vector3 diff = origPos - trans.localPosition;
+
+				trans.localPosition = origPos - diff; // Subtract the amount the object has been shifted over by the rotate, to get it back to it's orginal position
+				trans.rotation = this._optional.origRotation;
+
+				rotateAroundPt = point;
+				trans.RotateAround(rotateAroundPt, this._optional.axis, val);
+
+				this._optional.lastVal = val;
+			};
+			return this;
+		}
+
 		public LTDescr setRotateAround() {
 			this.type = TweenAction.ROTATE_AROUND;
 			this.initInternal = () => {

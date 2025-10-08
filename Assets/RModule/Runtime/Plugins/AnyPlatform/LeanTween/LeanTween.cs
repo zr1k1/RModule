@@ -1524,6 +1524,10 @@ namespace RModule.Runtime.LeanTween {
 			return pushNewTween(gameObject, new Vector3(add, 0f, 0f), time, options().setAxis(axis).setRotateAround());
 		}
 
+		public static LTDescr rotateAroundPoint(GameObject gameObject, Vector3 aroundPoint, Vector3 axis, float add, float time) {
+			return pushNewTween(gameObject, new Vector3(add, 0f, 0f), time, options().setAxis(axis).setRotateAroundPoint(aroundPoint));
+		}
+
 		/**
 		* Rotate a GameObject around a certain Axis in Local Space (the best method to use when you want to rotate beyond 180 degrees) <summary>Rotate a GameObject around a certain Axis in Local Space (the best method to use when you want to rotate beyond 180 degrees) </summary>
 		* 
