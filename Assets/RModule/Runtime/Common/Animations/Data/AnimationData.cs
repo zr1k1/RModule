@@ -15,5 +15,6 @@ public class AnimationData {
     public LeanTweenType loopLeanTweenType = default;
     public bool useLoopsCount = default;
     public int loopsCount = default;
+    public float delayBetweenLoops = default;
     public bool destroyOnFiinish = default;
 }

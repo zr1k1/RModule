@@ -6,12 +6,12 @@ public class ScaleAC : BaseAC {
     public AnimationData _animationData = default;
 
 	protected override IEnumerator Animate() {
-
 		float duration = _animationData.duration;
 		if (_animationData.back) {
 			duration *= 0.5f;
 		}
-		var from = _animationData.goToUse ? _animationData.goToUse.transform.localScale : _animationData.from;
+		var from = _animationData.useFromByGo && _animationData.goToUse != null ? _animationData.goToUse.transform.localScale : _animationData.from;
+		_animationData.goToUse.transform.localScale = from;
 		var lt = LeanTween.scale(_animationData.goToUse, _animationData.to, duration)
 			.setEase(_animationData.easeLeanTweenType)
 			.setDelay(_animationData.startDelay);
