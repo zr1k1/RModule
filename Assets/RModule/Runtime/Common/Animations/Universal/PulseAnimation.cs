@@ -18,7 +18,7 @@ public class PulseAnimation : MonoBehaviour {
 	private void Start() {
 		_scale = transform.localScale;
 		_totalTargetScale = _scale.x * _scaleTarget;
-		if (_disableAnimatorWhileIsPlaying)
+		if (_disableAnimatorWhileIsPlaying && _animator != null)
 			_animator.enabled = false;
 
 		var rt = GetComponent<RectTransform>();
@@ -30,14 +30,14 @@ public class PulseAnimation : MonoBehaviour {
 	}
 
 	public void Pause() {
-		if (_disableAnimatorWhileIsPlaying)
+		if (_disableAnimatorWhileIsPlaying && _animator != null)
 			_animator.enabled = true;
 
 		_lTDescr.pause();
 	}
 
 	public void Resume() {
-		if (_disableAnimatorWhileIsPlaying)
+		if (_disableAnimatorWhileIsPlaying && _animator != null)
 			_animator.enabled = false;
 
 		_lTDescr.resume();

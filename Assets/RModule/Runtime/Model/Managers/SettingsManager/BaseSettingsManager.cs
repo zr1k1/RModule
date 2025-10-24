@@ -75,25 +75,6 @@ public abstract class BaseSettingsManager<PurchasableGameItem, Placement, Option
 
 	protected abstract void LateInitialize();
 
-	// Others
-	public string GetSupportEmailString() {
-		string aboutString = GetAboutDeviceString();
-		aboutString = Uri.EscapeDataString(aboutString);
-		string emailString = $"mailto:{_appConfigData.ContactEmail}?subject={aboutString}";
-		return emailString;
-	}
-
-	public static string GetAboutDeviceString() {
-		string osVersion = SystemInfo.operatingSystem;
-		string deviceModel = SystemInfo.deviceModel;
-		string gameTitle = Application.productName;
-		string appVersion = Application.version;
-		string aboutString = $"{gameTitle} ({appVersion}, {osVersion}, {deviceModel})";
-
-		return aboutString;
-	}
-
-	// Set settings
 	public virtual void SetSetting<T1>(CommonSetting setting, T1 value) {
 		((IValueSetter<CommonSetting>)_commonSettings).SetValue(setting, value);
 	}
@@ -124,5 +105,23 @@ public abstract class BaseSettingsManager<PurchasableGameItem, Placement, Option
 
 	public string GetPlacement(Placement placementType) {
 		return ((IPlacementsProvider<Placement>)_appConfigData).GetPlacement(placementType);
+	}
+
+	// Others
+	public string GetSupportEmailString() {
+		string aboutString = GetAboutDeviceString();
+		aboutString = Uri.EscapeDataString(aboutString);
+		string emailString = $"mailto:{_appConfigData.ContactEmail}?subject={aboutString}";
+		return emailString;
+	}
+
+	public static string GetAboutDeviceString() {
+		string osVersion = SystemInfo.operatingSystem;
+		string deviceModel = SystemInfo.deviceModel;
+		string gameTitle = Application.productName;
+		string appVersion = Application.version;
+		string aboutString = $"{gameTitle} ({appVersion}, {osVersion}, {deviceModel})";
+
+		return aboutString;
 	}
 }
