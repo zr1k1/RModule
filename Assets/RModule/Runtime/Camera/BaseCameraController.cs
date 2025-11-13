@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +22,8 @@ public class BaseCameraController : MonoBehaviour, ICameraController {
     [SerializeField] protected ViewDirection _viewDirection = default;
     [SerializeField] protected RectTransform _safeAreaContainer = default;
     [SerializeField] protected Camera _gameCamera = default;
+    [SerializeField] protected List<RectTransform> _topToolbars = default;
+    [SerializeField] protected List<RectTransform> _bottomToolbars = default;
 
     [SerializeField] protected float _topMainOffsetInPixels = default;
     [SerializeField] protected float _bottomMainOffsetInPixels = default;
@@ -45,11 +49,6 @@ public class BaseCameraController : MonoBehaviour, ICameraController {
             Debug.LogError("Set _gameCamera in inspector!");
     }
 
-    public virtual void Setup(CanvasScaler canvasScaler, Vector2 sizeOfCentralizedObject, Vector2 positionOfCentralizedObject, Action setupFinishCallback = null) {
-        Prepare(canvasScaler, sizeOfCentralizedObject, positionOfCentralizedObject);
-        Setup(setupFinishCallback);
-    }
-
     public virtual BaseCameraController Prepare(CanvasScaler canvasScaler, Vector2 sizeOfCentralizedObject, Vector2 positionOfCentralizedObject) {
         Debug.Log($"BaseCameraController : Prepare");
         Debug.Log($"BaseCameraController : sizeOfCentralizedObject {sizeOfCentralizedObject}");
@@ -58,6 +57,8 @@ public class BaseCameraController : MonoBehaviour, ICameraController {
         _canvasScaler = canvasScaler;
         _sizeOfCentralizedObject = sizeOfCentralizedObject;
         _positionOfCentralizedObject = positionOfCentralizedObject;
+        SetTopMainOffsetInPixels(_topToolbars.Select(toolbar => toolbar.sizeDelta.y).Sum());
+        SetBottomMainOffsetInPixels(_bottomToolbars.Select(toolbar => toolbar.sizeDelta.y).Sum());
 
         _prepared = true;
 
@@ -80,8 +81,9 @@ public class BaseCameraController : MonoBehaviour, ICameraController {
            .SetLeftAdditionalOffsetUnits(_leftAdditionalOffsetInUnits)
            .SetRightAdditionalOffsetUnits(_rightAdditionalOffsetInUnits);
 
-        if (_safeAreaContainer != null)
+        if (_safeAreaContainer != null) {
             _gameObjectCentralizer.SetSafeAreaAnchoredMinMax(_safeAreaContainer.anchorMin, _safeAreaContainer.anchorMax);
+        }
 
         _resultData = _gameObjectCentralizer.Calculate();
 
@@ -97,7 +99,6 @@ public class BaseCameraController : MonoBehaviour, ICameraController {
 
         if (_viewDirection == ViewDirection.TopView) {
             _cameraPosition = new Vector3(_resultData.PositionCamera.x, _gameCamera.transform.position.y, _resultData.PositionCamera.y);
-            //_cameraPosition = new Vector3(_cameraPosition.x, _cameraPosition.z, _cameraPosition.y);
             cameraRotation = new Vector3(90, 0, 0);
         }
 
@@ -155,6 +156,54 @@ public class BaseCameraController : MonoBehaviour, ICameraController {
 
     public BaseCameraController SetRightAdditionalOffsetUnits(float rightAdditionalOffset) {
         _rightAdditionalOffsetInUnits = rightAdditionalOffset;
+
+        return this;
+    }
+
+    public BaseCameraController AddTopMainOffsetInPixels(float topOffsetInPixels) {
+        _topMainOffsetInPixels += topOffsetInPixels;
+
+        return this;
+    }
+
+    public BaseCameraController AddBottomMainOffsetInPixels(float bottomOffsetInPixels) {
+        _bottomMainOffsetInPixels += bottomOffsetInPixels;
+
+        return this;
+    }
+
+    public BaseCameraController AddLeftMainOffsetInPixels(float leftOffsetInPixels) {
+        _leftMainOffsetInPixels += leftOffsetInPixels;
+
+        return this;
+    }
+
+    public BaseCameraController AddRightMainOffsetInPixels(float rightOffsetInPixels) {
+        _rightMainOffsetInPixels += rightOffsetInPixels;
+
+        return this;
+    }
+
+    public BaseCameraController AddTopAdditionalOffsetUnits(float topAdditionalOffset) {
+        _topAdditionalOffsetInUnits += topAdditionalOffset;
+
+        return this;
+    }
+
+    public BaseCameraController AddBottomAdditionalOffsetUnits(float bottomAdditionalOffset) {
+        _bottomAdditionalOffsetInUnits += bottomAdditionalOffset;
+
+        return this;
+    }
+
+    public BaseCameraController AddLeftAdditionalOffsetUnits(float leftAdditionalOffset) {
+        _leftAdditionalOffsetInUnits += leftAdditionalOffset;
+
+        return this;
+    }
+
+    public BaseCameraController AddRightAdditionalOffsetUnits(float rightAdditionalOffset) {
+        _rightAdditionalOffsetInUnits += rightAdditionalOffset;
 
         return this;
     }
