@@ -30,4 +30,8 @@ public class ScaleAC : BaseAC {
 
 		yield return base.Animate();
 	}
+
+	public override float GetTotalDuration() {
+		return _animationData.duration;
+	}
 }
