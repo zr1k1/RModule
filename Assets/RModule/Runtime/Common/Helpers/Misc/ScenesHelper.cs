@@ -7,6 +7,9 @@ public class ScenesHelper {
 	public static void Open<SceneTypeEnum>(SceneTypeEnum sceneType, bool fadeAnimation = true) {
 		ScenesLoader<SceneTypeEnum>.Instance.Open(sceneType, fadeAnimation);
 	}
+	public static void OpenAsync<SceneTypeEnum>(SceneTypeEnum sceneType, bool fadeAnimation = true) {
+		ScenesLoader<SceneTypeEnum>.Instance.OpenAsync(sceneType, fadeAnimation);
+	}
 }
 
 public class ScenesLoader<SceneTypeEnum> {
@@ -26,9 +29,22 @@ public class ScenesLoader<SceneTypeEnum> {
 		var sceneFader = Object.FindObjectOfType<SceneFader>();
 		if (sceneFader == null || !fadeAnimation) {
 			SceneManager.LoadScene(sceneType.ToString());
-		} else {
+		}
+		else {
 			sceneFader.FadeOut(() => {
 				SceneManager.LoadScene(sceneType.ToString());
+			});
+		}
+	}
+	public void OpenAsync(SceneTypeEnum sceneType, bool fadeAnimation = true) {
+		s_currentScene = sceneType;
+		var sceneFader = Object.FindObjectOfType<SceneFader>();
+		if (sceneFader == null || !fadeAnimation) {
+			SceneManager.LoadSceneAsync(sceneType.ToString(), LoadSceneMode.Additive);
+		}
+		else {
+			sceneFader.FadeOut(() => {
+				SceneManager.LoadSceneAsync(sceneType.ToString(), LoadSceneMode.Additive);
 			});
 		}
 	}

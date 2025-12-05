@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if USE_SQLITE
+using System.Collections.Generic;
 using System.Data;
 using Mono.Data.Sqlite;
 using UnityEngine;
@@ -378,3 +379,4 @@ public static class SqliteConnectionOperationsExtension {
 		return result;
 	}
 }
+#endif
