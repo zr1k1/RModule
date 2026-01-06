@@ -28,9 +28,19 @@ namespace RModule.Runtime.Sounds {
 
 			if (_soundEffectConfig.AudioClips.Length > 1) {
 				SoundsManager.Instance.PlayRandomSoundEffect(_soundEffectConfig.AudioClips, _isImportantSound, _discardSameSoundsInOneFrame);
-			} else {
+			}
+			else {
 				SoundsManager.Instance.PlaySoundEffect(_soundEffectConfig.AudioClips[0], _isImportantSound, _discardSameSoundsInOneFrame);
 			}
+		}
+
+		public void SetConfig(SoundConfig soundConfig) {
+			_soundEffectConfig = soundConfig;
+		}
+
+		public void SetConfigAndPlay(SoundConfig soundConfig) {
+			_soundEffectConfig = soundConfig;
+			PlayEffect();
 		}
 	}
 }
