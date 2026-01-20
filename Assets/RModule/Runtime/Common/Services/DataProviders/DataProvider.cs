@@ -102,11 +102,13 @@ public class Data<OptionalValuesNames> : IValueSetter<OptionalValuesNames>, IVal
 			return;
 		}
 
-		if(value is not IConvertible) {
-			Debug.LogError($"Check setted value is IConvertible and setted value type ({value.GetType()}) is correct!");
-			return;
+		System.Object convertedObj;
+		if (value is not IConvertible) {
+			// This can be error cause custom classes need to be IConvertible, this option is not realized yet;
+			convertedObj = value;
+		} else {
+			convertedObj = Convert.ChangeType(value, _values[numberKey].GetType());
 		}
-		var convertedObj = Convert.ChangeType(value, _values[numberKey].GetType());
 
 		if (convertedObj != null)
 			_values[numberKey] = convertedObj;
@@ -199,7 +201,7 @@ public class DataProvider<OptionalValuesNames, DataConfigClass>
 	}
 
 	public void Reset() {
-		if(_dataConfig != null) {
+		if (_dataConfig != null) {
 			_dataConfig.DeleteData();
 		} else {
 			Debug.LogError($"Data<{typeof(OptionalValuesNames)}> is not loaded");
