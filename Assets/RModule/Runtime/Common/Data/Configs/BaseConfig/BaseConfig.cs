@@ -5,18 +5,25 @@ namespace RModule.Runtime.Data.Configs {
 	using System;
 
 	//Dont forget to add "where OptionalValue : Enum" on child class
-	public class BaseConfig<OptionalValue> : ScriptableObject, IValueGetterByEnum<OptionalValue> where OptionalValue : Enum {
+	public class BaseConfig<OptionalValueKey> : ScriptableObject, IValueGetterByEnum<OptionalValueKey> where OptionalValueKey : Enum {
 
 		[Header("OptionaConfigValue"), Space]
-		[SerializeField] protected SerializableDictionary<OptionalValue, BaseValueConfig> _valuesDict = default;
+		[SerializeField] protected SerializableDictionary<OptionalValueKey, BaseValueConfig> _valuesDict = default;
 
-		public virtual T GetValue<T>(OptionalValue valueType) {
-			if (!_valuesDict.ContainsKey(valueType)) {
-				Debug.LogError($"Value {valueType} is not present on dictionary _optionalValuesDict in {name}");
+		public virtual T GetValue<T>(OptionalValueKey key) {
+
+			if (!_valuesDict.ContainsKey(key)) {
+				Debug.LogError($"Value {key} is not present on dictionary _optionalValuesDict in {name}");
 				return default(T);
 			}
-			var value = _valuesDict[valueType].GetValue<object>();
-			return (T)value;
+
+			var value = _valuesDict[key].GetValue<object>();
+			if (value is T typedValue)
+				return typedValue;
+
+			Debug.LogError($"Config key '{key}' has type {value?.GetType().Name}, but requested {typeof(T).Name}");
+
+			return default;
 		}
 	}
 }
