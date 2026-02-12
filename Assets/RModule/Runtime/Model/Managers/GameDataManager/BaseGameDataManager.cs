@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class BaseGameDataManager<PlayerDataValuesNames> : SingletonMonoBehaviour<BaseGameDataManager<PlayerDataValuesNames>>, IInitializable
-	where PlayerDataValuesNames : Enum {
+public class BaseGameDataManager<TDerived, PlayerDataValuesNames> : SingletonMonoBehaviour<TDerived>, IInitializable
+	where PlayerDataValuesNames : Enum
+	where TDerived : BaseGameDataManager<TDerived, PlayerDataValuesNames> {
+
 	// Accessors
 	public static Data<PlayerDataValuesNames> PlayerData => Instance._playerDataProvider.Data;
 	public static DataProvider<PlayerDataValuesNames, PersistentSavedDataConfig<PlayerDataValuesNames>> PlayerDataProvider => Instance._playerDataProvider;
@@ -19,7 +21,7 @@ public class BaseGameDataManager<PlayerDataValuesNames> : SingletonMonoBehaviour
 
 	// Init
 	public virtual IEnumerator Initialize() {
-    	_dataPreparingFinished = false;
+		_dataPreparingFinished = false;
 
 		PrepareData();
 
