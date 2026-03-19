@@ -6,6 +6,8 @@ using Random = UnityEngine.Random;
 
 [Serializable]
 public class ReferenceTypeRandomData<T> : RandomData<T> {
+	public List<T> Values => _list;
+
 	[SerializeField] protected List<T> _list = default;
 
 	public override T GetRandomValue() {

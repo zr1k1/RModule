@@ -26,11 +26,10 @@ public class ScenesLoader<SceneTypeEnum> {
 
 	public void Open(SceneTypeEnum sceneType, bool fadeAnimation = true) {
 		s_currentScene = sceneType;
-		var sceneFader = Object.FindObjectOfType<SceneFader>();
+		var sceneFader = Object.FindFirstObjectByType<BaseSceneFader>();
 		if (sceneFader == null || !fadeAnimation) {
 			SceneManager.LoadScene(sceneType.ToString());
-		}
-		else {
+		} else {
 			sceneFader.FadeOut(() => {
 				SceneManager.LoadScene(sceneType.ToString());
 			});
@@ -38,11 +37,10 @@ public class ScenesLoader<SceneTypeEnum> {
 	}
 	public void OpenAsync(SceneTypeEnum sceneType, bool fadeAnimation = true) {
 		s_currentScene = sceneType;
-		var sceneFader = Object.FindObjectOfType<SceneFader>();
+		var sceneFader = Object.FindFirstObjectByType<BaseSceneFader>();
 		if (sceneFader == null || !fadeAnimation) {
 			SceneManager.LoadSceneAsync(sceneType.ToString(), LoadSceneMode.Additive);
-		}
-		else {
+		} else {
 			sceneFader.FadeOut(() => {
 				SceneManager.LoadSceneAsync(sceneType.ToString(), LoadSceneMode.Additive);
 			});
