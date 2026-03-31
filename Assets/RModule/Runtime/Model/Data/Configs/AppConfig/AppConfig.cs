@@ -77,7 +77,7 @@ public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue, Cr
 		[SerializeField] internal protected SerializableDictionary<Store, string> values = default;
 	}
 
-	public string GetCopyRightString() {
+	public virtual string GetCopyRightString() {
 		var copyrighString = $"© {_copyrightBeginYear}, Lunapp";
 		if (_copyrightBeginYear < DateTime.Now.Year) {
 			copyrighString = $"© {_copyrightBeginYear}-{DateTime.Now.Year}, Lunapp";

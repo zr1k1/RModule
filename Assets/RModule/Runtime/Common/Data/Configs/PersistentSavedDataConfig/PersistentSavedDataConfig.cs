@@ -13,6 +13,7 @@ public class PersistentSavedDataConfig<OptionalValuesNames> : ScriptableObject w
 	[Tooltip("Example .json")]
 	[SerializeField] string _fileFormat = ".json"; // Example .json
 
+	[Tooltip("When you change Enum - Dont replace enum numbers! Only add news!")]
 	[SerializeField] SerializableDictionary<OptionalValuesNames, BaseValueConfig> _valuesDict = default;
 
 	public bool DataIsExist(int id = -1) {
@@ -35,8 +36,8 @@ public class PersistentSavedDataConfig<OptionalValuesNames> : ScriptableObject w
 	public ReadOnlyDictionary<int, object> GetAllValues() {
 		var allValuesDictionary = new Dictionary<int, object>();
 		foreach (var keyValuePair in _valuesDict) {
-			var valueconfig = keyValuePair.Value ;
-			var value =  valueconfig.GetValue<object>();
+			var valueconfig = keyValuePair.Value;
+			var value = valueconfig.GetValue<object>();
 			allValuesDictionary.Add(Convert.ToInt32(keyValuePair.Key), value);
 		}
 
