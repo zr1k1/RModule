@@ -9,7 +9,7 @@ using MTUnityCore.Runtime.Extensions;
 public class FirebaseManagerInitializer : Initializer {
 	bool _enableFirebaseInitialization;
 
-	public FirebaseManagerInitializer(bool enableFirebaseInitialization) {
+	public FirebaseManagerInitializer(bool enableFirebaseInitialization = true) {
 		_enableFirebaseInitialization = enableFirebaseInitialization;
 	}
 
