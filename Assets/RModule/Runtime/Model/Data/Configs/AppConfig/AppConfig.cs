@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using RModule.Runtime.Data.Configs;
+using RModule.Runtime.Analytics;
 
 public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue, CrossPlatformValue> : ScriptableObject, IPlacementsProvider<Placement>
 
@@ -31,7 +32,7 @@ public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue, Cr
 	public string AppSiteLink => _appSiteLink;
 
 	public string IOSGADApplicationIdentifier => _iosGADApplicationIdentifier;
-	public string AppMetricaKey => _appMetricaKey;
+	public string AppMetricaKey => _analyticsConfig.AppMetricaData.ApiKey;
 
 	public string TrackingUsageDescription => _trackingUsageDescription;
 
@@ -50,6 +51,9 @@ public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue, Cr
 	[SerializeField] protected bool _enableTestAdsMode = default;
 	[SerializeField] protected AdPlacementsConfig<Placement> _adPlacementsConfig = default;
 
+	[Header("Analytics"), Space]
+	[SerializeField] protected BaseAnalyticsConfig _analyticsConfig = default;
+
 	[Header("Links"), Space]
 	[SerializeField] protected string _appPolicyLink = default;
 	[SerializeField] protected string _appTermsLink = default;
@@ -60,7 +64,7 @@ public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue, Cr
 
 	[Header("Keys"), Space]
 	[SerializeField] protected string _iosGADApplicationIdentifier = default;
-	[SerializeField] protected string _appMetricaKey = default;
+	// [SerializeField] protected string _appMetricaKey = default;
 
 	[Header("Plist descriptions"), Space]
 	[SerializeField] protected string _trackingUsageDescription = default;

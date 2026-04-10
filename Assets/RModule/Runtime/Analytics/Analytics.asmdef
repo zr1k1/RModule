@@ -2,7 +2,9 @@
     "name": "Analytics",
     "rootNamespace": "",
     "references": [
-        "GUID:8f883ba7da77749428166c853323c699"
+        "GUID:8f883ba7da77749428166c853323c699",
+        "GUID:98d0fb089bf1a4f2ab6fa3f585cb2452",
+        "GUID:a233deefe8df840f48e0648f292d73f8"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
