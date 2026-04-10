@@ -48,6 +48,7 @@ namespace RModule.Runtime.Analytics {
 		}
 
 		public static void Send(SendAnalyticEventCommand<EventNameEnum, ParameterNameOfAnalyticEventEnum> sendAnalyticEventCommand) {
+			Debug.Log($"Analytics : Send event {sendAnalyticEventCommand.Name}");
 			foreach (var analyticsSender in s_analyticsSenders) {
 				if (sendAnalyticEventCommand.Parameters.Count > 0)
 					analyticsSender.SendEvent(sendAnalyticEventCommand.Name, sendAnalyticEventCommand.Parameters);

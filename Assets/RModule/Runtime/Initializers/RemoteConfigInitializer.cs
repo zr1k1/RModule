@@ -17,15 +17,15 @@ public class RemoteConfigInitializer : Initializer {
 	}
 
 	public override IEnumerator Initialize() {
-#if USE_FIREBASE && USE_MTUNITYCORE
+#if USE_FIREBASE_REMOTE_CONFIG && USE_MTUNITYCORE
 		Debug.Log("RemoteConfigInitializer : Try Initialize Firebase Remote Config");
 		yield return EnableRemoteConfigOrTimeOut();
 #endif
 		yield return null;
 	}
 
+#if USE_FIREBASE_REMOTE_CONFIG && USE_MTUNITYCORE
 	IEnumerator EnableRemoteConfigOrTimeOut() {
-#if USE_FIREBASE && USE_MTUNITYCORE
 		Debug.Log($"RemoteConfigInitializer : EnableRemoteConfigOrTimeOut");
 		bool remoteConfigActivationDidFinish = false;
 		bool remoteConfigActivationSuccess = false;
@@ -45,7 +45,8 @@ public class RemoteConfigInitializer : Initializer {
 		}
 
 		_initializationFinishCallback?.Invoke(remoteConfigActivationSuccess);
-#endif
 		yield return null;
 	}
+#endif
+
 }
