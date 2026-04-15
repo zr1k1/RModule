@@ -19,8 +19,10 @@ namespace RModule.Runtime.Analytics {
 	}
 
 	public class BaseAnalyticsConfig : ScriptableObject {
+		public bool EnableLoggingSendedEventParameters => _enableLoggingSendedEventParameters;
 		public AppMetricaData AppMetricaData => _appMetricaData;
 
+		[SerializeField] bool _enableLoggingSendedEventParameters = default;
 		[SerializeField] protected AppMetricaData _appMetricaData;
 	}
 

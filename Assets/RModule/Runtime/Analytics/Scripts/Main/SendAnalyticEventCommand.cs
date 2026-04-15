@@ -44,8 +44,10 @@ namespace RModule.Runtime.Analytics {
 
 		public virtual bool TrySend() {
 			if (IsCanSend()) {
+
 				SaveSendedState();
 				Analytics<EventNameEnum, ParameterNameOfAnalyticEventEnum>.Send(this);
+
 				return true;
 			}
 

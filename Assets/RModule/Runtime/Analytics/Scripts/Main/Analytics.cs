@@ -41,6 +41,7 @@ namespace RModule.Runtime.Analytics {
 				return true;
 			} else {
 				Debug.LogError($"Event {eventNameEnum} is not present on BaseAnalyticsConfig dictionary!");
+
 				analyticEventData = new AnalyticEventData<ParameterNameOfAnalyticEventEnum>();
 
 				return false;
@@ -49,12 +50,20 @@ namespace RModule.Runtime.Analytics {
 
 		public static void Send(SendAnalyticEventCommand<EventNameEnum, ParameterNameOfAnalyticEventEnum> sendAnalyticEventCommand) {
 			Debug.Log($"Analytics : Send event {sendAnalyticEventCommand.Name}");
+			Debug.Log($"Analytics : Sended event prefs key {sendAnalyticEventCommand.PrefsKey}");
 			foreach (var analyticsSender in s_analyticsSenders) {
-				if (sendAnalyticEventCommand.Parameters.Count > 0)
+				if (sendAnalyticEventCommand.Parameters.Count > 0) {
 					analyticsSender.SendEvent(sendAnalyticEventCommand.Name, sendAnalyticEventCommand.Parameters);
-				else
+				} else
 					analyticsSender.SendEvent(sendAnalyticEventCommand.Name);
 			}
+
+			if (s_analyticsEventsConfig.EnableLoggingSendedEventParameters) {
+				foreach (var parameter in sendAnalyticEventCommand.Parameters) {
+					Debug.Log($"Analytics : [{parameter.Key}] = {parameter.Value}");
+				}
+			}
 		}
+
 	}
 }
