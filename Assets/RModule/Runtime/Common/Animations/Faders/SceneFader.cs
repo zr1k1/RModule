@@ -8,7 +8,7 @@ public class SceneFader : BaseSceneFader {
 	[SerializeField] Image fadeOutUIImage;
 	[SerializeField] float fadeSpeed = 0.8f;
 	[SerializeField] bool enableFadeIn = true;
-	[Range(0f, 1f)] [SerializeField] float initialAlpha = 0f;
+	[Range(0f, 1f)][SerializeField] float initialAlpha = 0f;
 	[SerializeField] bool waitForSpriteInGraphicComponentIsNotNull;
 
 	//enum FadeDirection { In, Out }
@@ -25,7 +25,7 @@ public class SceneFader : BaseSceneFader {
 			fadeOutUIImage.color = color;
 			foreach (Transform child in fadeOutUIImage.transform) {
 				Image img = child.GetComponent<Image>();
-				if(img != null) {
+				if (img != null) {
 					img.color = color;
 				}
 			}
@@ -36,18 +36,22 @@ public class SceneFader : BaseSceneFader {
 	// General Methods
 
 	public override void FadeOut(Action callback = null) {
+		DidStartFadeOut?.Invoke();
 		StartCoroutine(FadeCo(FadeDirection.Out, callback));
 	}
 
 	public override void FadeIn(Action callback = null) {
+		DidStartFadeIn?.Invoke();
 		StartCoroutine(FadeCo(FadeDirection.In, callback));
 	}
 
 	public override IEnumerator FadeOut() {
-		 yield return StartCoroutine(FadeCo(FadeDirection.Out));
+		DidStartFadeOut?.Invoke();
+		yield return StartCoroutine(FadeCo(FadeDirection.Out));
 	}
 
 	public override IEnumerator FadeIn() {
+		DidStartFadeOut?.Invoke();
 		yield return StartCoroutine(FadeCo(FadeDirection.In));
 	}
 

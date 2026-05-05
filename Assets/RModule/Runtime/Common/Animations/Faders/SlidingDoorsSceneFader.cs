@@ -73,20 +73,24 @@ public class SlidingDoorsSceneFader : BaseSceneFader {
     }
 
     public override void FadeOut(Action callback = null) {
+        DidStartFadeOut?.Invoke();
         Close(callback);
     }
 
     public override void FadeIn(Action callback = null) {
+        DidStartFadeIn?.Invoke();
         Open(callback);
     }
 
     public override IEnumerator FadeOut() {
+        DidStartFadeOut?.Invoke();
         SetupRandomIcon();
         SetActiveDoors(true);
         yield return _slidingDoorsUIAnimation.AnimateDoors(false, true, null);
     }
 
     public override IEnumerator FadeIn() {
+        DidStartFadeIn?.Invoke();
         SetupIconByIndex(s_lastCloseIconIndex);
         SetActiveDoors(true);
         yield return _slidingDoorsUIAnimation.AnimateDoors(true, true, null);
