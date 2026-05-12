@@ -9,6 +9,9 @@ public class AnimationData {
     public Vector3 from = default;
     public Vector3 to = default;
     public bool back = default;
+
+    [Tooltip("Animation starts if goToUse is not active")]
+    public bool ignoreGameObjectActiveStateToPlay = default;
     public float startDelay = default;
     public float duration = default;
     public LeanTweenType easeLeanTweenType = default;
