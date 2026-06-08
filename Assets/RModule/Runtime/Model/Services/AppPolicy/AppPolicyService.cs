@@ -1,8 +1,8 @@
 namespace RModule.Runtime.Services {
 	public class AppPolicyService {
-		public bool AppPolicyAccepted { get; private set; }
-		public int UserAge { get; private set; }
-		public bool HasTargetedAdsConsent { get; private set; }
+		public bool AppPolicyAccepted => _saveService.GetValue(K_appPolicyAccepted, false);
+		public int UserAge => _saveService.GetValue(K_userAge, 0);
+		public bool HasTargetedAdsConsent => _saveService.GetValue(K_hasTargetedAdsConsent, false);
 		public string AppPolicyLink => _inputData.appPolicyLink;
 		public string AppTermsLink => _inputData.appTermsLink;
 
@@ -23,9 +23,6 @@ namespace RModule.Runtime.Services {
 		public AppPolicyService(InputData inputData) {
 			_inputData = inputData;
 			_saveService = _inputData.saveService;
-			UserAge = _saveService.GetValue(K_userAge, 0);
-			AppPolicyAccepted = _saveService.GetValue(K_appPolicyAccepted, false);
-			HasTargetedAdsConsent = _saveService.GetValue(K_hasTargetedAdsConsent, false);
 		}
 
 		// ---------------------------------------------------------------
@@ -33,16 +30,14 @@ namespace RModule.Runtime.Services {
 
 		public void SetAdsConsent(bool hasConsent) {
 			if (HasTargetedAdsConsent != hasConsent) {
-				HasTargetedAdsConsent = hasConsent;
-				_saveService.SetValue(K_hasTargetedAdsConsent, HasTargetedAdsConsent);
+				_saveService.SetValue(K_hasTargetedAdsConsent, hasConsent);
 				_saveService.Save();
 			}
 		}
 
 		public void SetUserAge(int age) {
 			if (age > 0 && age <= 99) {
-				UserAge = age;
-				_saveService.SetValue(K_userAge, UserAge);
+				_saveService.SetValue(K_userAge, age);
 				_saveService.Save();
 			}
 		}
@@ -52,8 +47,7 @@ namespace RModule.Runtime.Services {
 		public bool UserHasProvidedAge => UserAge != 0;
 
 		public void AcceptAppPolicy() {
-			AppPolicyAccepted = true;
-			_saveService.SetValue(K_appPolicyAccepted, AppPolicyAccepted);
+			_saveService.SetValue(K_appPolicyAccepted, true);
 			_saveService.Save();
 		}
 	}
