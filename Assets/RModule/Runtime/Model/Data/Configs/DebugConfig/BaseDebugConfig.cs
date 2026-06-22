@@ -12,5 +12,9 @@
 		public virtual void EnableDebugMode() {
 			_debugModeEnabled = true;
 		}
+
+		public virtual void DisableDebugMode() {
+			_debugModeEnabled = false;
+		}
 	}
 }
