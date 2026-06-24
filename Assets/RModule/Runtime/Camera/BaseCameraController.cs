@@ -22,6 +22,7 @@ public class BaseCameraController : MonoBehaviour, ICameraController {
     [SerializeField] protected ViewDirection _viewDirection = default;
     [SerializeField] protected RectTransform _safeAreaContainer = default;
     [SerializeField] protected Camera _gameCamera = default;
+    [Header("Only active toolbars")]
     [SerializeField] protected List<RectTransform> _topToolbars = default;
     [SerializeField] protected List<RectTransform> _bottomToolbars = default;
 
@@ -57,8 +58,8 @@ public class BaseCameraController : MonoBehaviour, ICameraController {
         _canvasScaler = canvasScaler;
         _sizeOfCentralizedObject = sizeOfCentralizedObject;
         _positionOfCentralizedObject = positionOfCentralizedObject;
-        SetTopMainOffsetInPixels(_topToolbars.Select(toolbar => toolbar.sizeDelta.y).Sum());
-        SetBottomMainOffsetInPixels(_bottomToolbars.Select(toolbar => toolbar.sizeDelta.y).Sum());
+        SetTopMainOffsetInPixels(_topToolbars.FindAll(toolbar => toolbar.gameObject.activeSelf).Select(toolbar => toolbar.sizeDelta.y).Sum());
+        SetBottomMainOffsetInPixels(_bottomToolbars.FindAll(toolbar => toolbar.gameObject.activeSelf).Select(toolbar => toolbar.sizeDelta.y).Sum());
 
         _prepared = true;
 
