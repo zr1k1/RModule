@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5723904438354186841}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &146329641177576651
 MonoBehaviour:
@@ -48,7 +48,7 @@ MonoBehaviour:
   _debugConfig: {fileID: 11400000, guid: 8386d5bcde49046a1bc2f535fd81636a, type: 2}
   _commonSettings:
     _settingsDict:
-      m_keys: 000000000100000002000000030000000400000005000000060000000700000008000000
+      m_keys: 00000000010000000200000003000000040000000500000006000000070000000800000009000000
       m_values:
       - ValueDidChange:
           m_PersistentCalls:
@@ -112,6 +112,10 @@ MonoBehaviour:
           m_PersistentCalls:
             m_Calls: []
         _settingConfig: {fileID: 11400000, guid: 9e2258e7dd47740b6be4ab45475e0142, type: 2}
+      - ValueDidChange:
+          m_PersistentCalls:
+            m_Calls: []
+        _settingConfig: {fileID: 11400000, guid: e3c77d3556df143e0bd2218585f47141, type: 2}
   _optionalSettings:
     _settingsDict:
       m_keys: 

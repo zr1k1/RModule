@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public interface IValueByKeyGetter<TKey,TValue> {
+public interface IValueByKeyGetter<TKey, TValue> {
 	public bool TryGetValue(TKey key, out TValue value);
 }
 
@@ -14,5 +14,10 @@ public class ValueConfig<T> : BaseValueConfig {
 
 	public override T1 GetValue<T1>() {
 		return (T1)(object)_value;
+	}
+
+	public void SetValueOnlyInEditorMode(T value) {
+		if (Application.isEditor)
+			_value = value;
 	}
 }

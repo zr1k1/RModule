@@ -7,5 +7,6 @@ public enum CommonSetting {
 	Ages = 5,
 	NumberOfStarts = 6,
 	PlayedDaysInARowCount = 7,
-	LastPlayedDay = 8
+	LastPlayedDay = 8,
+	BuildNumber = 9
 }
