@@ -93,7 +93,7 @@ namespace RModule.Runtime.Analytics {
 
 		protected bool alreadySendedEarlier() {
 			if (PlayerPrefs.GetInt(_prefsKey, 0) == 1) {
-				Debug.Log($"Event name {Name} : already sended earlier");
+				Debug.Log($"Event name Name={Name} Key={_prefsKey} : already sended earlier");
 				return true;
 			}
 
