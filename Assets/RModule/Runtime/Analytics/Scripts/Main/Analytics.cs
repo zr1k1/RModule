@@ -10,6 +10,7 @@ namespace RModule.Runtime.Analytics {
 
 		static List<IAnalyticsSender> s_analyticsSenders = new List<IAnalyticsSender>();
 		static BaseAnalyticsConfig<EventNameEnum, ParameterNameOfAnalyticEventEnum> s_analyticsEventsConfig;
+		static bool s_isInitialized;
 
 		public interface IAnalyticsInputDataContainer {
 			public BaseAnalyticsConfig<EventNameEnum, ParameterNameOfAnalyticEventEnum> AnalyticsConfig { get; }
@@ -31,8 +32,15 @@ namespace RModule.Runtime.Analytics {
 		}
 
 		public static void Init(InputData inputData) {
+			if (s_isInitialized) {
+				Debug.LogError($"Analytics : Already initialized! Fix double initialization try!");
+
+				return;
+			}
+			s_analyticsSenders.Clear();
 			s_analyticsSenders.AddRange(inputData.AnalyticsSenders);
 			s_analyticsEventsConfig = inputData.AnalyticsConfig;
+			s_isInitialized = true;
 		}
 
 		public static bool TryGetEventData(EventNameEnum eventNameEnum, out AnalyticEventData<ParameterNameOfAnalyticEventEnum> analyticEventData) {
@@ -40,7 +48,7 @@ namespace RModule.Runtime.Analytics {
 				analyticEventData = s_analyticsEventsConfig.EventDatas[eventNameEnum].AnalyticEventData;
 				return true;
 			} else {
-				Debug.LogError($"Event {eventNameEnum} is not present on BaseAnalyticsConfig dictionary!");
+				Debug.LogError($"Analytics : Event {eventNameEnum} is not present in BaseAnalyticsConfig dictionary!");
 
 				analyticEventData = new AnalyticEventData<ParameterNameOfAnalyticEventEnum>();
 
