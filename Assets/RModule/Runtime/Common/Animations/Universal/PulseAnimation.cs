@@ -42,4 +42,12 @@ public class PulseAnimation : MonoBehaviour {
 
 		_lTDescr.resume();
 	}
+
+	public void Stop() {
+		if (_disableAnimatorWhileIsPlaying && _animator != null)
+			_animator.enabled = true;
+
+		_lTDescr.pause();
+		transform.localScale = _scale;
+	}
 }
