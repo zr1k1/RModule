@@ -53,3 +53,8 @@ Corridor/Library/metadata/
 # Rider generated #
 # =============== #
 .idea
+
+# ======= #
+# RModule #
+# ======= #
+Assets/RModule/Runtime/_ScriptableObjects/Values/SettingsDefaultValues/Int/buildNumberIntValueConfig.asset
