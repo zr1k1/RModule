@@ -103,14 +103,14 @@ public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue, Cr
 			return default(T1);
 		}
 
-		if (Application.platform == RuntimePlatform.Android) {
-			return (T1)(object)_crossPlatformValuesDict[key].values[Store.GooglePlayStore];
-		} else if (Application.platform == RuntimePlatform.IPhonePlayer) {
-			return (T1)(object)_crossPlatformValuesDict[key].values[Store.AppStore];
-		} else {
+#if PLATFORM_ANDROID
+		return (T1)(object)_crossPlatformValuesDict[key].values[Store.GooglePlayStore];
+#elif PLATFORM_IOS
+		return (T1)(object)_crossPlatformValuesDict[key].values[Store.AppStore];
+#else
 			Debug.LogError($"Platform {key} is not present! Fix it!");
 			return (T1)(object)_crossPlatformValuesDict[key].values[Store.GooglePlayStore];
-		}
+#endif
 	}
 
 	public string GetPlacement(Placement placementType) {
