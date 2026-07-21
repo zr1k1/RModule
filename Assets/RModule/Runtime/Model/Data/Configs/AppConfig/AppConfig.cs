@@ -30,8 +30,6 @@ public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue, Cr
 	public string VkLink => _vkLink;
 	public string FbLink => _fbLink;
 	public string AppSiteLink => _appSiteLink;
-
-	public string IOSGADApplicationIdentifier => _iosGADApplicationIdentifier;
 	public string AppMetricaKey => _analyticsConfig.AppMetricaData.ApiKey;
 
 	public string TrackingUsageDescription => _trackingUsageDescription;
@@ -63,8 +61,6 @@ public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue, Cr
 	[SerializeField] protected string _appSiteLink = default;
 
 	[Header("Keys"), Space]
-	[SerializeField] protected string _iosGADApplicationIdentifier = default;
-	// [SerializeField] protected string _appMetricaKey = default;
 
 	[Header("Plist descriptions"), Space]
 	[SerializeField] protected string _trackingUsageDescription = default;
@@ -112,6 +108,7 @@ public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue, Cr
 		} else if (Application.platform == RuntimePlatform.IPhonePlayer) {
 			return (T1)(object)_crossPlatformValuesDict[key].values[Store.AppStore];
 		} else {
+			Debug.LogError($"Platform {key} is not present! Fix it!");
 			return (T1)(object)_crossPlatformValuesDict[key].values[Store.GooglePlayStore];
 		}
 	}
