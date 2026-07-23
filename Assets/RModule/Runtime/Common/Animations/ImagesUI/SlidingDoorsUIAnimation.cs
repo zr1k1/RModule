@@ -10,7 +10,7 @@ public class SlidingDoorsUIAnimation : MonoBehaviour {
 
     [Header("Settings")]
     [SerializeField] float _openDistance = default;
-    [SerializeField] float _speed = default;
+    [SerializeField] float _duration = default;
 
     [Header("Debug fields")]
     [SerializeField] bool _testOpen;
@@ -64,8 +64,8 @@ public class SlidingDoorsUIAnimation : MonoBehaviour {
         if (animate) {
             inProgress = true;
 
-            LeanTween.moveLocalX(_leftDoor.gameObject, leftTarget.x, 1f / _speed);
-            LeanTween.moveLocalX(_rightDoor.gameObject, rightTarget.x, 1f / _speed).setOnComplete(() => {
+            LeanTween.moveLocalX(_leftDoor.gameObject, leftTarget.x, _duration);
+            LeanTween.moveLocalX(_rightDoor.gameObject, rightTarget.x, _duration).setOnComplete(() => {
                 inProgress = false;
             });
             while (inProgress) {

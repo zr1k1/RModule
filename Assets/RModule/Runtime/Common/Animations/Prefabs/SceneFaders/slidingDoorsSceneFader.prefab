@@ -386,7 +386,7 @@ MonoBehaviour:
   _leftDoor: {fileID: 992975139502021666}
   _rightDoor: {fileID: 1554424686257822417}
   _openDistance: 750
-  _speed: 1.4
+  _duration: 1
   _testOpen: 0
   _testClose: 0
 --- !u!114 &8940808430893018479
@@ -401,6 +401,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 221cec3d7273646c69b65e80b35102f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneSlidingDoorsVC
+  DidStartFadeIn:
+    m_PersistentCalls:
+      m_Calls: []
+  DidStartFadeOut:
+    m_PersistentCalls:
+      m_Calls: []
   _slidingDoorsUIAnimation: {fileID: 1385300066876444562}
   _leftDoor: {fileID: 2291372853418907980}
   _rightDoor: {fileID: 3188900438455238777}
