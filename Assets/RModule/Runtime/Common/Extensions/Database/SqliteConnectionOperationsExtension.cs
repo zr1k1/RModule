@@ -335,10 +335,10 @@ public static class SqliteConnectionOperationsExtension {
 				Debug.LogError(ex.Message);
 			}
 		}
-        return result;
-    }
+		return result;
+	}
 
-    static List<int> intResultFromCommand(this SqliteConnection _sqliteConnection, string sql) {
+	static List<int> intResultFromCommand(this SqliteConnection _sqliteConnection, string sql) {
 		List<int> result = new List<int>();
 		using (IDbCommand dbcmd = _sqliteConnection.CreateCommand()) {
 			dbcmd.CommandText = sql;
@@ -368,7 +368,6 @@ public static class SqliteConnectionOperationsExtension {
 			} catch (SqliteException ex) {
 				Debug.LogError(ex.Message);
 			}
-
 		}
 		return result;
 	}
