@@ -18,7 +18,7 @@ public enum SQLFieldParametr {
 }
 
 public static class SqliteConnectionOperationsExtension {
-	
+
 
 	public static void OperationBeginTransaction(this SqliteConnection _sqliteConnection) {
 		if (_sqliteConnection.State == ConnectionState.Open) {
@@ -60,20 +60,18 @@ public static class SqliteConnectionOperationsExtension {
 			dbcmd.ExecuteNonQuery();
 			result = _sqliteConnection.intResultFromCommand(sql);
 		}
-    }
+	}
 
-    public static void OperationCustom(this SqliteConnection _sqliteConnection, string _sql, out List<string> result)
-    {
-        result = new List<string>();
-        if (_sqliteConnection.State == ConnectionState.Open)
-        {
-            string sql = "";
-            sql = CombineSQLWithDebug(_sql);
-            IDbCommand dbcmd = _sqliteConnection.CreateCommand();
-            dbcmd.CommandText = sql;
-            dbcmd.ExecuteNonQuery();
-            result = _sqliteConnection.stringResultFromCommand(sql);
-        }
+	public static void OperationCustom(this SqliteConnection _sqliteConnection, string _sql, out List<string> result) {
+		result = new List<string>();
+		if (_sqliteConnection.State == ConnectionState.Open) {
+			string sql = "";
+			sql = CombineSQLWithDebug(_sql);
+			IDbCommand dbcmd = _sqliteConnection.CreateCommand();
+			dbcmd.CommandText = sql;
+			dbcmd.ExecuteNonQuery();
+			result = _sqliteConnection.stringResultFromCommand(sql);
+		}
 	}
 
 	public static void OperationSelectAllTable(this SqliteConnection _sqliteConnection, string fromTableName, out List<List<string>> result) {
@@ -95,9 +93,9 @@ public static class SqliteConnectionOperationsExtension {
 	}
 
 	public static void OperationSelect(this SqliteConnection _sqliteConnection, string field, string fromTableName, out List<string> result) {
-		result = new List<string>(); 
+		result = new List<string>();
 
-        if (_sqliteConnection.State == ConnectionState.Open) {
+		if (_sqliteConnection.State == ConnectionState.Open) {
 			string sql = CombineSQLWithDebug(SQLOperation.SELECT.ToString(), field, SQLOperation.FROM.ToString(), fromTableName, ";");
 			result = _sqliteConnection.stringResultFromCommand(sql);
 		}
@@ -105,13 +103,13 @@ public static class SqliteConnectionOperationsExtension {
 
 	public static void OperationSelect(this SqliteConnection _sqliteConnection, string field, string fromTableName, out List<int> result) {
 		result = new List<int>();
-        if (_sqliteConnection.State == ConnectionState.Open) {
+		if (_sqliteConnection.State == ConnectionState.Open) {
 			string sql = CombineSQLWithDebug(SQLOperation.SELECT.ToString(), field, SQLOperation.FROM.ToString(), fromTableName, ";");
 			result = _sqliteConnection.intResultFromCommand(sql);
 		}
-    }
+	}
 
-    public static void OperationSelect(this SqliteConnection _sqliteConnection, string field, string fromTableName, string fieldWhere, LogicOperation logicOper, string valueWhere, out List<string> result) {
+	public static void OperationSelect(this SqliteConnection _sqliteConnection, string field, string fromTableName, string fieldWhere, LogicOperation logicOper, string valueWhere, out List<string> result) {
 		result = new List<string>();
 		if (_sqliteConnection.State == ConnectionState.Open) {
 			string sql = CombineSQLWithDebug(SQLOperation.SELECT.ToString(), field, SQLOperation.FROM.ToString(), fromTableName, SQLOperation.WHERE.ToString(), fieldWhere, Convert(logicOper), $"'{valueWhere}'", ";");
@@ -147,20 +145,18 @@ public static class SqliteConnectionOperationsExtension {
 			sql = CombineSQLWithDebug(sql, fieldWhere[operations1.Count], Convert(operations[operations1.Count]), $"'{valueWhere[operations1.Count]}'", ";");
 			result = _sqliteConnection.stringResultFromCommand(sql);
 		}
-    }
+	}
 
-    public static void OperationSelectNotNull(this SqliteConnection _sqliteConnection, string field, string fromTableName, out List<string> result)
-    {
-        result = new List<string>();
+	public static void OperationSelectNotNull(this SqliteConnection _sqliteConnection, string field, string fromTableName, out List<string> result) {
+		result = new List<string>();
 
-        if (_sqliteConnection.State == ConnectionState.Open)
-        {
-            string sql = CombineSQLWithDebug(SQLOperation.SELECT.ToString(), "*", SQLOperation.FROM.ToString(), fromTableName, SQLOperation.WHERE.ToString(), field,"IS NOT NULL", ";");
-            result = _sqliteConnection.stringResultFromCommandWithoutNULLValues(sql, field);
-        }
-    }
+		if (_sqliteConnection.State == ConnectionState.Open) {
+			string sql = CombineSQLWithDebug(SQLOperation.SELECT.ToString(), "*", SQLOperation.FROM.ToString(), fromTableName, SQLOperation.WHERE.ToString(), field, "IS NOT NULL", ";");
+			result = _sqliteConnection.stringResultFromCommandWithoutNULLValues(sql, field);
+		}
+	}
 
-    public static int OperationSelectMax(this SqliteConnection _sqliteConnection, string field, string tableName) {
+	public static int OperationSelectMax(this SqliteConnection _sqliteConnection, string field, string tableName) {
 		int result = 0;
 		if (_sqliteConnection.State == ConnectionState.Open) {
 			string sql = CombineSQLWithDebug(SQLOperation.SELECT.ToString(), SQLOperation.MAX.ToString(), $"({field})", SQLOperation.FROM.ToString(), tableName, ";");
@@ -265,7 +261,7 @@ public static class SqliteConnectionOperationsExtension {
 		else if (logicOperation == LogicOperation.MORE_THAN)
 			return " > ";
 		else if (logicOperation == LogicOperation.LESS_THAN)
-			return " < "; 
+			return " < ";
 		else
 			return "STRING FOR LOGIC OPERATION NOT SETTED";
 	}
@@ -276,7 +272,7 @@ public static class SqliteConnectionOperationsExtension {
 		else if (sqlOperation == SQLOperation.ORDER_BY_RANDOM_LIMIT) {
 			return " ORDER BY RANDOM() LIMIT ";
 		}
-			return "STRING FOR SQL OPERATION NOT SETTED";
+		return "STRING FOR SQL OPERATION NOT SETTED";
 	}
 
 	static string Convert(SQLFieldParametr sqlFieldParametr) {
@@ -289,7 +285,7 @@ public static class SqliteConnectionOperationsExtension {
 	static List<string> stringResultFromCommand(this SqliteConnection _sqliteConnection, string sql) {
 		List<string> result = new List<string>();
 		using (IDbCommand dbcmd = _sqliteConnection.CreateCommand()) {
-            dbcmd.CommandText = sql;
+			dbcmd.CommandText = sql;
 			try {
 				using (IDataReader reader = dbcmd.ExecuteReader())
 					while (reader.Read())
@@ -326,12 +322,10 @@ public static class SqliteConnectionOperationsExtension {
 		return result;
 	}
 
-	static List<string> stringResultFromCommandWithoutNULLValues(this SqliteConnection _sqliteConnection, string sql, string fieldNameNotNum)
-    {
-        List<string> result = new List<string>();
-        using (IDbCommand dbcmd = _sqliteConnection.CreateCommand())
-        {
-            dbcmd.CommandText = sql;
+	static List<string> stringResultFromCommandWithoutNULLValues(this SqliteConnection _sqliteConnection, string sql, string fieldNameNotNum) {
+		List<string> result = new List<string>();
+		using (IDbCommand dbcmd = _sqliteConnection.CreateCommand()) {
+			dbcmd.CommandText = sql;
 			try {
 				using (IDataReader reader = dbcmd.ExecuteReader())
 					while (reader.Read())
