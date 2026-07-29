@@ -344,8 +344,13 @@ public static class SqliteConnectionOperationsExtension {
 			dbcmd.CommandText = sql;
 			try {
 				using (IDataReader reader = dbcmd.ExecuteReader())
-					while (reader.Read())
-						result.Add(reader.GetInt32(0));
+					while (reader.Read()) {
+						if (reader.IsDBNull(0)) {
+							result.Add(0);
+						} else {
+							result.Add(reader.GetInt32(0));
+						}
+					}
 			} catch (SqliteException ex) {
 				Debug.LogError(ex.Message);
 			}
