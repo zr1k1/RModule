@@ -31,8 +31,8 @@ public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue, Cr
 	public string FbLink => _fbLink;
 	public string AppSiteLink => _appSiteLink;
 	public string AppMetricaKey => _analyticsConfig.AppMetricaData.ApiKey;
-
 	public string TrackingUsageDescription => _trackingUsageDescription;
+	public int DefaultAge => _defaultAge;
 
 	// Outlets
 	[Header("Misc app settings"), Space]
@@ -41,6 +41,7 @@ public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue, Cr
 	[SerializeField] protected bool _enableRemoteConfig = default;
 	[SerializeField] protected int _dragBeginTreeshold = default;
 	[SerializeField] protected int _copyrightBeginYear = default;
+	[SerializeField] protected int _defaultAge = 14;
 
 	[Header("Economics"), Space]
 	[SerializeField] protected AppEconomicsConfig<PurchasableGameItem> _appEconomicsData = default;

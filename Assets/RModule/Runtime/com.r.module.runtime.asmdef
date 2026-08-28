@@ -13,19 +13,20 @@
         "Vibration",
         "LeanTweenPlugin",
         "Arcade",
-        "com.appodeal",
         "com.codefabric.mt.unity.core",
         "Analytics",
         "MotivationMessages",
-        "Popups"
+        "Popups",
+        "AppodealStack.Monetization.Api",
+        "AppodealStack.Monetization.Common",
+        "AppodealStack.Cmp"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [
-        "Newtonsoft.Json.dll",
-        ""
+        "Newtonsoft.Json.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],
