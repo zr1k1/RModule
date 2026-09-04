@@ -40,10 +40,20 @@ namespace RModule.Runtime.Analytics {
 			s_analyticsSenders.Clear();
 			s_analyticsSenders.AddRange(inputData.AnalyticsSenders);
 			s_analyticsEventsConfig = inputData.AnalyticsConfig;
-			s_isInitialized = true;
+			if (s_analyticsEventsConfig != null)
+				s_isInitialized = true;
+			else
+				Debug.LogError($"Analytics : s_analyticsEventsConfig is null! Check Initialization!");
 		}
 
 		public static bool TryGetEventData(EventNameEnum eventNameEnum, out AnalyticEventData<ParameterNameOfAnalyticEventEnum> analyticEventData) {
+			if (!s_isInitialized) {
+				Debug.LogError($"Analytics : is not initialized!");
+				analyticEventData = null;
+
+				return false;
+			}
+
 			if (s_analyticsEventsConfig.EventDatas.ContainsKey(eventNameEnum)) {
 				analyticEventData = s_analyticsEventsConfig.EventDatas[eventNameEnum].AnalyticEventData;
 				return true;
@@ -57,6 +67,12 @@ namespace RModule.Runtime.Analytics {
 		}
 
 		public static void Send(SendAnalyticEventCommand<EventNameEnum, ParameterNameOfAnalyticEventEnum> sendAnalyticEventCommand) {
+			if (!s_isInitialized) {
+				Debug.LogError($"Analytics : is not initialized!");
+
+				return;
+			}
+
 			Debug.Log($"Analytics : Send event {sendAnalyticEventCommand.Name}");
 			Debug.Log($"Analytics : Sended event prefs key {sendAnalyticEventCommand.PrefsKey}");
 			foreach (var analyticsSender in s_analyticsSenders) {
