@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections;
-using System.Collections.Generic;
 
 public class ScenesHelper {
 	public static void Open<SceneTypeEnum>(SceneTypeEnum sceneType, bool fadeAnimation = true) {
@@ -9,6 +7,9 @@ public class ScenesHelper {
 	}
 	public static void OpenAsync<SceneTypeEnum>(SceneTypeEnum sceneType, bool fadeAnimation = true) {
 		ScenesLoader<SceneTypeEnum>.Instance.OpenAsync(sceneType, fadeAnimation);
+	}
+	public static void OpenAsyncSingle<SceneTypeEnum>(SceneTypeEnum sceneType, bool fadeAnimation = true) {
+		ScenesLoader<SceneTypeEnum>.Instance.OpenAsyncSingle(sceneType, fadeAnimation);
 	}
 }
 
@@ -46,36 +47,16 @@ public class ScenesLoader<SceneTypeEnum> {
 			});
 		}
 	}
+	public void OpenAsyncSingle(SceneTypeEnum sceneType, bool fadeAnimation = true) {
+		s_currentScene = sceneType;
+		var sceneFader = Object.FindFirstObjectByType<BaseSceneFader>();
+		if (sceneFader == null || !fadeAnimation) {
+			SceneManager.LoadSceneAsync(sceneType.ToString(), LoadSceneMode.Single);
+		} else {
+			sceneFader.FadeOut(() => {
+				SceneManager.LoadSceneAsync(sceneType.ToString(), LoadSceneMode.Single);
+			});
+		}
+	}
 }
-
-public enum ExampleSceneType {
-	None = 0,
-	SplashScene,
-	CheatScene,
-	MainMenuScene,
-	GameScene,
-	AllGamesScene,
-	GamePlanScene,
-	SettingsScene,
-	GameCompleteScene,
-	LevelCompleteScene
-};
-
-//public static class ScenesHelper {
-//	public static SceneType CurrentScene => s_currentScene;
-//	static SceneType s_currentScene;
-
-
-//	public static void Open(SceneType sceneType, bool fadeAnimation = true) {
-//		s_currentScene = sceneType;
-//		var sceneFader = Object.FindObjectOfType<SceneFader>();
-//		if (sceneFader == null || !fadeAnimation) {
-//			SceneManager.LoadScene(sceneType.ToString());
-//		} else {
-//			sceneFader.FadeOut(() => {
-//				SceneManager.LoadScene(sceneType.ToString());
-//			});
-//		}
-//	}
-//}
 
