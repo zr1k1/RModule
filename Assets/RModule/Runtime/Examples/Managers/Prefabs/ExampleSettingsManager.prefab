@@ -48,7 +48,7 @@ MonoBehaviour:
   _debugConfig: {fileID: 11400000, guid: 8386d5bcde49046a1bc2f535fd81636a, type: 2}
   _commonSettings:
     _settingsDict:
-      m_keys: 00000000010000000200000003000000040000000500000006000000070000000800000009000000
+      m_keys: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a000000
       m_values:
       - ValueDidChange:
           m_PersistentCalls:
@@ -116,6 +116,10 @@ MonoBehaviour:
           m_PersistentCalls:
             m_Calls: []
         _settingConfig: {fileID: 11400000, guid: e3c77d3556df143e0bd2218585f47141, type: 2}
+      - ValueDidChange:
+          m_PersistentCalls:
+            m_Calls: []
+        _settingConfig: {fileID: 11400000, guid: eb21189722a994b0792dc444321ae192, type: 2}
   _optionalSettings:
     _settingsDict:
       m_keys: 

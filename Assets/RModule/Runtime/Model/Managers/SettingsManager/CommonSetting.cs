@@ -8,5 +8,6 @@ public enum CommonSetting {
 	NumberOfStarts = 6,
 	PlayedDaysInARowCount = 7,
 	LastPlayedDay = 8,
-	BuildNumber = 9
+	BuildNumber = 9,
+	DafsaApplicationVersion = 10
 }
