@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 using UnityEngine;
+using Newtonsoft.Json.Linq;
 
 public class Data<OptionalValuesNames> : IValueSetter<OptionalValuesNames>, IValueGetterByEnum<OptionalValuesNames> where OptionalValuesNames : Enum {
 	// Delegates
@@ -118,16 +119,19 @@ public class Data<OptionalValuesNames> : IValueSetter<OptionalValuesNames>, IVal
 	}
 
 	public T1 GetValue<T1>(OptionalValuesNames enumType) {
-		// for avoid convertions and reference types problems
-		var serializedObject = JsonConvert.SerializeObject(_values[Convert.ToInt32(enumType)], Formatting.Indented
-			, new JsonSerializerSettings() {
-				ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-			}
-		);
+		var value = _values[Convert.ToInt32(enumType)];
 
-		var deserializedObject = JsonConvert.DeserializeObject<T1>(serializedObject);
+		if (value is T1 typedValue)
+			return typedValue;
 
-		return deserializedObject;
+		if (value is JToken token)
+			return token.ToObject<T1>();
+
+		if (value is IConvertible)
+			return (T1)Convert.ChangeType(value, typeof(T1));
+
+		throw new InvalidCastException(
+			$"Cannot convert {value.GetType()} to {typeof(T1)}.");
 	}
 
 	public void PrintDataValues(ConvertIntKeyToEnum dConvertIntKeyToEnum) {
