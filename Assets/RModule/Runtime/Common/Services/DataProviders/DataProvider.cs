@@ -165,25 +165,42 @@ public class DataProvider<OptionalValuesNames, DataConfigClass>
 
 	public void LoadData(int id = -1) {
 		_id = id;
+
+		bool needSave = false;
+
 		Debug.Log($"DataProvider : Load {_dataConfig.GetPath()}");
+
 		if (_dataConfig.DataIsExist(_id)) {
-			_data = Data<OptionalValuesNames>.DecodeJsonAndGenerateGameData(File.ReadAllText(_dataConfig.GetPath(_id)));
+			_data = Data<OptionalValuesNames>.DecodeJsonAndGenerateGameData(
+				File.ReadAllText(_dataConfig.GetPath(_id))
+			);
+
 			var currentConfigValues = _dataConfig.GetAllValues();
-			// Remove from loaded _data not existed keys in current config
-			var keyToRemove = _data.Values.Keys.ToList().FindAll(key => !currentConfigValues.ContainsKey(key));
-			foreach (var key in keyToRemove) {
-				_data.Values.Remove(key);
+
+			var keyToRemove = _data.Values.Keys
+				.ToList()
+				.FindAll(key => !currentConfigValues.ContainsKey(key));
+
+			if (keyToRemove.Count > 0) {
+				needSave = true;
+
+				foreach (var key in keyToRemove)
+					_data.Values.Remove(key);
 			}
-			// Add key values from current config not existed in _data.Values 
+
 			foreach (var keyPair in currentConfigValues) {
-				if (!_data.Values.ContainsKey(keyPair.Key))
+				if (!_data.Values.ContainsKey(keyPair.Key)) {
 					_data.Values.Add(keyPair.Key, keyPair.Value);
+					needSave = true;
+				}
 			}
 		} else {
 			_data = Data<OptionalValuesNames>.CreateDefaultData(_dataConfig);
+			needSave = true;
 		}
 
-		SaveData();
+		if (needSave)
+			SaveData();
 	}
 
 	public void ChangeData(Data<OptionalValuesNames> data) {
