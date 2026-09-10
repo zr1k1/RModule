@@ -46,7 +46,7 @@ public class AddressableGraphicSetter : MonoBehaviour {
 
 	private void Update() {
 		if (_beginCheckWhenSpriteComponentOnEnabled) {
-			if((_image != null && _image.enabled) || (_spriteRenderer != null && _spriteRenderer.enabled))
+			if ((_image != null && _image.enabled) || (_spriteRenderer != null && _spriteRenderer.enabled))
 				TryProvide();
 		} else if (_beginCheckWhenSpriteComponentOnDisabled) {
 			if ((_image != null && !_image.enabled) || (_spriteRenderer != null && !_spriteRenderer.enabled))
@@ -55,7 +55,6 @@ public class AddressableGraphicSetter : MonoBehaviour {
 	}
 
 	void TryProvide() {
-		Debug.Log("TryProvide");
 		if ((!string.IsNullOrEmpty(_address) || _assetReference != null) && (_image != null || _spriteRenderer != null))
 			if (_graphicProvider == null)
 				ProvideSprite();
@@ -63,9 +62,9 @@ public class AddressableGraphicSetter : MonoBehaviour {
 
 	void ProvideSprite() {
 		_graphicProvider = new AddressableAssetProvider();
-		if(!string.IsNullOrEmpty(_address))
+		if (!string.IsNullOrEmpty(_address))
 			_graphicProvider.LoadAsset<Sprite>(_address, SetSprite);
-		else if(_assetReference != null) {
+		else if (_assetReference != null) {
 			_graphicProvider.LoadAsset<Sprite>(_assetReference, SetSprite);
 		}
 		_beginCheckWhenSpriteComponentOnEnabled = false;

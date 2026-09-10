@@ -237,8 +237,10 @@ public static class SqliteConnectionOperationsExtension {
 		string sql = "";
 		for (int i = 0; i < pieces.Length; i++)
 			sql += pieces[i] + " ";
+#if UNITY_EDITOR
 		Debug.Log("SQL:");
 		Debug.Log(sql);
+#endif
 		return sql;
 	}
 

@@ -11,7 +11,7 @@ public class RaysAC : BaseAC {
 	[Header("Properties")]
 	[Range(1, 100)][SerializeField] float _rotateSpeed = default;
 	[SerializeField] bool clockwise = default;
-	[Range(1, 400)] [SerializeField] float _changeAlphaSpeed = default;
+	[Range(1, 400)][SerializeField] float _changeAlphaSpeed = default;
 	[SerializeField] bool _playOnAwake = default;
 
 	// Private vars
@@ -38,8 +38,8 @@ public class RaysAC : BaseAC {
 	IEnumerator ChangeAlpha() {
 		_switchAlpha = !_switchAlpha;
 		float alpha = _switchAlpha ? Random.Range(0.5f, 1f) : Random.Range(0.1f, 0.5f);
-
-		yield return LeanTween.alpha(_alphaTransform, alpha, _aplhaTime);
+		if (_alphaTransform != null)
+			yield return LeanTween.alpha(_alphaTransform, alpha, _aplhaTime);
 		yield return new WaitForSeconds(_aplhaTime);
 		StartCoroutine(ChangeAlpha());
 	}

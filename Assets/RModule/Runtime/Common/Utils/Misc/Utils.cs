@@ -6,6 +6,8 @@ using Newtonsoft.Json;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace RModule.Runtime.Utils {
 
@@ -55,19 +57,39 @@ namespace RModule.Runtime.Utils {
 
 		public static bool TryGetCurrentTime(out DateTime currentDay) {
 			currentDay = DateTime.Now;
+
 			if (Application.internetReachability == NetworkReachability.NotReachable)
 				return false;
-			Debug.Log($"{Application.internetReachability}");
-			var client = new TcpClient("time.nist.gov", 13);
-			using (var streamReader = new StreamReader(client.GetStream())) {
-				var response = streamReader.ReadToEnd();
-				if (response.Length < 25)
-					return false;
-				var utcDateTimeString = response.Substring(7, 17);
-				currentDay = DateTime.ParseExact(utcDateTimeString, "yy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal);
-			}
 
-			return true;
+			try {
+				using (var client = new TcpClient()) {
+					client.ReceiveTimeout = 3000;
+					client.SendTimeout = 3000;
+
+					client.Connect("time.nist.gov", 13);
+
+					using (var streamReader = new StreamReader(client.GetStream())) {
+						var response = streamReader.ReadToEnd();
+
+						if (response.Length < 25)
+							return false;
+
+						var utcDateTimeString = response.Substring(7, 17);
+
+						currentDay = DateTime.ParseExact(
+							utcDateTimeString,
+							"yy-MM-dd HH:mm:ss",
+							CultureInfo.InvariantCulture,
+							DateTimeStyles.AssumeUniversal
+						);
+					}
+				}
+
+				return true;
+			} catch (Exception exception) {
+				Debug.LogWarning($"TryGetCurrentTime failed: {exception.Message}");
+				return false;
+			}
 		}
 
 		// Camera

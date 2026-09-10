@@ -19,7 +19,8 @@
         "Popups",
         "AppodealStack.Monetization.Api",
         "AppodealStack.Monetization.Common",
-        "AppodealStack.Cmp"
+        "AppodealStack.Cmp",
+        "Unity.InputSystem"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
