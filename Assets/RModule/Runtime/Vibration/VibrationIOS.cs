@@ -52,7 +52,9 @@ using System.Runtime.InteropServices;
 		}
 
 		public static void Vibrate() {
+#if !UNITY_WEBGL
 			Handheld.Vibrate();
+#endif
 		}
 
 		void Start() {
