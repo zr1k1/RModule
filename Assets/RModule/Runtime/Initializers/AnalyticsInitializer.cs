@@ -44,15 +44,13 @@ public class AnalyticsInitializer<TEventName, TEventParameters> : Initializer
 	// Privats
 	Analytics<TEventName, TEventParameters>.InputData _inputData;
 
-	public AnalyticsInitializer( Analytics<TEventName, TEventParameters>.InputData inputData) {
+	public AnalyticsInitializer(Analytics<TEventName, TEventParameters>.InputData inputData) {
 		_inputData = inputData;
 	}
 
 	public override IEnumerator Initialize() {
-#if !USE_YG
 		Debug.Log("AnalyticsInitializer : Initialize Analytics");
 		Analytics<TEventName, TEventParameters>.Init(_inputData);
-#endif
 		yield return null;
 	}
 }
