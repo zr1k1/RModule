@@ -22,7 +22,7 @@ namespace RModule.Runtime.Sounds {
 		// --- Private vars ---
 		protected bool _soundEnabled = true;
 		protected bool _musicEnabled = true;
-		protected readonly Dictionary<int, bool> _currentRestrictedSounds = new Dictionary<int, bool>();
+		protected readonly Dictionary<EntityId, bool> _currentRestrictedSounds = new Dictionary<EntityId, bool>();
 		protected float _soundsDiscardPeriodCount;
 		protected AudioClip _lastPlayedClip;
 
@@ -93,11 +93,13 @@ namespace RModule.Runtime.Sounds {
 			if (!_soundEnabled || clip == null)
 				return;
 
-			if (discardSameSoundsInOneFrame) {
-				if (_currentRestrictedSounds.ContainsKey(clip.GetInstanceID())) {
+			if (discardSameSoundsInOneFrame) {				
+				if (_currentRestrictedSounds.ContainsKey(clip.GetEntityId())) {
+
 					return;
-				}
-				_currentRestrictedSounds[clip.GetInstanceID()] = true;
+				}				
+			
+				_currentRestrictedSounds[clip.GetEntityId()] = true;
 			}
 
 			var effectsSource = GetSoundEffectsSource(isImportantSound);
