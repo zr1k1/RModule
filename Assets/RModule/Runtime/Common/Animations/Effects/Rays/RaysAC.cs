@@ -27,8 +27,7 @@ public class RaysAC : BaseAC {
 	protected override IEnumerator Animate() {
 		Debug.Log("Animate rays");
 
-		//LeanTween.rotateAroundLocal(_rotateTransform, Vector3.forward, clockwise ? -360 : 360, 100f / _rotateSpeed).setLoopClamp();
-		LeanTween.rotateZ(_rotateTransform.gameObject, (clockwise ? 1 : -1) * 180, 100f / _rotateSpeed).setLoopClamp();
+		LeanTween.rotateAroundLocal(_rotateTransform, Vector3.forward, clockwise ? -360 : 360, 100f / _rotateSpeed).setLoopClamp();
 
 		StartCoroutine(ChangeAlpha());
 
