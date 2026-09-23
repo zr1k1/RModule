@@ -9,8 +9,8 @@ namespace RModule.Runtime.AppodealHelper {
 
     public class RequestGdprConsentInitializer : Initializer {
 
-        const float ConsentInfoTimeout = 3f;
-        const float ConsentFormLoadTimeout = 3f;
+        const float ConsentInfoTimeout = 5f;
+        const float ConsentFormLoadTimeout = 5f;
 
         string _appodealAppKey;
         int _age;
