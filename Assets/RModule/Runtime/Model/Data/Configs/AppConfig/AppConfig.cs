@@ -108,9 +108,11 @@ public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue, Cr
 		return (T1)(object)_crossPlatformValuesDict[key].values[Store.GooglePlayStore];
 #elif PLATFORM_IOS
 		return (T1)(object)_crossPlatformValuesDict[key].values[Store.AppStore];
+#elif UNITY_WEBGL
+		return default(T1);
 #else
-			Debug.LogError($"Platform {key} is not present! Fix it!");
-			return (T1)(object)_crossPlatformValuesDict[key].values[Store.GooglePlayStore];
+		Debug.LogError($"Platform {key} is not present! Fix it!");
+		return (T1)(object)_crossPlatformValuesDict[key].values[Store.GooglePlayStore];
 #endif
 	}
 
