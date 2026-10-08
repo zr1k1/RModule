@@ -4,5 +4,7 @@ using UnityEngine;
 
 public enum Store {
 	GooglePlayStore,
-	AppStore
+	AppStore,
+	AppGallery,
+	RuStore
 }

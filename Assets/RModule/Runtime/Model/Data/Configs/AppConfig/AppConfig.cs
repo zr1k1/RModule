@@ -108,6 +108,10 @@ public class AppConfig<PurchasableGameItem, Placement, OptionaAppConfigValue, Cr
 		return (T1)(object)_crossPlatformValuesDict[key].values[Store.GooglePlayStore];
 #elif PLATFORM_IOS
 		return (T1)(object)_crossPlatformValuesDict[key].values[Store.AppStore];
+#elif APP_GALLERY
+		return (T1)(object)_crossPlatformValuesDict[key].values[Store.AppGallery];
+#elif RU_STORE
+		return (T1)(object)_crossPlatformValuesDict[key].values[Store.RuStore];
 #elif UNITY_WEBGL
 		return default(T1);
 #else
