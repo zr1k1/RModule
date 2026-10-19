@@ -19,8 +19,12 @@
 		const string k_vibrationIsEnabled = "vibrationIsEnabled";
 
 		public static void Initialize() {
+			if (s_isInitialized)
+				return;
+
 			GameObject vibrationControllerGO = new GameObject("vibrationController",
 				typeof(VibrationController), typeof(VibrationAndroid), typeof(VibrationIOS));
+			DontDestroyOnLoad(vibrationControllerGO);
 
 			s_vibrationAndroid = vibrationControllerGO.GetComponent<VibrationAndroid>();
 			s_vibrationAndroid.enabled = false;
@@ -53,6 +57,14 @@
 		public static void PlayShortVibration() {
 			if (VibrationIsEnabled && s_isInitialized && s_vibrator != null)
 				s_vibrator.VibrateShort();
+		}
+
+		///<summary>
+		/// Very light tick (e.g. selection feedback)
+		///</summary>
+		public static void PlayTickVibration() {
+			if (VibrationIsEnabled && s_isInitialized && s_vibrator != null)
+				s_vibrator.VibrateTick();
 		}
 	}
 

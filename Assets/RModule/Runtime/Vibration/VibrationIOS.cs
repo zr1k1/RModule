@@ -22,6 +22,9 @@ using System.Runtime.InteropServices;
 
     [DllImport ( "__Internal" )]
     private static extern void _VibrateNope ();
+
+    [DllImport ( "__Internal" )]
+    private static extern void _VibrateSelection ();
 #endif
 
 		public static void VibratePop() {
@@ -44,6 +47,15 @@ using System.Runtime.InteropServices;
 #endif
 		}
 
+		///<summary>
+		/// Lightest selection tick (UISelectionFeedbackGenerator)
+		///</summary>
+		public static void VibrateSelection() {
+#if UNITY_IOS && !UNITY_EDITOR
+        _VibrateSelection ();
+#endif
+		}
+
 		public static bool HasVibrator() {
 #if UNITY_IOS && !UNITY_EDITOR
         return _HasVibrator ();
@@ -57,12 +69,12 @@ using System.Runtime.InteropServices;
 #endif
 		}
 
-		void Start() {
-			VibratePop();
-		}
-
 		void IVibrator.VibrateShort() {
 			VibratePeek();
+		}
+
+		void IVibrator.VibrateTick() {
+			VibrateSelection();
 		}
 
 		void IVibrator.VibrateCustom(long milliseconds) {

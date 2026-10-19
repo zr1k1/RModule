@@ -34,6 +34,14 @@
     AudioServicesPlaySystemSoundWithCompletion(1521, NULL);
 }
 
++ (void)    vibrateSelection {
+    static UISelectionFeedbackGenerator *generator = nil;
+    if (generator == nil)
+        generator = [[UISelectionFeedbackGenerator alloc] init];
+    [generator selectionChanged];
+    [generator prepare];
+}
+
 @end
 
 #pragma mark - "C"
@@ -59,6 +67,9 @@ extern "C"
     }
     void    _VibrateNope () {
         [Vibration vibrateNope];
+    }
+    void    _VibrateSelection () {
+        [Vibration vibrateSelection];
     }
     
 #ifdef _cplusplus

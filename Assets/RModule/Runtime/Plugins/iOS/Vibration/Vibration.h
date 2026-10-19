@@ -9,5 +9,6 @@
 + (void) vibratePeek;
 + (void) vibratePop;
 + (void) vibrateNope;
++ (void) vibrateSelection;
 
 @end
